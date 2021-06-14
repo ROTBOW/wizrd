@@ -10,7 +10,7 @@ const initialState = {
 };
 
 
-export default function (state = initialState, action) {
+const SessionReducer = function (state = initialState, action) {
   switch (action.type) {
 
     case RECEIVE_USER_LOGOUT: return { isAuthenticated: false, user: undefined };
@@ -34,3 +34,5 @@ function receiveCurrentUser(state, action) {
     user: action.currentUser
   }
 }
+
+export default SessionReducer;
