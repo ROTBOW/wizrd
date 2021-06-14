@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 
 // Add api routes
 app.use('/api/users', users);
-app.use('/api/events', events);
+// app.use('/api/events', events);
 
 const port = process.env.PORT || 5000;
 
