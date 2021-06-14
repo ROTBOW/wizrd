@@ -46,18 +46,18 @@ const port = process.env.PORT || 5000;
 
 // Peer Server
 let peerServer;
-if (process.env.NODE_ENV === 'production') {
-  peerServer = new PeerServer({ 
-    secure: true,
-    host: 'mebrinjo.herokuapp.com',
-    port: 443, 
-  })
-} else {
+// if (process.env.NODE_ENV === 'production') {
+//   peerServer = new PeerServer({ 
+//     secure: true,
+//     host: 'mebrinjo.herokuapp.com',
+//     port: 443, 
+//   })
+// } else {
   peerServer = new PeerServer({ 
     port: 9000, 
     path: '/peer'
   })
-}
+// }
 
 
 io.on('connection', socket => {
