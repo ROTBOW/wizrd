@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
+const mongoose = require('mongoose');
+const passport = require('passport');
 const Event = require('../../models/Event');
 const validateEventInput = require('../../validation/events');
 
@@ -32,6 +33,7 @@ router.post('/',
   
       const newEvent = new Event({
         hostId: req.user.id,
+        // Need to add streamId (a UUID string)
         title: req.body.title,
         topic: req.body.topic,
         description: req.body.description,

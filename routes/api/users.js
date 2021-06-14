@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
     } else {
       // Otherwise create a new user
       const newUser = new User({
-        handle: req.body.handle,
+        username: req.body.username,
         email: req.body.email,
         password: req.body.password,
       });
@@ -36,7 +36,7 @@ router.post('/register', (req, res) => {
           newUser
             .save()
             .then((user) => {
-              const payload = { id: user.id, handle: user.handle };
+              const payload = { id: user.id, username: user.username };
               jwt.sign(
                 payload,
                 keys.secretOrKey,
@@ -100,7 +100,7 @@ router.get(
   (req, res) => {
     res.json({
       id: req.user.id,
-      handle: req.user.handle,
+      username: req.user.username,
       email: req.user.email,
     });
   }
