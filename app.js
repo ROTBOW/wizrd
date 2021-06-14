@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const http = require("http");
 const socketIo = require("socket.io");
-const server = http.createServer(app);
+const server = http.Server(app);
 const io = socketIo(server);
 const db = require('./config/keys').mongoURI;
 const mongoose = require('mongoose');
@@ -39,12 +39,17 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api/users', users);
 app.use('/api/events', events);
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
-
 io.on('connection', (socket) => {
   console.log('a user connected')
   socket.on('disconnect', () => {
     console.log('user disconnected')
   });
+
+  // socket.on('new message', (msg) => {
+  //   console.log('new message: ' + msg);
+  // });
 })
+
+const port = process.env.PORT || 5000;
+server.listen(port, () => console.log(`Server is running on port ${port}`));
+
