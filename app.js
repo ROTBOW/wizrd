@@ -13,8 +13,6 @@ const { v4: uuidV4 } = require('uuid');
 const users = require('./routes/api/users');
 const events = require('./routes/api/events');
 const User = require('./models/User');
-const e = require('express');
-
 
 mongoose 
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -45,19 +43,10 @@ const port = process.env.PORT || 5000;
 
 
 // Peer Server
-let peerServer;
-// if (process.env.NODE_ENV === 'production') {
-//   peerServer = new PeerServer({ 
-//     secure: true,
-//     host: 'mebrinjo.herokuapp.com',
-//     port: 443, 
-//   })
-// } else {
-  peerServer = new PeerServer({ 
+const peerServer = new PeerServer({ 
     port: 9000, 
     path: '/peer'
   })
-// }
 
 
 io.on('connection', socket => {

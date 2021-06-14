@@ -11,19 +11,11 @@ const Video = () => {
 
   useEffect(() => {
     socket.current = io.connect('/');
-    let myPeer;
-    // if (process.env.NODE_ENV === 'production') {
-    //   myPeer = new Peer({
-    //     host: 'mebrinjo.herokuapp.com',
-    //     port: 443
-    //   })
-    // } else {
-      myPeer = new Peer({
+    const myPeer = new Peer({
         host: '/',
         path: '/peer',
         port: 9000
       })
-    // }
 
     const videoGrid = document.getElementById('video-grid');
     const myVideo = document.createElement('video');
