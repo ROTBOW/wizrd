@@ -1,21 +1,19 @@
-import { RECEIVE_USER_LOGOUT } from '../actions/session_actions';
+import { RECEIVE_USER_LOGOUT } from '../actions/sessionActions';
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
-
     case RECEIVE_USER_LOGOUT:
       return {
         isAuthenticated: false,
-        user: undefined
+        user: undefined,
       };
 
     default:
       return state;
-      
   }
 }

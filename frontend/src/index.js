@@ -4,8 +4,7 @@ import Root from './components/root';
 import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
-import { logout } from './actions/session_actions';
-
+import { logout } from './actions/sessionActions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -14,10 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setAuthToken(localStorage.jwtToken);
 
     const decodedUser = jwt_decode(localStorage.jwtToken);
-    const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
-    
+    const preloadedState = {
+      session: { isAuthenticated: true, user: decodedUser },
+    };
+
     store = configureStore(preloadedState);
-    
 
     const currentTime = Date.now() / 1000;
 
@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   ReactDOM.render(<Root store={store} />, root);
 });
-
-
 
 // import React from 'react';
 // import ReactDOM from 'react-dom';

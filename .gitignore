@@ -159,5 +159,5 @@ jspm_packages
 #Excluding build directory
 public/
 
-/config/keys.js
+/config/keys-dev.js
 /frontend/node_modules
