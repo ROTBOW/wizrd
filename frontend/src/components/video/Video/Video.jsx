@@ -13,7 +13,7 @@ const Video = () => {
     socket.current = io.connect('/');
     const myPeer = new Peer({
         host: '/',
-        path: '/peer',
+        path: '/',
         port: 9000
       })
 
