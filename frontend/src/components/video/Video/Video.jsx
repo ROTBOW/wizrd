@@ -9,83 +9,83 @@ const Video = () => {
 
   const socket = useRef();
 
-  // useEffect(() => {
-  //   socket.current = io.connect('/');
-  //   let myPeer;
-  //   if (process.env.NODE_ENV === 'production') {
-  //     myPeer = new Peer({
-  //       host: 'mebrinjo.herokuapp.com',
-  //       port: 443
-  //     })
-  //   } else {
-  //     myPeer = new Peer({
-  //       host: '/',
-  //       path: '/peer',
-  //       port: 9000
-  //     })
-  //   }
+  useEffect(() => {
+    socket.current = io.connect('/');
+    let myPeer;
+    // if (process.env.NODE_ENV === 'production') {
+    //   myPeer = new Peer({
+    //     host: 'mebrinjo.herokuapp.com',
+    //     port: 443
+    //   })
+    // } else {
+      myPeer = new Peer({
+        host: '/',
+        path: '/peer',
+        port: 9000
+      })
+    // }
 
-  //   const videoGrid = document.getElementById('video-grid');
-  //   const myVideo = document.createElement('video');
-  //   myVideo.muted = true;
+    const videoGrid = document.getElementById('video-grid');
+    const myVideo = document.createElement('video');
+    myVideo.muted = true;
 
-  //   const peers = {};
+    const peers = {};
 
-  //   navigator.mediaDevices.getUserMedia({
-  //     video: true,
-  //     audio: true
-  //   }).then(stream => {
-  //     addVideoStream(myVideo, stream)
+    navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true
+    }).then(stream => {
+      addVideoStream(myVideo, stream)
 
-  //     myPeer.on('call', call => {
-  //       call.answer(stream);
+      myPeer.on('call', call => {
+        call.answer(stream);
 
-  //       const video = document.createElement('video');
-  //       call.on('stream', userVideoStream => {
-  //         addVideoStream(video, userVideoStream)
-  //       })
-  //     })
+        const video = document.createElement('video');
+        call.on('stream', userVideoStream => {
+          addVideoStream(video, userVideoStream)
+        })
+      })
 
-  //     socket.current.on('user-connected', userId => {
-  //       console.log('user connected', userId)
-  //       connectToNewUser(userId, stream);
-  //     })
+      socket.current.on('user-connected', userId => {
+        console.log('user connected', userId)
+        connectToNewUser(userId, stream);
+      })
       
-  //   })
+    })
 
-  //   socket.current.on('user-disconnected', userId => {
-  //     if (peers[userId]) peers[userId].close()
-  //   })
+    socket.current.on('user-disconnected', userId => {
+      if (peers[userId]) peers[userId].close()
+    })
 
-  //   myPeer.on('open', id => {
-  //     socket.current.emit('join-room', 'room', id)
-  //   })
+    myPeer.on('open', id => {
+      socket.current.emit('join-room', 'room', id)
+    })
 
 
-  //   function connectToNewUser(userId, stream) {
-  //     const call = myPeer.call(userId, stream);
-  //     const video = document.createElement('video');
-  //     call.on('stream', userVideoStream => {
-  //       addVideoStream(video, userVideoStream)
-  //     })
-  //     call.on('close', () => {
-  //       video.remove()
-  //     })
-  //     peers[userId] = call
+    function connectToNewUser(userId, stream) {
+      const call = myPeer.call(userId, stream);
+      const video = document.createElement('video');
+      call.on('stream', userVideoStream => {
+        addVideoStream(video, userVideoStream)
+      })
+      call.on('close', () => {
+        video.remove()
+      })
+      peers[userId] = call
     
-  //   }
+    }
     
-  //   function addVideoStream(video, stream) {
-  //     video.srcObject = stream;
-  //     video.addEventListener('loadedmetadata', (event) => {
-  //       console.log(event)
-  //       video.play()
-  //     })
-  //     videoGrid.append(video)
-  //   }
+    function addVideoStream(video, stream) {
+      video.srcObject = stream;
+      video.addEventListener('loadedmetadata', (event) => {
+        console.log(event)
+        video.play()
+      })
+      videoGrid.append(video)
+    }
   
 
-  // }, [])
+  }, [])
 
 
   return (
