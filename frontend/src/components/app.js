@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom';
 import LoginFormContainer from './session/LoginForm/LoginFormContainer';
 import SignupFormContainer from './session/SignupForm/SignupFormContainer';
 import { Link } from 'react-router-dom';
-import EventForm from './events/EventForm';
+import EventForm from './events/EventForm/EventFormContainer';
 import Video from './video/Video/Video';
 
 class temp extends React.Component {
