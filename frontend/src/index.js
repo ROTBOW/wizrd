@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
     
     store = configureStore(preloadedState);
+    
 
     const currentTime = Date.now() / 1000;
 
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore({});
   }
   const root = document.getElementById('root');
+  window.store = store;
 
   ReactDOM.render(<Root store={store} />, root);
 });

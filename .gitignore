@@ -160,3 +160,4 @@ jspm_packages
 public/
 
 /config/keys.js
+/frontend/node_modules
