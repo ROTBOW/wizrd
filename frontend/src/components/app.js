@@ -10,8 +10,8 @@ import NavbarContainer from './navbar/NavbarContainer'
 class temp extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Welcome to this site, I guess...</h1>
+      <div style={{'maxWidth': '1024px', 'margin': '0 auto', 'padding': '32px 32px'}}>
+        <h2>Welcome to this site, I guess...</h2>
         <p><Link to="/login">Login</Link></p>
         <p><Link to="/signup">Sign up</Link></p>
       </div>
@@ -23,7 +23,6 @@ class temp extends React.Component {
 const App = () => (
   <div>
     <NavbarContainer />
-    <Video />
     <Switch>
       <AuthRoute exact path="/" component={temp} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />

@@ -1,0 +1,111 @@
+
+// Navbar
+
+$nav-item-hover-background: rgb(249, 245, 241);
+$light-gray: rgba(15, 15, 15, 0.1);
+
+.header {
+  height: 64px;
+  box-sizing: border-box;
+  box-shadow: 0 0 16px 6px rgba(15, 15, 15, 0.03);
+}
+
+.outer {
+  max-width: 1024px;
+  height: 64px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.inner {
+  height: 64px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-wrapper {
+  height: 64px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  height: 32px;
+}
+
+.logo:focus {
+  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset, rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
+}
+
+.logo:active {
+  box-shadow: none;
+}
+
+.desktop-actions {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.nav {
+  height: 64px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-weight: 500;
+}
+
+.nav-list {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.nav-list-item {
+  height: 32px;
+  padding: 0px 12px;
+  border-radius: 3px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  a, a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .nav-logout {
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  .nav-logout:focus {
+    box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset, rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
+  }
+
+  .nav-logout:active {
+    box-shadow: none;
+  }
+}
+
+.item:hover {
+  background-color: $nav-item-hover-background;
+}
+
+
+.divider {
+  width: 1px;
+  height: 20px;
+  margin: 0 10px;
+  background: $light-gray;
+}
+
+.nav-greeting {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  padding: 0 12px;
+}
