@@ -94,8 +94,7 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.get(
-  '/current',
+router.get('/current',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     res.json({
