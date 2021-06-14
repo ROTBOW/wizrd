@@ -27,7 +27,7 @@ const SessionApiReducer = (state = initialState, action) => {
     case RECEIVE_USER_SIGN_IN:
       return {
         ...state,
-        isSignedIn: true,
+        isSignedUp: true,
       };
 
     default:
