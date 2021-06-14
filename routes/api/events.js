@@ -46,7 +46,10 @@ router.post('/',
 );
 
 // Update an event
-router.delete('/:eventId', (req, res) => {
+router.patch('/:eventId', (req, res) => {
+
+  // TODO: UDPATE WITH PAYLOAD
+
   Event.findById(req.params.eventId)
     .then((event) => res.json(event))
     .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that ID' }));
