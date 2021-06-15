@@ -4,7 +4,6 @@ import Peer from 'simple-peer';
 import styles from './StreamRoom.module.scss';
 
 
-
 const Video = (props) => {
 
   const ref = useRef();
@@ -27,19 +26,19 @@ const videoConstraints = {
 }
 
 
-const StreamRoom = (props) => {
+const StreamRoom = ({ hostID, eventID, isHost }) => {
 
   const [peers, setPeers] = useState([]);
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
-  const roomID = "stream"//props.match.params.roomID;
 
   useEffect(() => {
     socketRef.current = io.connect('/');
+    
     navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true}).then(stream => {
       userVideo.current.srcObject = stream;
-      socketRef.current.emit('join room');
+      socketRef.current.emit('join room', eventID);
       socketRef.current.on('all users', users => {
         const peers = [];
         users.forEach(userID => {

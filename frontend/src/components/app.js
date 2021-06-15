@@ -23,7 +23,7 @@ class temp extends React.Component {
 const App = () => (
   <div>
     <NavbarContainer />
-    <StreamRoom />
+    <StreamRoom eventID='60c7a54041517de3c5fbd7a8' hostID='60c7a1a4ba294ae0599d7ef7' isHost={true} />
     <Switch>
       <AuthRoute exact path="/" component={temp} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
