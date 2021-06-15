@@ -45,8 +45,7 @@ const port = process.env.PORT || 5000;
 // Peer Server
 peerServer = new PeerServer({ 
     port: 9000, 
-    path: '/',
-    secure: true
+    path: '/'
   })
 
 

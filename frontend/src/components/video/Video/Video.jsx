@@ -7,22 +7,24 @@ import './Video.scss';
 
 const Video = () => {
 
+
+  const [ peers, setPeers ] = useState({});
+
   const socket = useRef();
+  
+
 
   useEffect(() => {
     socket.current = io.connect('/');
     const myPeer = new Peer({
         host: '/',
         path: '/',
-        port: 9000,
-        secure: true
+        port: 9000
       })
 
     const videoGrid = document.getElementById('video-grid');
     const myVideo = document.createElement('video');
     myVideo.muted = true;
-
-    const peers = {};
 
     navigator.mediaDevices.getUserMedia({
       video: true,
@@ -47,7 +49,11 @@ const Video = () => {
     })
 
     socket.current.on('user-disconnected', userId => {
-      if (peers[userId]) peers[userId].close()
+      if (peers[userId]) {
+        const newPeers = { ...peers }
+        delete newPeers[userId]
+        setPeers(newPeers)
+      }
     })
 
     myPeer.on('open', id => {
@@ -64,7 +70,7 @@ const Video = () => {
       call.on('close', () => {
         video.remove()
       })
-      peers[userId] = call
+      setPeers({ ...peers, [userId]: call })
     
     }
     
