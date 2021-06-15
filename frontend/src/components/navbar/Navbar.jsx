@@ -7,7 +7,7 @@ import {
   TransitionGroup,
 } from 'react-transition-group';
 
-const Navbar = () => {
+const Navbar = (props) => {
 
   const [meetPos, setMeetPos] = useState(0);
   const [meet, setMeet] = useState([
