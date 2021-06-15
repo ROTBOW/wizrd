@@ -33,6 +33,9 @@ const Navbar = (props) => {
                 <li className={styles.navLink}>
                   <Link to="/signup">Sign up</Link>
                 </li>
+                <li className={styles.navLink}>
+                  <div onClick={props.logout}>Log out</div>
+                </li>
               </ul>
 
               <div className={styles.divider}></div>
