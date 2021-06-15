@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 $nav-item-hover-background: rgb(249, 245, 241);
 $light-gray: rgba(15, 15, 15, 0.1);
 
@@ -6,6 +8,7 @@ $light-gray: rgba(15, 15, 15, 0.1);
   box-sizing: border-box;
   box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
 }
+
 
 .outer {
   max-width: 1048px;

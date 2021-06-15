@@ -23,27 +23,62 @@ time, mark, audio, video {
 	font: inherit;
   font-family: Inter;
 	vertical-align: baseline;
+  
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
+
 ol, ul {
 	list-style: none;
 }
+
 blockquote, q {
 	quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+html, body, div, span, iframe, svg,
+h1, h2, h3, h4, h5, h6, button,
+p, a, img, strong, main, small, input,
+ol, ul, li, label, form, textarea,
+article, aside, canvas, figure, time,
+footer, header, figcaption, nav, section {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  background: transparent;
+  box-sizing: border-box;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  margin-block-start: 0;
+  margin-inline-start: 0;
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+} 

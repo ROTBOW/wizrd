@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
 
-const Navbar = () => {
-
+const Navbar = (props) => {
+  // console.log('props', props);
 
   // const greeting = () => {
   //   if (loggedIn) {
