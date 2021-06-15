@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import styles from './SessionForm.module.scss';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -59,25 +60,34 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-              <input type="text"
-                value={this.state.usernameOrEmail}
-                onChange={this.update('usernameOrEmail')}
-                placeholder="Your username or email"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                placeholder="Your password"
-              />
-            <br/>
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
-          </div>
-        </form>
+      <div className={styles.authPageWrapper}>
+
+      
+        <div className={styles.authSectionWrapper}>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label>Username or email
+                <input type="text"
+                  value={this.state.usernameOrEmail}
+                  onChange={this.update('usernameOrEmail')}
+                  placeholder="Your username or email"
+                />
+              </label>
+
+              <label>Password
+                <input type="password"
+                  value={this.state.password}
+                  onChange={this.update('password')}
+                  placeholder="Your password"
+                />
+              </label>
+
+              <button type="submit" className={styles.submitButton}>Sign in</button>
+
+              {this.renderErrors()}
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
