@@ -7,7 +7,7 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => (
     !loggedIn ? (
       <Component {...props} />
     ) : (
-      <Redirect to="/tweets" />
+      <Redirect to="" />
     )
   )} />
 );
@@ -15,7 +15,7 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => (
 const Protected = ({ component: Component, loggedIn, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       loggedIn ? (
         <Component {...props} />
       ) : (
@@ -32,3 +32,4 @@ const mapStateToProps = state => (
 export const AuthRoute = withRouter(connect(mapStateToProps)(Auth));
 
 export const ProtectedRoute = withRouter(connect(mapStateToProps)(Protected));
+ 

@@ -1,0 +1,107 @@
+$nav-item-hover-background: rgb(249, 245, 241);
+$light-gray: rgba(15, 15, 15, 0.1);
+
+.header {
+  height: 72px;
+  box-sizing: border-box;
+  box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
+}
+
+.outer {
+  max-width: 1048px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.inner {
+  height: 72px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoWrapper {
+  height: 72px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  height: 32px;
+}
+
+.logo:focus {
+  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset, rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
+}
+
+.logo:active {
+  box-shadow: none;
+}
+
+.navWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.nav {
+  height: 72px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-weight: 500;
+}
+
+.navList {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.navLink {
+  height: 32px;
+  padding: 0px 12px;
+  border-radius: 3px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  &:hover {
+    background-color: $nav-item-hover-background;
+  }
+
+  a, a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+// .navLogout {
+//   cursor: pointer;
+//   border-radius: 3px;
+
+//   &:focus {
+//     box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset, rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
+//   }
+
+//   &active {
+//     box-shadow: none;
+//   }
+// }
+
+.divider {
+  width: 1px;
+  height: 20px;
+  margin: 0 10px;
+  background: $light-gray;
+}
+
+.navGreeting {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  padding: 0 12px;
+}
