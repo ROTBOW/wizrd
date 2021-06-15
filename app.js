@@ -33,5 +33,27 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api/users', users);
 app.use('/api/events', events);
 
+io.on('connection', (socket) => {
+  console.log('a user connected')
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  });
+
+  socket.on("join chat", ({chatId, username}) => {
+    socket.join(chatId);
+    console.log(username + " joined chatroom: " + chatId);
+  })
+
+  socket.on("leave chat", ({chatId, username}) => {
+    socket.leave(chatId);
+    console.log(username + " left chatroom: " + chatId);
+  })
+
+  socket.on("chat message", ({chatId, msg, username}) => {
+    console.log('chat message: ' + msg);
+    io.to(chatId).emit("new message", {username, msg});
+  })
+})
+
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+server.listen(port, () => console.log(`Server is running on port ${port}`));
