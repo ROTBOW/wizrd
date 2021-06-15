@@ -9,7 +9,7 @@ const EventsReducer = (state = {}, action) => {
 
     switch(action.type) {
 
-        case RECEIVE_ALL_EVENTS: return action.events;
+        case RECEIVE_ALL_EVENTS: return action.events.data;
 
         case RECEIVE_EVENT: return receiveAEvent(action.event, nextState);
 
@@ -20,6 +20,7 @@ const EventsReducer = (state = {}, action) => {
 }
 
 const receiveAEvent = function(event, nextState) {
+    debugger
     nextState[event.id] = event;
     return nextState;
 }
