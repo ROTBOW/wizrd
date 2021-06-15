@@ -21,14 +21,14 @@ class temp extends React.Component {
 
 
 const App = () => (
-  <div>
+  <>
     <NavbarContainer />
     <Switch>
       <AuthRoute exact path="/" component={temp} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
     </Switch>
-  </div>
+  </>
 );
 
 export default App;

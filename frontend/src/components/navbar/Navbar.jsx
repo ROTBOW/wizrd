@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.scss';
-// import '../../index.scss';
 import logo from '../../assets/logo.svg';
 
 const Navbar = () => {
+
+
+  // const greeting = () => {
+  //   if (loggedIn) {
+  //     return <div></div>
+  //   } else {
+  //     return <div></div>
+  //   }
+  // };
 
   return (
     <header className={styles.header}>
       <div className={styles.outer}>
         <div className={styles.inner}>
-          <div className={styles['logo-wrapper']}>
+          <div className={styles.logoWrapper}>
             <Link to="/">
               <img className={styles.logo} src={logo} alt="logo" />
             </Link>
           </div>
 
-          <div className={styles['desktop-actions']}>
+          <div className={styles.navWrapper}>
             <nav className={styles.nav}>
-              <ul className={styles['nav-list']}>
-                <li className={styles['nav-list-item']}>
+              <ul className={styles.navList}>
+                <li className={styles.navLink}>
                   <Link to="/login">Log in</Link>
                 </li>
-                <li className={styles['nav-list-item']}>
+                <li className={styles.navLink}>
                   <Link to="/signup">Sign up</Link>
                 </li>
               </ul>
 
               <div className={styles.divider}></div>
 
-              <ul className={styles['nav-list']}>
-                <li className={styles['nav-list-item']}>
+              <ul className={styles.navList}>
+                <li className={styles.navLink}>
                   <a href="https://github.com/ROTBOW/MERN-stack-project" target="_blank" rel="noreferrer">GitHub</a>
                 </li>
               </ul>
@@ -41,7 +49,6 @@ const Navbar = () => {
       </div>
     </header>
   );
-}
-
+};
 
 export default Navbar;
