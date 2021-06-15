@@ -54,7 +54,7 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
         })
         
         socketRef.current.on('user joined', payload => {
-          console.log('here')
+          console.log('user has joined here')
           const peer = addPeer(payload.signal, payload.callerID, stream);
           peersRef.current.push({
             peerID: payload.callerID,
@@ -69,6 +69,7 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
   
       })
     } else {
+      console.log("IS HOST?", isHost)
       socketRef.current.emit('joining event', eventID, isHost);
       socketRef.current.on('host', host => {
         if (host) {
@@ -81,6 +82,14 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
           setHost(peer);
         }
       })
+
+      socketRef.current.on('user joined', payload => {
+        console.log('here')
+        const peer = addPeer(payload.signal, payload.callerID);
+        hostRef.current = peer
+      });
+
+
       socketRef.current.on('receiving returned signal', payload => {
         //const item = peersRef.current.find(p => p.peerID === payload.id);
         console.log(hostRef, payload.id)
