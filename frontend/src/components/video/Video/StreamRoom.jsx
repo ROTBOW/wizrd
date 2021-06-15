@@ -50,7 +50,7 @@ const StreamRoom = (props) => {
           })
           peers.push(peer);
         })
-        setPeers(peers);
+        setPeers(peers);//
       })
 
       socketRef.current.on('user joined', payload => {
