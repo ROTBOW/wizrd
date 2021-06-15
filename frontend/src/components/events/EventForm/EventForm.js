@@ -10,7 +10,7 @@ class EventForm extends React.Component {
             title: '',
             topic: '',
             description: '',
-            startDate: this.getTime(),
+            startTime: this.getTime(),
 
             liveToggle: false
 
@@ -26,9 +26,10 @@ class EventForm extends React.Component {
           title: this.state.title,
           topic: this.state.topic,
           description: this.state.description,
-          startDate: this.state.startDate
+          startTime: this.state.startTime
         };
         this.props.createEvent(submitForm);
+        this.history.replace('/')
     }
 
     update(key) {
@@ -66,8 +67,8 @@ class EventForm extends React.Component {
       </button> : <div><input
                     type='datetime-local'
                     min={this.getTime()}
-                    value={this.state.startDate}
-                    onChange={this.update('startDate')}
+                    value={this.state.startTime}
+                    onChange={this.update('startTime')}
                   />
                   <button onClick={this.handleToggle}>Switch to live Event</button>
                   </div>
