@@ -21,22 +21,33 @@ mongoose
   .catch((err) => console.log(err));
 
 
-
-const streamUsers = {};
-const socketToRoom = {};
+const eventUsers = {};
+const socketToEvent = {};
 
 io.on('connection', socket => {
-  socket.on('join room', roomID => {
-    if (streamUsers[roomID]) {
-      streamUsers[roomID].push(socket.id);
+  socket.on('joining event', (eventID, isHost) => {
+    if (eventUsers[eventID]) {
+      eventUsers[eventID].push({
+        id: socket.id,
+        isHost
+      });
     } else {
-      streamUsers[roomID] = [socket.id];
+      eventUsers[eventID] = [{
+        id: socket.id,
+        isHost
+      }];
     }
-    socketToRoom[socket.id] = roomID;
-    const streamUsersInThisRoom = streamUsers[roomID].filter(id => id !== socket.id);
-     
-    socket.emit('all users', streamUsersInThisRoom);
+    console.log(eventUsers)
+    socketToEvent[socket.id] = eventID;
+    if (isHost) {
+      const eventUsersInThisRoom = eventUsers[eventID].filter(user => user.id !== socket.id);
+      socket.emit('all users', eventUsersInThisRoom);
+    } else {
+      const host = eventUsers[eventID].find(user => user.isHost === true)
+      socket.emit('host', host)
+    }
   })
+
 
   socket.on('sending signal', payload => {
     io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID })
@@ -47,11 +58,11 @@ io.on('connection', socket => {
   })
 
   socket.on('disconnect', () => {
-    const roomID = socketToRoom[socket.id];
-    let room = streamUsers[roomID];
-    if (room) {
-      room = room.filter(id => id !== socket.id);
-      streamUsers[roomID] = room;
+    const eventID = socketToEvent[socket.id];
+    let event = eventUsers[eventID];
+    if (event) {
+      event = event.filter(user => user.id !== socket.id);
+      eventUsers[eventID] = event;
     }
   })
 })
@@ -79,3 +90,5 @@ app.use('/api/events', events);
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`Server is running on port ${port}`));
 //
+
+
