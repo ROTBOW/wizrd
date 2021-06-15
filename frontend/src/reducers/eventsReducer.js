@@ -9,7 +9,7 @@ const EventsReducer = (state = {}, action) => {
 
     switch(action.type) {
 
-        case RECEIVE_ALL_EVENTS: return action.events.data;
+        case RECEIVE_ALL_EVENTS: return receiveAllThemEvents(action.events.data);
 
         case RECEIVE_EVENT: return receiveAEvent(action.event, nextState);
 
@@ -19,9 +19,16 @@ const EventsReducer = (state = {}, action) => {
     }
 }
 
+const receiveAllThemEvents = function(events) {
+    let answer = {};
+    for (let id in events) {
+        answer[events[id]._id] = events[id]
+    }
+    return answer
+}
+
 const receiveAEvent = function(event, nextState) {
-    debugger
-    nextState[event.id] = event;
+    nextState[event.data._id] = event.data;
     return nextState;
 }
 

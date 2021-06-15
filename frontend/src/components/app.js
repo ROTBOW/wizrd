@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import EventFormContainer from './events/EventForm/EventFormContainer';
 import Video from './video/Video/Video';
 import NavbarContainer from './navbar/NavbarContainer'
+import EventShowContainer from './events/EventShow/EventShowContainer'
 
 class temp extends React.Component {
   render() {
@@ -25,13 +26,12 @@ const App = () => (
   <>
     <NavbarContainer />
     <Switch>
-      <AuthRoute exact path="/" component={temp} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
 
       <ProtectedRoute exact path="/event/create" component={EventFormContainer}/>
       <ProtectedRoute exact path="/event/:eventId" component={EventShowContainer}/>
-      <AuthRoute exact path="/" component={temp} />
+      {/* <AuthRoute exact path="/" component={temp} /> */}
     </Switch>
   </>
 );
