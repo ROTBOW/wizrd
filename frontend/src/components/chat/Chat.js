@@ -5,36 +5,50 @@ import styles from './Chat.module.scss';
 
 
 const Chat = (props) => {
-  const socket = useRef();
+  // const socket = useRef();
   const [messages, setMessages] = useState([]);
+  const [socket, setSocket] = useState(null);
   
   
   useEffect(() => {
-    socket.current = io.connect('/');
+    let newSocket;
+    if (!socket) {
+      newSocket = io.connect('/');
+      setSocket(newSocket);
 
-    socket.current.emit('join chat', {
-      chatId: props.chatId,
-      username: props.user.username
-    });
+      newSocket.emit('join chat', {
+        chatId: props.chatId,
+        username: props.user.username
+      });
 
-    socket.current.on('new message', ({username, msg}) => {
+    } else {
+      newSocket = socket;
+    }
+    
+    newSocket.on('new message', ({username, msg}) => {
         // let item = document.createElement('li');
         // const messages = document.getElementById('message-list');
         // item.textContent = msg;
         // messages.appendChild(item);
         // window.scrollTo(0, document.body.scrollHeight);
-        console.log(messages);
+        // console.log(messages);
         let message = `${username}: ${msg}`;
         setMessages([...messages, message]);
-        console.log(messages);
       });
+
+    return () => newSocket.off('new message');
+
+    // return newSocket.emit('leave chat', {
+    //   chatId: props.chatId,
+    //   username: props.user.username
+    // })
   }, [messages])
   
   const handleSubmit = (e) => {
     e.preventDefault();
     const input = document.getElementById("chat-input");
     if (input.value) {
-      socket.current.emit('chat message', {chatId: props.chatId, msg: input.value, username: props.username})
+      socket.emit('chat message', {chatId: props.chatId, msg: input.value, username: props.username})
       input.value = '';
     };
   };

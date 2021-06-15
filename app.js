@@ -50,6 +50,11 @@ io.on('connection', (socket) => {
     console.log(username + " joined chatroom: " + chatId);
   })
 
+  socket.on("leave chat", ({chatId, username}) => {
+    socket.leave(chatId);
+    console.log(username + " left chatroom: " + chatId);
+  })
+
   socket.on("chat message", ({chatId, msg, username}) => {
     console.log('chat message: ' + msg);
     io.to(chatId).emit("new message", {username, msg});
