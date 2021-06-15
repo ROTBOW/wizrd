@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 
-import styles from './Chat.module.scss';
+// import styles from './Chat.module.scss';
 
 
 const Chat = (props) => {
@@ -44,7 +44,7 @@ const Chat = (props) => {
 
   return (
     <div>
-      <ul className={styles.chatList} id="message-list">
+      <ul id="message-list">
         {messages.map((message, i) => {
           return <li key={i}>{message}</li>;
         })}

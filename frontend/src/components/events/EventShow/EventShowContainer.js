@@ -6,7 +6,8 @@ import { fetchAllEvents, fetchEvent } from '../../../actions/eventsActions'
 const mapStateToProps = (state, ownProps) => {
     return {
         event: state.entities.events[ownProps.match.params.eventId],
-        eventId: ownProps.match.params.eventId
+        eventId: ownProps.match.params.eventId,
+        user: state.session.user
     }
 }
 

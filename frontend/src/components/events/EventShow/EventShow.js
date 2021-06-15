@@ -1,5 +1,5 @@
 import React from "react";
-
+import Chat from '../../chat/Chat';
 
 
 class EventShow extends React.Component {
@@ -28,7 +28,7 @@ class EventShow extends React.Component {
                     <div>
                         <h1>{this.props.event.title}</h1>
                         <div>this will be the video feed</div>
-                        <div>this will be the chat room</div>
+                        <Chat user={this.props.user} chatId={this.props.eventId} />
                     </div>
                 )
             }
