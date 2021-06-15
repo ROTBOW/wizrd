@@ -11,29 +11,37 @@ class EventShow extends React.Component {
     }
 
     render(){
-        if (this.props.event != undefined) {
-            let startTime = this.props.event.startTime;
-
-            console.log(new Date(startTime) > new Date());
+        if (this.props.event !== undefined) {
+            let event = this.props.event
+            let startTime = event.startTime;
 
             if (new Date(startTime) > new Date()) {
+
                 return (
                     <div>
-                        <h1>{this.props.event.title}</h1>
-                        <p>Oops... this event hasn't started yet!, come back on <i>{startTime}</i> so you don't miss it!</p>
+                        <h1>{event.title}</h1>
+                        <p>
+                            Oops... this event hasn't started yet! <br/>
+                            It will be about <i>{event.topic}</i><br/>
+                            come back on <i>{startTime}</i> so you don't miss it!
+                        </p>
+
                     </div>
                 )
+
             } else {
+
                 return (
                     <div>
-                        <h1>{this.props.event.title}</h1>
+                        <h1>{event.title}</h1>
                         <div>this will be the video feed</div>
                         <Chat user={this.props.user} chatId={this.props.eventId} />
                     </div>
                 )
+
             }
         } else {
-            return <div>oops</div>
+            return <div>I can't find any event info! make sure your on the right page.</div>
         }
     }
 }
