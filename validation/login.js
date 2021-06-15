@@ -8,12 +8,12 @@ module.exports = function validateLoginInput(data) {
   data.password = validText(data.password) ? data.password : '';
 
   if (Validator.isEmpty(data.usernameOrEmail)) {
-    errors.email = 'Username or email field is required';
+    errors.usernameOrEmail = 'Username or email field is required';
   }
 
   if (data.usernameOrEmail.includes('@')) {
-    if (!Validator.isEmail(data.email)) {
-      errors.email = 'Email is invalid';
+    if (!Validator.isEmail(data.usernameOrEmail)) {
+      errors.usernameOrEmail = 'Username or email is invalid';
     }
   }
 
