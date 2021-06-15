@@ -45,14 +45,14 @@ io.on('connection', (socket) => {
     console.log('user disconnected')
   });
 
-  socket.on("join chat", ({chatId}) => {
+  socket.on("join chat", ({chatId, username}) => {
     socket.join(chatId);
-    console.log("A user joined chatroom: " + chatId);
+    console.log(username + " joined chatroom: " + chatId);
   })
 
-  socket.on("chat message", ({chatId, msg}) => {
+  socket.on("chat message", ({chatId, msg, username}) => {
     console.log('chat message: ' + msg);
-    io.to(chatId).emit("new message", msg);
+    io.to(chatId).emit("new message", {username, msg});
   })
 })
 
