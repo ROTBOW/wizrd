@@ -17,6 +17,8 @@ module.exports = function validateRegisterInput(data) {
     errors.username = 'Username field is required';
   }
 
+  // Add validation for username and email uniqueness
+
   if (Validator.isEmpty(data.email)) {
     errors.email = 'Email field is required';
   }

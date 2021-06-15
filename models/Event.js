@@ -10,7 +10,8 @@ const EventSchema = new Schema(
     },
     streamId: {
       type: String,
-      required: true
+      required: true,
+      unique: true,
     },
     title: {
       type: String,
@@ -24,7 +25,8 @@ const EventSchema = new Schema(
       type: String
     },
     startTime: {
-      type: Date
+      type: Date,
+      required: true,
     },
     endTime: {
       type: Date
@@ -35,4 +37,4 @@ const EventSchema = new Schema(
   }
 );
 
-module.exports = Tweet = mongoose.model('Event', EventSchema);
+module.exports = Event = mongoose.model('Event', EventSchema);

@@ -20,7 +20,7 @@ class EventShow extends React.Component {
                 return (
                     <div>
                         <h1>{this.props.event.title}</h1>
-                        <p>Oops... this event hasn't started yet!, come back on <i>{Date(startTime)}</i> so you don't miss it!</p>
+                        <p>Oops... this event hasn't started yet!, come back on <i>{startTime}</i> so you don't miss it!</p>
                     </div>
                 )
             } else {

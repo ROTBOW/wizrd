@@ -1,12 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import styles from './SessionForm.module.scss';
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
+      usernameOrEmail: '',
       password: '',
       errors: {}
     };
@@ -15,7 +16,7 @@ class LoginForm extends React.Component {
     this.renderErrors = this.renderErrors.bind(this);
   }
 
-  // Once the user has been authenticated, redirect to the Tweets page
+  // Once the user has been authenticated, redirect to the Home page
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser === true) {
       this.props.history.push('/');
@@ -37,7 +38,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
 
     let user = {
-      email: this.state.email,
+      usernameOrEmail: this.state.usernameOrEmail,
       password: this.state.password
     };
 
@@ -59,25 +60,34 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-              <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder="Email"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                placeholder="Password"
-              />
-            <br/>
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
-          </div>
-        </form>
+      <div className={styles.authPageWrapper}>
+
+      
+        <div className={styles.authSectionWrapper}>
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label>Username or email
+                <input type="text"
+                  value={this.state.usernameOrEmail}
+                  onChange={this.update('usernameOrEmail')}
+                  placeholder="Your username or email"
+                />
+              </label>
+
+              <label>Password
+                <input type="password"
+                  value={this.state.password}
+                  onChange={this.update('password')}
+                  placeholder="Your password"
+                />
+              </label>
+
+              <button type="submit" className={styles.submitButton}>Sign in</button>
+
+              {this.renderErrors()}
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 32px 32px;
+}
+
+.temp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
