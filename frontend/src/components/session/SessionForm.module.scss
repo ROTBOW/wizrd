@@ -1,6 +1,8 @@
+@import '../../styles/variables.scss';
+
 // Styles for LoginForm and SignupForm
 
-.auth-page-wrapper {
+.authPageWrapper {
   max-width: 1024px;
   margin: 48px auto 48px auto;
   padding: 0 32px;
@@ -9,13 +11,13 @@
   align-items: center;
 }
 
-// .auth-section-wrapper {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   // margin-bottom: 32px;
-// }
+.authSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // margin-bottom: 32px;
+}
 
 // .auth-section-divider {
 //   height: 1px;
@@ -67,7 +69,7 @@ input {
   display: block;
   width: 100%;
   border-radius: 3px;
-  border: 1px solid #777;
+  border: 1px solid $gray-700;
   margin-top: 3px;
   margin-bottom: 10px;
 
@@ -79,73 +81,15 @@ input {
   font-size: inherit;
 }
 
-// input:focus {
-//   border: 1px solid rgba(46, 170, 220, 40%);
-//   box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
-//     rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
-// }
+input:focus {
+  border: 1px solid rgba(46, 170, 220, 40%);
+  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
+    rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
+}
 
-// input::placeholder {
-//   color: $medium-light-gray;
-// }
-
-// .input-domain-wrapper {
-//   display: flex;
-//   align-items: center;
-//   height: 34px;
-//   margin-top: 4px;
-//   margin-bottom: 10px;
-// }
-
-// .domain-prefix {
-//   color: $medium-light-gray;
-// }
-
-// .input-domain {
-//   margin: 0;
-//   margin-left: 5px;
-// }
-
-// [type="file"] {
-//   border: 0;
-//   clip: rect(0, 0, 0, 0);
-//   height: 1px;
-//   overflow: hidden;
-//   margin: 0;
-//   padding: 0;
-//   position: absolute !important;
-//   white-space: nowrap;
-//   width: 1px;
-
-//   + label {
-//     // File upload button styles
-//     width: 100%;
-//     display: block;
-//     // height: 32px;
-//     padding: 8px 12px;
-//     background: $blue-300;
-//     border-radius: 3px;
-//     border: 1px solid $blue-500;
-//     color: white;
-//     cursor: pointer;
-//     margin-top: 3px;
-//     margin-bottom: 10px;
-//     transition: all 0.3s;
-//     text-align: center;
-//   }
-
-//   &:focus + label,
-//   + label:hover {
-//     // File upload hover state button styles
-//     background: $blue-700;
-//   }
-
-//   &:focus + label {
-//     // File upload focus state button styles
-//     background: $blue-700;
-//   }
-// }
-
+input::placeholder {
+  color: $gray-500;
+}
 
 
 
@@ -165,37 +109,37 @@ input {
 //   margin: 8px 0;
 // }
 
-// button {
-//   cursor: pointer;
-//   box-sizing: border-box;
-// }
+button {
+  cursor: pointer;
+  box-sizing: border-box;
+}
 
-// button:focus {
-//   border: 1px solid rgba(46, 170, 220, 40%);
-//   box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
-//     rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
-// }
+button:focus {
+  border: 1px solid rgba(46, 170, 220, 40%);
+  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
+    rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
+}
 
 // button:active {
 //   border: none;
 //   box-shadow: none;
 // }
 
-// button.auth-submit-primary {
-//   display: block;
-//   width: 100%;
-//   // margin-top: 8px;
-//   border-radius: 3px;
-//   border: 1px solid $red-300;
-//   color: $red-400;
-//   padding: 8px 0px;
-//   background: $red-50;
-//   text-align: center;
-//   font-size: 18px;
-//   font-weight: 500;
-//   box-shadow: 0px 1px 2px rgba(15, 15, 15, 10%);
-//   transition: all 0.1s;
-// }
+.submitButton {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  border-radius: 3px;
+  border: 1px solid black;
+  color: black;
+  padding: 8px 0px;
+  background: $gray-300;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0px 1px 2px rgba(15, 15, 15, 10%);
+  transition: all 0.1s;
+}
 
 // button.auth-submit-primary:hover {
 //   background: $red-100;
