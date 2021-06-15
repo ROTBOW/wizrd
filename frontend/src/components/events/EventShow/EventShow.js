@@ -11,7 +11,7 @@ class EventShow extends React.Component {
     }
 
     render(){
-        if (this.props.event != undefined) {
+        if (this.props.event !== undefined) {
             let event = this.props.event
             let startTime = event.startTime;
 
