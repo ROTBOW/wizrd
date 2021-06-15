@@ -7,7 +7,6 @@ import styles from './Chat.module.scss';
 const Chat = (props) => {
   const socket = useRef();
   const [messages, setMessages] = useState([]);
-  // const [socket, setSocket] = useState();
   
   
   useEffect(() => {
@@ -18,26 +17,21 @@ const Chat = (props) => {
     });
 
     socket.current.on('new message', (msg) => {
-      console.log("I'm executing");
-        // console.log('chat message: ' + msg);
-        let item = document.createElement('li');
-        // console.log(item);
-        const messages = document.getElementById('message-list');
-        item.textContent = msg;
-        messages.appendChild(item);
-        window.scrollTo(0, document.body.scrollHeight);
+        // let item = document.createElement('li');
+        // const messages = document.getElementById('message-list');
+        // item.textContent = msg;
+        // messages.appendChild(item);
+        // window.scrollTo(0, document.body.scrollHeight);
+        console.log(messages);
+        setMessages([...messages, msg]);
+        console.log(messages);
       });
-  }, [])
+  }, [messages])
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("I'm handling an event");
     const input = document.getElementById("chat-input");
-    // console.log(input);
-    // console.log(input.value);
     if (input.value) {
-      // console.log("about to emit");
-      // console.log(socket.current);
       socket.current.emit('chat message', {chatId: 1, msg: input.value})
       input.value = '';
     };
@@ -46,9 +40,9 @@ const Chat = (props) => {
   return (
     <div>
       <ul className={styles.chatList} id="message-list">
-        {/* {props.messages.map((message, i) => {
+        {messages.map((message, i) => {
           return <li key={i}>{message}</li>;
-        })} */}
+        })}
       </ul>
       <form>
         <input type="text" id="chat-input"></input>

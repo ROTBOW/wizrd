@@ -5,7 +5,7 @@ import LoginFormContainer from './session/LoginFormContainer';
 import SignupFormContainer from './session/SignupFormContainer';
 import { Link } from 'react-router-dom';
 import Video from './video/Video/Video';
-import ChatContainer from './chat/ChatContainer';
+import Chat from './chat/Chat';
 
 class temp extends React.Component {
   render() {
@@ -26,7 +26,7 @@ const App = () => (
     <Switch>
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
-      <ProtectedRoute exact path="/chat" component={ChatContainer} />
+      <ProtectedRoute exact path="/chat" component={Chat} />
       <AuthRoute exact path="/" component={temp} />
     </Switch>
   </div>
