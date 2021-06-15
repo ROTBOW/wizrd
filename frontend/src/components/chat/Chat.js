@@ -16,6 +16,7 @@ const Chat = (props) => {
       newSocket = io.connect('/');
       setSocket(newSocket);
 
+      debugger;
       newSocket.emit('join chat', {
         chatId: props.chatId,
         username: props.user.username
@@ -37,7 +38,7 @@ const Chat = (props) => {
     e.preventDefault();
     const input = document.getElementById("chat-input");
     if (input.value) {
-      socket.emit('chat message', {chatId: props.chatId, msg: input.value, username: props.username})
+      socket.emit('chat message', {chatId: props.chatId, msg: input.value, username: props.user.username})
       input.value = '';
     };
   };
