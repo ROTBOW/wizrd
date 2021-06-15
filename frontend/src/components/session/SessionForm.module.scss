@@ -1,11 +1,13 @@
-// .auth-page-wrapper {
-//   max-width: 1024px;
-//   margin: 48px auto 48px auto;
-//   padding: 0 32px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
+// Styles for LoginForm and SignupForm
+
+.auth-page-wrapper {
+  max-width: 1024px;
+  margin: 48px auto 48px auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 // .auth-section-wrapper {
 //   display: flex;
@@ -60,22 +62,22 @@
 //   }
 // }
 
-// input {
-//   box-sizing: border-box;
-//   display: block;
-//   width: 100%;
-//   border-radius: 3px;
-//   border: 1px solid $light-gray;
-//   margin-top: 3px;
-//   margin-bottom: 10px;
+input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #777;
+  margin-top: 3px;
+  margin-bottom: 10px;
 
-//   padding: 4px 10px;
-//   text-indent: 5px;
-//   padding-left: 5px;
+  padding: 4px 10px;
+  text-indent: 5px;
+  padding-left: 5px;
 
-//   font-family: inherit;
-//   font-size: inherit;
-// }
+  font-family: inherit;
+  font-size: inherit;
+}
 
 // input:focus {
 //   border: 1px solid rgba(46, 170, 220, 40%);

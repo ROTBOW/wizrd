@@ -6,6 +6,7 @@ import SignupFormContainer from './session/SignupFormContainer';
 import { Link } from 'react-router-dom';
 import Video from './video/Video/Video';
 import NavbarContainer from './navbar/NavbarContainer'
+import HomeFeed from './home/HomeFeed';
 
 class temp extends React.Component {
   render() {
@@ -24,6 +25,7 @@ const App = () => (
   <>
     <NavbarContainer />
     <Switch>
+      <ProtectedRoute exact path="/" component={HomeFeed} />
       <AuthRoute exact path="/" component={temp} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />

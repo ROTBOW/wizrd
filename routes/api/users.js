@@ -63,10 +63,17 @@ router.post('/login', (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
+  const usernameOrEmail = req.body.usernameOrEmail;
   const password = req.body.password;
-
-  User.findOne({ email }).then((user) => {
+  
+  let queryField;
+  if (usernameOrEmail.includes('@')) {
+    queryField = 'email';
+  } else {
+    queryField = 'username'
+  }
+  
+  User.findOne({ [queryField]: usernameOrEmail }).then((user) => {
     if (!user) {
       // Use the validations to send the error
       errors.email = 'User not found';
@@ -75,7 +82,7 @@ router.post('/login', (req, res) => {
 
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
-        const payload = { id: user.id, email: user.email };
+        const payload = { id: user.id, username: user.username, email: user.email };
         jwt.sign(
           payload,
           keys.secretOrKey,

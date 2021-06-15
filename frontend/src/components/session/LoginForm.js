@@ -6,7 +6,7 @@ class LoginForm extends React.Component {
     super(props);
 
     this.state = {
-      email: '',
+      usernameOrEmail: '',
       password: '',
       errors: {}
     };
@@ -37,7 +37,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
 
     let user = {
-      email: this.state.email,
+      usernameOrEmail: this.state.usernameOrEmail,
       password: this.state.password
     };
 
@@ -63,15 +63,15 @@ class LoginForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div>
               <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder="Email"
+                value={this.state.usernameOrEmail}
+                onChange={this.update('usernameOrEmail')}
+                placeholder="Your username or email"
               />
             <br/>
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
-                placeholder="Password"
+                placeholder="Your password"
               />
             <br/>
             <input type="submit" value="Submit" />

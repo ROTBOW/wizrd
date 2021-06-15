@@ -28,19 +28,20 @@ module.exports = function validateEventInput(data) {
     errors.description = 'Description must be between 0 and 1400 characters';
   }
 
-  if (data.startTime || data.endTime) {
-    if (!data.startTime || !data.endTime) {
-      erros.endTime = 'You must enter both start time and end time.';
-      errors.endTime = 'You must enter both start time and end time.';
-    }
-
+  if (data.startTime) {
     let currentTime = new Date();
     if (data.startTime < currentTime) {
       errors.startTime = 'Start time must be in the future.';
     }
+  }
+
+  if (data.endTime) {
+    if (!startTime) {
+      errors.starTime = 'You must enter both start time and end time.';
+    }
 
     if (startTime > endTime) {
-      errors.endTime = 'End time must be after start time.'
+      errors.endTime = 'End time must be after start time.';
     }
   }
 
