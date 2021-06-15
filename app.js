@@ -45,9 +45,15 @@ io.on('connection', (socket) => {
     console.log('user disconnected')
   });
 
-  // socket.on('new message', (msg) => {
-  //   console.log('new message: ' + msg);
-  // });
+  socket.on("join chat", ({chatId}) => {
+    socket.join(chatId);
+    console.log("A user joined chatroom: " + chatId);
+  })
+
+  socket.on("chat message", ({chatId, msg}) => {
+    console.log('chat message: ' + msg);
+    io.to(chatId).emit("new message", msg);
+  })
 })
 
 const port = process.env.PORT || 5000;
