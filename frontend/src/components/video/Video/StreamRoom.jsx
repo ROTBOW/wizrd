@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import Peer from 'simple-peer';
 import styles from './StreamRoom.module.scss';
+import axios from 'axios';
+
+// export const login = (userData) => {
+//   return axios.post('/api/users/login', userData);
+// };
 
 
 
@@ -14,111 +19,50 @@ const videoConstraints = {
 
 const StreamRoom = ({ hostID, eventID, currentUserId }) => {
 
-  const [host, setHost] = useState();
-  const socketRef = useRef();
-  const hostVideo = useRef();
-  const peersRef = useRef([]);
-  const hostRef = useRef();
-  const isHost = currentUserId === '60c783c93805d227f3bf8734'
-  console.log(currentUserId)
+  
+
+  const videoRef = useRef()
 
   useEffect(() => {
-    socketRef.current = io.connect('/');
-
     if (isHost) {
-      console.log('isHost')
-      navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then(stream => {
-        hostVideo.current.srcObject = stream;
-        console.log(stream)
-        socketRef.current.emit('joining event', eventID, isHost);
-        socketRef.current.on('all users', users => {
-          console.log("received all users", { users })
-
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          videoRef.current.srcObject = stream;
+          const peer = createPeer();
+          stream.getTracks().forEach(track => peer.addTrack(track, stream));
         })
+    }
+  })
 
-        socketRef.current.on("user joined", payload => {
-          console.log('user joined')
-
-          const peer = addPeer(payload.signal, payload.callerID, stream);
-          peersRef.current.push({
-            peerID: payload.callerID,
-            peer,
-          })
-        });
-
-
-      })
-    } else {
-      socketRef.current.emit('joining event', eventID, isHost);
-      socketRef.current.on('host', host => {
-        console.log('host', host)
-        const peer = createPeer(host.id, socketRef.current.id);
-        hostRef.current = {
-          hostID: host.id,
-          peer
+  function createPeer() {
+    const peer = new RTCPeerConnection({
+      iceServers: [
+        {
+          urls: 'stun:stun.stunprotocol.org'
         }
-        setHost(peer)
-      })
-
-      socketRef.current.on("receiving returned signal", payload => {
-        // console.log('user received back signal')
-        //hostRef.current.peer.signal(payload)
-        hostRef.current.peer.signal(payload.signal);
-        // console.log('signal accepted')
-      });
-
-
-    }
-
-  }, [])
-
-
-  function createPeer(userToSignal, callerID, stream) {
-    const peer = new Peer({
-      initiator: true,
-      trickle: false,
-      stream,
-    });
-
-    peer.on("signal", signal => {
-      console.log('creating host peer and sending signal to host')
-      socketRef.current.emit("sending signal", { userToSignal, callerID, signal })
+      ]
     })
-
+    peer.onnegotiationneeded = () => handleNegotiationNeededEvent(peer);
     return peer;
   }
 
-  function addPeer(incomingSignal, callerID, stream) {
-    console.log('adding user peer and sending signal to back to user')
+  async function handleNegotiationNeededEvent(peer) {
+    const offer = await peer.createOffer();
+    await peer.setLocalDescription(offer);
+    const payload = {
+      sdp: peer.localDescription
+    }
 
-    const peer = new Peer({
-      initiator: false,
-      trickle: false,
-      stream
-    })
-
-    peer.on("signal", signal => {
-      socketRef.current.emit("returning signal", { signal, callerID })
-    })
-
-    peer.signal(incomingSignal);
-
-    return peer;
+    const { data } = await axios.post('/broadcast', payload);
+    const desc = new RTCSessionDescription(data.sdp);
+    peer.setRemoteDescription(desc).catch(e => console.log(e));
   }
 
-  useEffect(() => {
 
-    if (host) {
-      host.on('stream', stream => {
-        console.log('receiving streaming')
-        hostVideo.current.srcObject = stream;
-      })
-    }
-  }, [host])
 
   return (
     <div>
-      <video muted={isHost} ref={hostVideo} autoPlay playsInline />
+      <video muted={isHost} ref={videoRef} autoPlay playsInline />
     </div>
   )
 

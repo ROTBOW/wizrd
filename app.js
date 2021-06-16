@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
+const webrtc = require('wrtc');
 const socket = require('socket.io');
 const io = socket(server);
 const db = require('./config/keys').mongoURI;
@@ -21,55 +22,8 @@ mongoose
   .catch((err) => console.log(err));
 
 
-const eventUsers = {};
-const socketToEvent = {};
 
-io.on('connection', socket => {
-  socket.on('joining event', (eventID, isHost) => {
-
-    if (eventUsers[eventID]) {
-      eventUsers[eventID].push({
-        id: socket.id,
-        isHost
-      });
-    } else {
-      eventUsers[eventID] = [{
-        id: socket.id,
-        isHost
-      }];
-    }
-    console.log(eventUsers)
-    socketToEvent[socket.id] = eventID;
-    if (isHost) {
-      const eventUsersInThisRoom = eventUsers[eventID].filter(user => user.id !== socket.id);
-      socket.emit('all users', eventUsersInThisRoom);
-    } else {
-      const host = eventUsers[eventID].find(user => user.isHost === true)
-      socket.emit('host', host)
-    }
-  })
-
-
-  socket.on('sending signal', payload => {
-    console.log('here')
-    io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID })
-  })
-
-  socket.on('returning signal', payload => {
-    io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id })
-  })
-
-  socket.on('disconnect', () => {
-    const eventID = socketToEvent[socket.id];
-    let event = eventUsers[eventID];
-    if (event) {
-      event = event.filter(user => user.id !== socket.id);
-      eventUsers[eventID] = event;
-    }
-  })
-})
-
-
+let senderStream;
 // app.get('/', (req, res) => res.send('Hello World'));
 
 app.use(passport.initialize());
@@ -84,6 +38,50 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   })
 } 
+
+
+app.post('/consumer', async ({ body }, res) => {
+  const peer = new webrtc.RTCPeerConnection({
+    iceServers:[
+      {
+        urls: "stun:stun.stunprotocol.org"
+      }
+    ]
+  })
+  const desc = new webrtc.RTCSessionDescription(body.sdp);
+  await peer.setRemoteDescription(desc);
+  senderStream.getTracks().forEach(track => peer.addTrack(track, senderStream));
+  const answer = await peer.createAnswer();
+
+
+})
+
+
+app.post('/broadcast', async ({ body }, res) => {
+  const peer = new webrtc.RTCPeerConnection({
+    iceServers: [
+      {
+        urls: "stun:stun.stunprotocol.org"
+      }
+    ]
+  })
+  peer.ontrack = (e) => handleTrackEvent(e, peer);
+  const desc = new webrtc.RTCSessionDescription(body.sdp);
+  await peer.setRemoteDescription(desc);
+  const answer = await peer.createAnswer();
+  await peer.setLocalDescription(answer);
+  const payload = {
+    sdp: peer.localDescription
+  }
+  res.json(payload)
+})
+
+function handleTrackEvent(e, peer) {
+  senderStream = e.streams[0];
+}
+
+
+
 
 // Add api routes
 app.use('/api/users', users);
