@@ -40,7 +40,7 @@ app.post('/consumer', async ({ body }, res) => {
   const peer = new webrtc.RTCPeerConnection({
     iceServers: [
       {
-        urls: "stun:stun.stunprotocol.org"
+        urls: "stun:sip1.lakedestiny.cordiaip.com"
       }
     ]
   });
@@ -53,8 +53,9 @@ app.post('/consumer', async ({ body }, res) => {
   const payload = {
     sdp: peer.localDescription
   }
-
+  console.log('consumer payload', payload)
   res.json(payload);
+
 })
 
 
@@ -62,7 +63,7 @@ app.post('/broadcast', async ({ body }, res) => {
   const peer = new webrtc.RTCPeerConnection({
     iceServers: [
       {
-        urls: "stun:stun.stunprotocol.org"
+        urls: "stun:sip1.lakedestiny.cordiaip.com"
       }
     ]
   });

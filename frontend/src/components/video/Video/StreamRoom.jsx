@@ -41,7 +41,7 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
 
   useEffect(() => {
     if (video) {
-      console.log('executing')
+      console.log('executing video', video)
       userRef.current.srcObject = video;
 
     }
@@ -57,7 +57,7 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
     const peer = new RTCPeerConnection({
       iceServers: [
         {
-          urls: 'stun:stun.stunprotocol.org'
+          urls: 'stun:sip1.lakedestiny.cordiaip.com'
         }
       ]
     })
