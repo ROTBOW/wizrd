@@ -14,7 +14,7 @@ const uiReducer = function (state = initialState, action) {
 }
 
 function assignModal (state, modalName) {
-  if (modal) {  
+  if (state.modal) {  
     state['modal'] = false;
   } else {
     state['modal'] = modalName;

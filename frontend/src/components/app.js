@@ -18,8 +18,6 @@ const App = () => (
       <ProtectedRoute exact path="/event/create" component={EventFormContainer}/>
       <ProtectedRoute exact path="/event/:eventId" component={EventShowContainer}/>
       <HomeRoute path="/" /> 
-
-      {/* <AuthRoute exact path="/" component={temp} /> */}
     </Switch>
   </>
 );

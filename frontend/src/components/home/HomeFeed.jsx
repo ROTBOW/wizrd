@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import styles from './HomeFeed.module.scss';
 import { fetchLiveEvents, fetchFutureEvents } from '../../util/eventUtil';
 import EventForm from '../events/EventForm/EventForm';
+import { updateModal } from '../../actions/uiActions';
+import moment from 'moment';
+import { BiUser, BiBulb, BiVideo } from "react-icons/bi";
 
 const HomeFeed = (props) => {
   const [liveEvents, setLiveEvents] = useState([]);
@@ -20,42 +23,71 @@ const HomeFeed = (props) => {
       })
   }, [])
 
+  const formatDate = (date) => {
+    return;
+  }
+
   return (
     <div>
-      {this.props.modal === 'createEvent' ? <EventForm /> : ''}
-      <div className={styles.wrapper}>
+      {props.modal === 'createEvent' ? <EventForm /> : ''}
 
-        <div>
-          <button onClick={this.props.updateModal('createEvent')}>Create Event</button>
+      <div className={styles.headerWrapper}>
+        <div className={styles.header}>
+          <h1 className={styles.headerTitle}>Welcome to Wizrd, @{props.user.username}</h1>
+          <p className={styles.headerSubtitle}>
+            Wizard is a streaming platform for the teacher inside all of us. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione beatae tenetur veritatis. Join an event, or create your own.
+          </p>
+          <button className={styles.createEventButton} onClick={props.updateModal('createEvent')}>Create an event</button>
         </div>
-      
-        <div className={styles.sectionWrapper}> 
-          <h2>Currently Streaming Events</h2>
-          <ul>
-            {liveEvents ? liveEvents.map((e, i) => {
-              return <li key={i}>
-                  <Link to={`/event/${e._id}`}><h5>{e.title}</h5></Link>
-                  <p>{e.topic}</p>
-                </li>
-            }) : ''}
-          </ul>
-        </div>
-
-        <div> 
-          <h2>Upcoming Events</h2>
-          <ul>
-            {futureEvents ? futureEvents.map((e, i) => {
-              return <li key={i}>
-                  <Link to={`/event/${e._id}`}><h5>{e.title}</h5></Link>
-                  <p>{e.topic}</p>
-                  <p>{e.startTime}</p>
-                </li>
-            }) : ''}
-          </ul>
-        </div>
-
       </div>
 
+      <main className={styles.feedWrapper}>
+
+        <section className={styles.sectionWrapper}> 
+          <h2 className={styles.categoryTitle}>Currently Streaming Events</h2>
+          <ul className={styles.eventsGrid}>
+            {liveEvents ? liveEvents.map((e, i) => {
+              return <li key={i} className={styles.eventCard}>
+                  <Link to={`/event/${e._id}`} className={styles.noUnderline}>
+                    <h3 className={styles.eventTitle}>{e.title}</h3>
+                  </Link>
+                  <div className={styles.cardRowWrapper}>
+                    <BiBulb className={styles.cardIcon}/>
+                    <p className={styles.eventTopic}>{e.topic}</p>
+                  </div>
+                  <div className={styles.cardRowWrapper}>
+                    <BiVideo className={styles.cardIcon}/>
+                    <p className={styles.eventStartTime}>{moment(e.startTime).format("ddd, MMM D, LT")}</p>
+                  </div>
+                  {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
+                </li>
+            }) : ''}
+          </ul>
+        </section>
+
+        <section className={styles.sectionWrapper}> 
+          <h2 className={styles.categoryTitle}>Upcoming Events</h2>
+          <ul className={styles.eventsGrid}>
+            {futureEvents ? futureEvents.map((e, i) => {
+              return <li key={i} className={styles.eventCard}>
+                  <Link to={`/event/${e._id}`} className={styles.noUnderline}>
+                    <h3 className={styles.eventTitle}>{e.title}</h3>
+                  </Link>
+                  <p className={styles.eventTopic}>{e.topic}</p>
+                  <p className={styles.eventStartTime}>{e.startTime}</p>
+                  {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
+                </li>
+            }) : ''}
+          </ul>
+        </section>
+
+      </main>
+
+      <div className={styles.footerWrapper}>
+        <div className={styles.footer}>
+            <h3>Wizrd</h3>
+        </div>
+      </div>
     </div>
   );
 };

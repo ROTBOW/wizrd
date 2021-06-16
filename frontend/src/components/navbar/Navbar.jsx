@@ -66,6 +66,9 @@ const Navbar = (props) => {
                 <li className={styles.navLink}>
                   <a href="https://github.com/ROTBOW/MERN-stack-project" target="_blank" rel="noreferrer">GitHub</a>
                 </li>
+                <li className={styles.navLink}>
+                  <Link to="/team">Team</Link>
+                </li>
               </ul>
 
 
@@ -74,12 +77,12 @@ const Navbar = (props) => {
                   timeout={500}
                   classNames={styles.example}
                 > */}
-                <div className={styles.navLink}>
+                {/* <div className={styles.navLink}>
                   {meet[meetPos]}
-                </div>
+                </div> */}
                 {/* </CSSTransition>
               </TransitionGroup> */}
-
+              
 
             </nav>
           </div>
