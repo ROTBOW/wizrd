@@ -8,11 +8,6 @@ const EventSchema = new Schema(
       ref: 'users',
       required: true
     },
-    // streamId: {
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    // },
     title: {
       type: String,
       required: true,
@@ -28,9 +23,6 @@ const EventSchema = new Schema(
       type: Date,
       required: true,
     },
-    // endTime: {
-    //   type: Date
-    // },
     isOver: {
       type: Boolean
     }

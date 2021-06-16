@@ -37,6 +37,20 @@ router.get('/:eventId', (req, res) => {
     .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that ID' }));
 });
 
+//Search for events
+router.put('/', (req, res) => {
+  console.log(req.body);
+  if (req.body.topic) {
+    Event.find({topic: req.body.topic})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that topic' }));
+  } else if (req.body.title) {
+    Event.find({title: req.body.title})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that title' }));
+  }
+})
+
 // Create an event
 router.post('/',
   passport.authenticate('jwt', { session: false }),
