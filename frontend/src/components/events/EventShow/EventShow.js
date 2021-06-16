@@ -11,6 +11,10 @@ class EventShow extends React.Component {
         this.props.fetchEvent(this.props.match.params.eventId);
     }
 
+    // handleStateEvent(e){
+    //     e.preventDefault();
+    // }
+
     render(){
         if (this.props.event !== undefined) {
             let event = this.props.event
@@ -33,10 +37,22 @@ class EventShow extends React.Component {
             } else {
 
                 return (
-                    <div>
-                        <h1>{event.title}</h1>
-                        <img src="https://plchldr.co/i/1000x550" alt="vid Placeholder" width="1000"/>
-                        <Chat user={this.props.user} chatId={this.props.eventId} />
+                    <div className={styles.wrapper} >
+                        <div className={styles.leftWing}>
+                            <h1 className={styles.eventTitle}>{event.title}</h1>
+                            <img src="https://plchldr.co/i/650x450?bg=111111" alt="vid Placeholder" className={styles.videoFeed}/>
+                            <p className={styles.normalText}>
+                               {this.props.user.username} is streaming about <i className={styles.specialText}>{this.props.event.topic}</i></p>
+                            <p>{this.props.event.description}</p>
+
+                        </div>
+
+                        <div className={styles.rightWing}>
+                            <article  className={styles.chatFeed}>
+                                <Chat user={this.props.user} chatId={this.props.eventId}/>
+                            </article>
+                        </div>
+
                     </div>
                 )
 

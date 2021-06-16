@@ -1,6 +1,46 @@
 @import '../../../styles/variables.scss';
 
+.normalText {
+    color: $text-primary;
+}
+
+.specialText {
+    color: $text-secondary;
+}
+
+.wrapper {
+    display: flex;
+    margin-top: 25px;
+    max-width: 1080px;
+}
+
+.leftWing {
+    width: 70%;
+    height: 100%;
+    margin-left: 4rem;
+}
+
+.rightWing {
+    width: 34%;
+    height: 100%;
+}
+
 
 .videoFeed {
-    
+    width: 65rem;
+    height: 45rem;
+    margin-bottom: 1.5rem;
+}
+
+.eventTitle {
+    color: $text-primary;
+    font-size: 32px;
+}
+
+
+.chatFeed {
+    width: 30rem;
+    height: 70rem;
+    // position: fixed;
+    overflow-x: auto;
 }

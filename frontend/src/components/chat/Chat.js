@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 
-// import styles from './Chat.module.scss';
+import styles from './Chat.module.scss';
 
 
 const Chat = (props) => {
@@ -43,13 +43,13 @@ const Chat = (props) => {
   };
 
   return (
-    <div>
-      <ul id="message-list">
-        {messages.map((message, i) => {
-          return <li key={i}>{message}</li>;
+    <div className={styles.wrapper}>
+      <ul className={styles.messageList}>
+        {messages.reverse().map((message, i) => {
+          return <li key={i} className={styles.message}>{message}</li>;
         })}
       </ul>
-      <form>
+      <form className={styles.messageInput}>
         <input type="text" id="chat-input"></input>
         <button onClick={handleSubmit}>Send</button>
       </form>
