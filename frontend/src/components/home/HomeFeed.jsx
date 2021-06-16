@@ -46,11 +46,10 @@ const HomeFeed = (props) => {
         <section className={styles.sectionWrapper}> 
           <h2 className={styles.categoryTitle}>Currently Streaming Events</h2>
           <ul className={styles.eventsGrid}>
-            {liveEvents ? liveEvents.map((e, i) => {
-              return <li key={i} className={styles.eventCard}>
-                  <Link to={`/event/${e._id}`} className={styles.noUnderline}>
-                    <h3 className={styles.eventTitle}>{e.title}</h3>
-                  </Link>
+            {liveEvents ? liveEvents.map((e, i) => (
+              <Link to={`/event/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}>
+                <li key={i}>
+                  <h3 className={styles.eventTitle}>{e.title}</h3>
                   <p className={styles.eventTopic}>{e.topic}</p>
                   <div className={styles.cardRowWrapper}>
                     <BiUser className={styles.cardIcon}/>
@@ -62,18 +61,18 @@ const HomeFeed = (props) => {
                   </div>
                   {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
                 </li>
-            }) : ''}
+              </Link>
+            )) : ''}
           </ul>
         </section>
 
         <section className={styles.sectionWrapper}> 
           <h2 className={styles.categoryTitle}>Upcoming Events</h2>
           <ul className={`${styles.eventsGrid} ${styles.lastGrid}`}>
-            {futureEvents ? futureEvents.map((e, i) => {
-              return <li key={i} className={styles.eventCard}>
-                  <Link to={`/event/${e._id}`} className={styles.noUnderline}>
-                    <h3 className={styles.eventTitle}>{e.title}</h3>
-                  </Link>
+            {futureEvents ? futureEvents.map((e, i) => (
+              <Link to={`/event/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}>
+                <li key={i}>
+                  <h3 className={styles.eventTitle}>{e.title}</h3>
                   <p className={styles.eventTopic}>{e.topic}</p>
                   <div className={styles.cardRowWrapper}>
                     <BiUser className={styles.cardIcon}/>
@@ -85,7 +84,8 @@ const HomeFeed = (props) => {
                   </div>
                   {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
                 </li>
-            }) : ''}
+              </Link>
+            )) : ''}
           </ul>
         </section>
 
