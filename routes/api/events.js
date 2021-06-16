@@ -8,10 +8,25 @@ const { v4: uuidv4 } = require('uuid');
 
 // Get all events
 router.get('/', (req, res) => {
-  Event.find()
-    .sort({ date: -1 })
-    .then((events) => res.json(events))
-    .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  if (req.body.time === 'live') {
+    Event.find({startTime: {$lt: new Date()}}, {endTime: {$gte: new Date()}})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } else if (req.body.time === 'future') {
+     Event.find({startTime: {$gte: new Date()}})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } else if (req.body.time === 'not over') {
+    Event.find({endTime: {$gte: new Date()}})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } else {
+    Event.find()
+      .sort({ date: -1 })
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  }
+
 });
 
 // Get a specific event

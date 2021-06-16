@@ -11,6 +11,9 @@ const HomeFeed = (props) => {
         <h3>You are logged in. Your username is @{props.user.username}.</h3>
       </div>
 
+      <div> 
+        
+      </div>
 
     </div>
   );
