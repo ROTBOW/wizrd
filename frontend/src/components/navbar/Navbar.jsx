@@ -43,7 +43,6 @@ const Navbar = (props) => {
   }
 
   const loginButtons = () => {
-    console.log(props.user);
     if (empty(props.user)) {
       return [
         <li className={styles.navLink} key="1">
