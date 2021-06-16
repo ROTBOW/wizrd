@@ -21,6 +21,7 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
 
   const [video, setVideo] = useState(null)
   const videoRef = useRef()
+  const userRef = useRef()
 
 
   const isHost = currentUserId === '60c783c93805d227f3bf8734'
@@ -34,18 +35,22 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
           stream.getTracks().forEach(track => peer.addTrack(track, stream));
         })
     } else {
-      const peer = createPeer();
-      peer.addTransceiver('video', { direction: 'recvonly' })
+
     }
   }, [])
 
   useEffect(() => {
     if (video) {
       console.log('executing')
-      videoRef.current.srcObject = video;
+      userRef.current.srcObject = video;
 
     }
   }, [video])
+
+  const onClick = () => {
+    const peer = createPeer();
+    peer.addTransceiver('video', { direction: 'recvonly' })
+  }
 
 
   function createPeer() {
@@ -94,6 +99,16 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
       <video muted={isHost} ref={videoRef} autoPlay playsInline>
 
       </video>
+
+      <button type="button" onClick={onClick} >View Stream</button>
+       
+      {
+        video ?
+        <video muted={isHost} ref={userRef} autoPlay playsInline>
+
+        </video>
+        : null
+      }
 
     </div>
   )
