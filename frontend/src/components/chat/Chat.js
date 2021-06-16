@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
+import rightArrow from '../../assets/rightArrow.png';
 import io from 'socket.io-client';
 
-// import styles from './Chat.module.scss';
+import styles from './Chat.module.scss';
 
 
 const Chat = (props) => {
@@ -25,7 +26,7 @@ const Chat = (props) => {
     }
     
     newSocket.on('new message', ({username, msg}) => {
-        let message = `${username}: ${msg}`;
+        let message = [username, msg];
         setMessages([...messages, message]);
       });
 
@@ -43,15 +44,17 @@ const Chat = (props) => {
   };
 
   return (
-    <div>
-      <ul id="message-list">
-        {messages.map((message, i) => {
-          return <li key={i}>{message}</li>;
+    <div className={styles.wrapper}>
+      <ul className={styles.messageList}>
+        {messages.reverse().map((message, i) => {
+          return <li key={i} className={styles.message}><i className={styles.specialText}>{message[0]}</i>: {message[1]}</li>;
         })}
       </ul>
-      <form>
+      <form className={styles.messageInput}>
         <input type="text" id="chat-input"></input>
-        <button onClick={handleSubmit}>Send</button>
+        <button onClick={handleSubmit} >
+          <img src={rightArrow} className={styles.arrow}/>
+        </button>
       </form>
     </div>
   )
