@@ -13,14 +13,28 @@ $gray-800: #1F2937;
 $gray-900: #111827;
 $black: #000;
 
-// $brand-primary: #088d1a;
-// $brand-secondary: #04460d;
+$emerald-50: #ECFDF5;
+$emerald-100: #D1FAE5;
+$emerald-200: #A7F3D0;
+$emerald-300: #6EE7B7;
+$emerald-400: #34D399;
+$emerald-500: #10B981;
+$emerald-600: #059669;
+$emerald-700: #047857;
+$emerald-800: #065F46;
+$emerald-900: #064E3B;
+
+$brand-primary: $emerald-600;
+$brand-secondary: $emerald-700;
 
 // $body-background: #000000;
 
 $text-primary: $black;
 $text-secondary: $gray-800;
 
-// $link-color: $brand-primary;
-// $link-color-hover: darken($link-color, 10%);
+$accent-primary: $emerald-600;
+$accent-secondary: $emerald-700;
+
+$link-color: $brand-primary;
+$link-color-hover: darken($link-color, 10%);
 
