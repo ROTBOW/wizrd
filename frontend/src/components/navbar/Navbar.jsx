@@ -28,22 +28,41 @@ const Navbar = (props) => {
   })
 
 
-  // const greeting = () => {
-  //   if (loggedIn) {
-  //     return <div></div>
-  //   } else {
-  //     return <div></div>
-  //   }
-  // };
+  const search = (e) => {
+    e.preventDefault();
+    const input = document.getElementById('searchInput');
+    const param = document.getElementById('searchParam').value;
+    if (input.value) {
+      props.findEvents({[param]: input.value})
+        // .then(() => {
+        //   props.history.push('/search');
+        // })
+    }
+  }
+  
 
   return (
     <header className={styles.header}>
       <div className={styles.outer}>
         <div className={styles.inner}>
-          <div className={styles.logoWrapper}>
-            <Link to="/">
-              <img className={styles.logo} src={logo} alt="logo" />
-            </Link>
+          <div className={styles.navBarLeft}>
+            <div className={styles.logoWrapper}>
+              <Link to="/">
+                <img className={styles.logo} src={logo} alt="logo" />
+              </Link>
+            </div>
+
+            <div>
+              <form className={styles.search}>
+                <select id="searchParam">
+                  <option value="title">Title</option>
+                  <option value="topic" selected>Topic</option>
+                  <option value="description">Description</option>
+                </select>
+                <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event"/>
+                <button onClick={search}>Search</button>
+              </form>
+            </div>
           </div>
 
           <div className={styles.navWrapper}>

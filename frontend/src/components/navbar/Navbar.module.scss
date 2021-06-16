@@ -24,6 +24,11 @@ $light-gray: rgba(15, 15, 15, 0.1);
   align-items: center;
 }
 
+.navBarLeft {
+  display: flex;
+  align-items: center;
+}
+
 .logoWrapper {
   height: 72px;
   display: flex;
@@ -126,4 +131,16 @@ $light-gray: rgba(15, 15, 15, 0.1);
 .example-leave.example-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+.search {
+  display: flex;
+  margin-left: 2rem;
+  align-items: center;
+
+}
+
+.searchInput {
+  margin: 0;
+  padding-left: 0.2rem;
 }
