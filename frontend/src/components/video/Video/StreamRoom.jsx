@@ -95,7 +95,7 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
 
   return (
     <div>
-      <video muted ref={userVideo} autoPlay playsInline />
+      <video muted={isHost} ref={userVideo} autoPlay playsInline />
      
     </div>
   )
