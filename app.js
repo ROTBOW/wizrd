@@ -60,20 +60,23 @@ io.on('connection', (socket) => {
       console.log('streaming')
       io.to(eventId).emit('stream', data)
     })
+    
+    socket.on('host joined', (hostId) => {
+      //io.to(eventId).emit('host connected')
+      console.log('host just joined on server')
+      io.to(eventId).emit('host request connection', hostId)
+    })
 
     socket.on('user joined', (userId) => {
       console.log('a new user joined')
       io.to(eventId).emit('user request stream', userId)
     })
-
+    
     socket.on('host disconnected', () => {
       console.log('host disconnecting')
       io.to(eventId).emit('host disconnected')
     })
-
-    socket.on('host connected', () => {
-      //io.to(eventId).emit('host connected')
-    })
+    
 
   })
 //
