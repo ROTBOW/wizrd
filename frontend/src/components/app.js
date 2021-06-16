@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom';
 import LoginFormContainer from './session/LoginFormContainer';
 import SignupFormContainer from './session/SignupFormContainer';
 import { Link } from 'react-router-dom';
-import StreamRoom from './video/Video/StreamRoom';
+import StreamRoomContainer from './video/Video/StreamRoomContainer';
 import NavbarContainer from './navbar/NavbarContainer'
 
 class temp extends React.Component {
@@ -23,7 +23,7 @@ class temp extends React.Component {
 const App = () => (
   <div>
     <NavbarContainer />
-    <StreamRoom eventID='60c7a54041517de3c5fbd7a8' hostID='60c7a1a4ba294ae0599d7ef7' isHost={true} />
+    <StreamRoomContainer eventID='60c7a54041517de3c5fbd7a8' hostID='60c7a1a4ba294ae0599d7ef7' />
     <Switch>
       <AuthRoute exact path="/" component={temp} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
