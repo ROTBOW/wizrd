@@ -16,7 +16,6 @@ const Chat = (props) => {
       newSocket = io.connect('/');
       setSocket(newSocket);
 
-      debugger;
       newSocket.emit('join chat', {
         chatId: props.chatId,
         username: props.user.username
@@ -52,8 +51,8 @@ const Chat = (props) => {
       </ul>
       <form>
         <input type="text" id="chat-input"></input>
+        <button onClick={handleSubmit}>Send</button>
       </form>
-      <button onClick={handleSubmit}>Send</button>
     </div>
   )
 }
