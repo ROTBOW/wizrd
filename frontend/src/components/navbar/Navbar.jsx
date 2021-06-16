@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
 import {
@@ -16,6 +16,7 @@ const Navbar = (props) => {
     <a href="https://github.com/melflynn" target="_blank" rel="noreferrer" key="3" >Meet Melissa</a>,
     <a href="https://github.com/ROTBOW" target="_blank" rel="noreferrer" key="4" >Meet Josiah</a>
   ]);
+  const history = useHistory();
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -35,7 +36,7 @@ const Navbar = (props) => {
     if (input.value) {
       props.findEvents({[param]: input.value})
         .then(() => {
-          props.history.push('/search');
+          history.push('/search');
         })
     }
   }

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../home/HomeFeed.module.scss';
 import { BiUser, BiBulb, BiVideo } from "react-icons/bi";
 import moment from 'moment';
 
 const SearchResults = (props) => {
-  const [results, setResults] = useState(props.events);
+  const [results, setResults] = useState([]);
   
+  useEffect(() => {
+    if (results.length === 0) {
+      let events = [];
+      for (let key in props.events) {
+        events.push(props.events[key])
+      }
+      setResults(events);
+    }
+    console.log(props.events);
+  }, [results])
+
   return (
     <section className={styles.sectionWrapper}> 
           <h2 className={styles.categoryTitle}>Currently Streaming Events</h2>
