@@ -19,9 +19,11 @@ const videoConstraints = {
 
 const StreamRoom = ({ hostID, eventID, currentUserId }) => {
 
-  
-
+  const [video, setVideo] = useState(null)
   const videoRef = useRef()
+
+
+  const isHost = currentUserId === '60c783c93805d227f3bf8734'
 
   useEffect(() => {
     if (isHost) {
@@ -31,8 +33,20 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
           const peer = createPeer();
           stream.getTracks().forEach(track => peer.addTrack(track, stream));
         })
+    } else {
+      const peer = createPeer();
+      peer.addTransceiver('video', { direction: 'recvonly' })
     }
-  })
+  }, [])
+
+  useEffect(() => {
+    if (video) {
+      console.log('executing')
+      videoRef.current.srcObject = video;
+
+    }
+  }, [video])
+
 
   function createPeer() {
     const peer = new RTCPeerConnection({
@@ -42,6 +56,9 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
         }
       ]
     })
+    if (!isHost) {
+      peer.ontrack = handleTrackEvent;
+    }
     peer.onnegotiationneeded = () => handleNegotiationNeededEvent(peer);
     return peer;
   }
@@ -53,16 +70,31 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
       sdp: peer.localDescription
     }
 
-    const { data } = await axios.post('/broadcast', payload);
+    const endpoint = isHost ? '/broadcast' : '/consumer'
+
+    const { data } = await axios.post(endpoint, payload);
     const desc = new RTCSessionDescription(data.sdp);
     peer.setRemoteDescription(desc).catch(e => console.log(e));
   }
+
+  function handleTrackEvent(e) {
+
+    // videoRef.current.srcObject = e.streams[0];
+    setVideo(e.streams[0])
+  }
+
+
 
 
 
   return (
     <div>
-      <video muted={isHost} ref={videoRef} autoPlay playsInline />
+
+
+      <video muted={isHost} ref={videoRef} autoPlay playsInline>
+
+      </video>
+
     </div>
   )
 

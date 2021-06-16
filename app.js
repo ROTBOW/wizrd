@@ -1,11 +1,7 @@
 require('dotenv').config()
 const express = require('express');
-const http = require('http');
 const app = express();
-const server = http.createServer(app);
 const webrtc = require('wrtc');
-const socket = require('socket.io');
-const io = socket(server);
 const db = require('./config/keys').mongoURI;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -37,23 +33,28 @@ if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   })
-} 
+}
 
 
 app.post('/consumer', async ({ body }, res) => {
   const peer = new webrtc.RTCPeerConnection({
-    iceServers:[
+    iceServers: [
       {
         urls: "stun:stun.stunprotocol.org"
       }
     ]
-  })
+  });
+  console.log({ senderStream })
   const desc = new webrtc.RTCSessionDescription(body.sdp);
   await peer.setRemoteDescription(desc);
   senderStream.getTracks().forEach(track => peer.addTrack(track, senderStream));
   const answer = await peer.createAnswer();
+  await peer.setLocalDescription(answer);
+  const payload = {
+    sdp: peer.localDescription
+  }
 
-
+  res.json(payload);
 })
 
 
@@ -64,16 +65,20 @@ app.post('/broadcast', async ({ body }, res) => {
         urls: "stun:stun.stunprotocol.org"
       }
     ]
-  })
+  });
   peer.ontrack = (e) => handleTrackEvent(e, peer);
   const desc = new webrtc.RTCSessionDescription(body.sdp);
+  console.log({ sdp: body.sdp })
   await peer.setRemoteDescription(desc);
   const answer = await peer.createAnswer();
   await peer.setLocalDescription(answer);
   const payload = {
     sdp: peer.localDescription
   }
-  res.json(payload)
+  console.log({ senderStream })
+
+
+  res.json(payload);
 })
 
 function handleTrackEvent(e, peer) {
@@ -88,7 +93,7 @@ app.use('/api/users', users);
 app.use('/api/events', events);
 
 const port = process.env.PORT || 5000;
-server.listen(port, () => console.log(`Server is running on port ${port}`));
+app.listen(port, () => console.log(`Server is running on port ${port}`));
 //
 
 
