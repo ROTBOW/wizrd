@@ -26,6 +26,7 @@ const socketToEvent = {};
 
 io.on('connection', socket => {
   socket.on('joining event', (eventID, isHost) => {
+
     if (eventUsers[eventID]) {
       eventUsers[eventID].push({
         id: socket.id,
@@ -50,6 +51,7 @@ io.on('connection', socket => {
 
 
   socket.on('sending signal', payload => {
+    console.log('here')
     io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID })
   })
 
