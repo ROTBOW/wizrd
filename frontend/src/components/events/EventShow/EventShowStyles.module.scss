@@ -55,16 +55,9 @@
 
 
 .earlyMessage{
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-}
-
-.earlyMessageBox {
-    background-color: $emerald-50;
-    margin: auto 50%;
-    width: fit-content;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .earlyMessageTitle {

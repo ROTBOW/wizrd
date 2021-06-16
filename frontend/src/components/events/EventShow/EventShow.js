@@ -1,6 +1,7 @@
 import React from "react";
 import Chat from '../../chat/Chat';
 import styles from './EventShowStyles.module.scss';
+import Moment from 'moment';
 
 
 class EventShow extends React.Component {
@@ -25,17 +26,17 @@ class EventShow extends React.Component {
                 return (
                     <div>
                         <h1 className={styles.earlyMessageTitle}>{event.title}</h1>
-                        <div className={styles.earlyMessageBox}>
-                            <p className={styles.earlyMessage}>
-                                Oops... this event hasn't started yet!
-                            </p>
-                            <p className={styles.earlyMessage}>
-                                It will be on&nbsp;<i className={styles.specialText}>{event.topic}</i>
-                            </p>
-                            <p className={styles.earlyMessage}>
-                                come back on&nbsp;<i className={styles.specialText}>{startTime}</i>&nbsp;so you don't miss it!
-                            </p>
-                        </div>
+                        
+                        <p className={styles.earlyMessage}>
+                            Oops... this event hasn't started yet!
+                        </p>
+                        <p className={styles.earlyMessage}>
+                            It will be on&nbsp;<i className={styles.specialText}>{event.topic}</i>
+                        </p>
+                        <p className={styles.earlyMessage}>
+                            come back on&nbsp;<i className={styles.specialText}>{Moment(startTime).format("ddd, MMM D, LT")}</i>&nbsp;so you don't miss it!
+                        </p>
+                    
 
                     </div>
                 )
