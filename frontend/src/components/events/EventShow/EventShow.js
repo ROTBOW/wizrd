@@ -1,5 +1,6 @@
 import React from "react";
 import Chat from '../../chat/Chat';
+import styles from './EventShowStyles.module.scss';
 
 
 class EventShow extends React.Component {
@@ -34,7 +35,7 @@ class EventShow extends React.Component {
                 return (
                     <div>
                         <h1>{event.title}</h1>
-                        <div>this will be the video feed</div>
+                        <img src="https://plchldr.co/i/1000x550" alt="vid Placeholder" width="1000"/>
                         <Chat user={this.props.user} chatId={this.props.eventId} />
                     </div>
                 )
