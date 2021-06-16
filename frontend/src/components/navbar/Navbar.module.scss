@@ -9,9 +9,8 @@ $light-gray: rgba(15, 15, 15, 0.1);
   box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
 }
 
-
 .outer {
-  max-width: 1024px;
+  max-width: 1080px;
   height: 72px;
   margin: 0 auto;
   padding: 0 32px;
@@ -38,7 +37,8 @@ $light-gray: rgba(15, 15, 15, 0.1);
 }
 
 .logo:focus {
-  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset, rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
+  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
+    rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
 }
 
 .logo:active {
@@ -76,7 +76,8 @@ $light-gray: rgba(15, 15, 15, 0.1);
     background-color: $nav-item-hover-background;
   }
 
-  a, a:visited {
+  a,
+  a:visited {
     color: inherit;
     text-decoration: none;
   }
@@ -108,7 +109,6 @@ $light-gray: rgba(15, 15, 15, 0.1);
   font-weight: 400;
   padding: 0 12px;
 }
-
 
 .example-enter {
   opacity: 0.01;
