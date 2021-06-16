@@ -2,9 +2,7 @@ import React from 'react';
 
 const searchResults = (props) => {
 
-  return (
-    
-  )
+  return null;
 }
 
 export default searchResults;
