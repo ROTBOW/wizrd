@@ -12,8 +12,12 @@ export const fetchEvents = () => {
     return axios.get('/api/events')
 }
 
-export const fetchCurrentEvents = () => {
-    return axios.get('/api/events')
+export const fetchLiveEvents = () => {
+    return axios({
+        method: 'GET',
+        url: '/api/events',
+        data: {time: 'live'}
+    })
 }
 
 export const fetchEvent = eventId => { //this might be singular not plural

@@ -8,6 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 
 // Get all events
 router.get('/', (req, res) => {
+  console.log(req.body);
   if (req.body.time === 'live') {
     Event.find({startTime: {$lt: new Date()}}, {isOver: false})
       .then((events) => res.json(events))
@@ -48,7 +49,6 @@ router.post('/',
 
     const newEvent = new Event({
       hostId: req.user.id,
-      // streamId: uuidv4(),
       title: req.body.title,
       topic: req.body.topic,
       description: req.body.description,
