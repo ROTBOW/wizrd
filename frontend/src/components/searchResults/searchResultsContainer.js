@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import searchResults from './searchResults';
+import SearchResults from './searchResults';
 import { findEvents } from '../../actions/eventsActions';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   events: state.entities.events
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   findEvents: (searchOptions) => dispatch(findEvents(searchOptions))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(searchResults);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

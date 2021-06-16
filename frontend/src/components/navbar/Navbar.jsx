@@ -34,12 +34,13 @@ const Navbar = (props) => {
     const param = document.getElementById('searchParam').value;
     if (input.value) {
       props.findEvents({[param]: input.value})
-        // .then(() => {
-        //   props.history.push('/search');
-        // })
+        .then(() => {
+          props.history.push('/search');
+        })
     }
   }
   
+  // console.log(props)
 
   return (
     <header className={styles.header}>

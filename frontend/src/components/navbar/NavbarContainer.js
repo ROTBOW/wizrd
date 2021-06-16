@@ -3,8 +3,8 @@ import { signup, login, logout } from '../../actions/sessionActions';
 import Navbar from './Navbar';
 import { findEvents } from '../../actions/eventsActions';
 
-const mapStateToProps = (state) => {
-  // console.log(state);
+const mapStateToProps = (state, ownProps) => {
+  console.log(ownProps);
   return {
     user: state.session.user,
     errors: state.errors.session,
