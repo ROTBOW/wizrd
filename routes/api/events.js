@@ -48,7 +48,7 @@ router.post('/',
 
     const newEvent = new Event({
       hostId: req.user.id,
-      streamId: uuidv4(),
+      // streamId: uuidv4(),
       title: req.body.title,
       topic: req.body.topic,
       description: req.body.description,
