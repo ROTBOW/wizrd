@@ -50,7 +50,6 @@
   }
 }
 
-
 .feedWrapper {
   width: 100%;
   background: $gray-100;
@@ -59,7 +58,7 @@
 .sectionWrapper {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 32px 32px;
+  padding: 40px 32px;
 }
 
 .categoryTitle {
@@ -75,11 +74,18 @@
   gap: 24px;
 }
 
+// add media query
+
+.lastGrid {
+  margin-bottom: 40px;
+}
+
 .eventCard {
+  min-width: 256px;
   background: $white;
-  // border: 2px solid $emerald-500;
   border-radius: 12px;
   padding: 24px 20px;
+  // padding: 28px 24px;
   box-shadow: 0px 0px 24px 8px rgba($emerald-100, 0.3);
 
   &:hover {
@@ -96,6 +102,7 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 1.25;
+  margin-bottom: 4px;
 }
 
 .cardRowWrapper {
@@ -105,39 +112,40 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  // margin-bottom: 8px;
 }
 
 .eventTopic {
   color: $gray-400;
   font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 0;
-  // line-height: 1.0;
+  font-weight: 500;
+  margin-bottom: 4px;
 }
 
 .cardIcon {
-  margin-right: 12px;
+  margin-right: 10px;
   color: $emerald-700;
+}
+
+.eventHost {
+  color: $emerald-600;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0;
 }
 
 .eventStartTime {
   color: $emerald-600;
   font-size: 14px;
-  font-weight: 600;
-  line-height: 1.0;
+  font-weight: 500;
   margin-bottom: 0;
 }
 
 .eventDescription {
   color: $gray-800;
   font-size: 15px;
-  line-height: 1.35;
-  margin-top: 8px;
+  line-height: 1.4;
+  margin-top: 4px;
 }
-
-
-
 
 .footerWrapper {
   width: 100%;

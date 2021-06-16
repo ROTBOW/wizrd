@@ -51,9 +51,10 @@ const HomeFeed = (props) => {
                   <Link to={`/event/${e._id}`} className={styles.noUnderline}>
                     <h3 className={styles.eventTitle}>{e.title}</h3>
                   </Link>
+                  <p className={styles.eventTopic}>{e.topic}</p>
                   <div className={styles.cardRowWrapper}>
-                    <BiBulb className={styles.cardIcon}/>
-                    <p className={styles.eventTopic}>{e.topic}</p>
+                    <BiUser className={styles.cardIcon}/>
+                    <p className={styles.eventHost}>username</p>
                   </div>
                   <div className={styles.cardRowWrapper}>
                     <BiVideo className={styles.cardIcon}/>
@@ -67,14 +68,21 @@ const HomeFeed = (props) => {
 
         <section className={styles.sectionWrapper}> 
           <h2 className={styles.categoryTitle}>Upcoming Events</h2>
-          <ul className={styles.eventsGrid}>
+          <ul className={`${styles.eventsGrid} ${styles.lastGrid}`}>
             {futureEvents ? futureEvents.map((e, i) => {
               return <li key={i} className={styles.eventCard}>
                   <Link to={`/event/${e._id}`} className={styles.noUnderline}>
                     <h3 className={styles.eventTitle}>{e.title}</h3>
                   </Link>
                   <p className={styles.eventTopic}>{e.topic}</p>
-                  <p className={styles.eventStartTime}>{e.startTime}</p>
+                  <div className={styles.cardRowWrapper}>
+                    <BiUser className={styles.cardIcon}/>
+                    <p className={styles.eventHost}>username</p>
+                  </div>
+                  <div className={styles.cardRowWrapper}>
+                    <BiVideo className={styles.cardIcon}/>
+                    <p className={styles.eventStartTime}>{moment(e.startTime).format("ddd, MMM D, LT")}</p>
+                  </div>
                   {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
                 </li>
             }) : ''}
