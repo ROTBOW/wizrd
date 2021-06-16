@@ -31,6 +31,11 @@ export const fetchAllEvents = () => dispatch => {
         .then(events => dispatch(receiveAllEvents(events)))
 };
 
+export const findEvents = (searchOptions) => dispatch => {
+    return APIUtil.findEvents(searchOptions) 
+        .then(events => dispatch(receiveAllEvents(events)))
+}
+
 export const fetchEvent = eventId => dispatch => {
     return APIUtil.fetchEvent(eventId)
         .then(event => dispatch(receiveEvent(event)))
