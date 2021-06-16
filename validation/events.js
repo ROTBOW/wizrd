@@ -29,8 +29,15 @@ module.exports = function validateEventInput(data) {
   }
 
   if (data.startTime) {
+    let startTime;
+    if (typeof data.startTime === 'string') {
+      startTime = Date.parse(data.startTime);
+    } else {
+      startTime = data.startTime;
+    }
+
     let currentTime = new Date();
-    if (data.startTime < currentTime) {
+    if (startTime < currentTime) {
       errors.startTime = 'Start time must be in the future.';
     }
   }
@@ -50,3 +57,4 @@ module.exports = function validateEventInput(data) {
     isValid: Object.keys(errors).length === 0,
   };
 };
+a = new Date()
