@@ -1,6 +1,7 @@
 // Global styles
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import './variables.scss';
 
 * {
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -15,9 +16,9 @@
   box-sizing: border-box;
 }
 
-// html {
-//   font-size: 62.5%;
-// }
+html {
+  font-size: 62.5%;
+}
 
 .container {
   max-width: 1080px;
@@ -25,79 +26,85 @@
   padding: 16px 32px;
 }
 
-// h1 {
-//   font-size: 4.8rem;
-//   font-weight: 600;
-//   margin-bottom: 1.6rem;
-// }
-
-// h2 {
-//   font-size: 3.2rem;
-//   font-weight: 600;
-//   margin-bottom: 1.2rem;
-// }
-
-// h3 {
-//   font-size: 2.4rem;
-//   font-weight: 600;
-//   margin-bottom: 0.8rem;
-// }
-
-// h4 {
-//   font-size: 2.0rem;
-//   font-weight: 500;
-//   margin-bottom: 0.8rem;
-// }
-
-// p {
-//   font-size: 1.6rem;
-//   font-weight: 400;
-//   margin-bottom: 0.8rem;
-// }
-
-// a {
-//   font-size: 1.6rem;
-//   text-decoration: underline;
-// }
-
 h1 {
-  font-size: 48px;
+  font-size: 4.8rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 1.6rem;
 }
 
 h2 {
-  font-size: 28px;
+  font-size: 3.2rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 1.2rem;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 }
 
 h4 {
-  font-size: 20px;
+  font-size: 2.0rem;
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 }
 
 p {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 400;
-  line-height: 1.5;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 }
 
 a {
+  font-size: 1.6rem;
   text-decoration: underline;
 }
+
+// h1 {
+//   font-size: 48px;
+//   font-weight: 600;
+//   margin-bottom: 16px;
+// }
+
+// h2 {
+//   font-size: 28px;
+//   font-weight: 600;
+//   margin-bottom: 16px;
+// }
+
+// h3 {
+//   font-size: 24px;
+//   font-weight: 600;
+//   margin-bottom: 8px;
+// }
+
+// h4 {
+//   font-size: 20px;
+//   font-weight: 500;
+//   margin-bottom: 8px;
+// }
+
+// p {
+//   font-size: 16px;
+//   font-weight: 400;
+//   line-height: 1.5;
+//   margin-bottom: 8px;
+// }
+
+// a {
+//   text-decoration: underline;
+// }
 
 button {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
+}
+
+input:focus {
+  outline: none;
+  border: 0.2rem solid $brand-secondary;
+  padding: 3px;
 }

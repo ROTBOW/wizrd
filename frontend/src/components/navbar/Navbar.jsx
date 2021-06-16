@@ -36,6 +36,31 @@ const Navbar = (props) => {
   //   }
   // };
 
+  const empty = pojo => {
+    let count = 0;
+    for (let i in pojo) count++;
+    return count === 0
+  }
+
+  const loginButtons = () => {
+    if (empty(props.user)) {
+      return [
+        <li className={styles.navLink} key="1">
+          <Link to="/login">Log in</Link>
+        </li>,
+        <li className={styles.navLink} key="2">
+          <Link to="/signup">Sign up</Link>
+        </li>
+      ]
+    } else {
+      return [
+        <li className={styles.navLink}>
+          <a onClick={props.logout}>Log out</a>
+        </li>
+      ]
+    }
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.outer}>
@@ -49,15 +74,16 @@ const Navbar = (props) => {
           <div className={styles.navWrapper}>
             <nav className={styles.nav}>
               <ul className={styles.navList}>
-                <li className={styles.navLink}>
+                {/* <li className={styles.navLink}>
                   <Link to="/login">Log in</Link>
                 </li>
                 <li className={styles.navLink}>
                   <Link to="/signup">Sign up</Link>
-                </li>
-                <li className={styles.navLink}>
-                  <div onClick={props.logout}>Log out</div>
-                </li>
+                </li> */}
+                {loginButtons()}
+                {/* <li className={styles.navLink}>
+                  <a onClick={props.logout}>Log out</a>
+                </li> */}
               </ul>
 
               <div className={styles.divider}></div>

@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import styles from './HomeFeed.module.scss';
 import { fetchLiveEvents, fetchFutureEvents } from '../../util/eventUtil';
 import EventForm from '../events/EventForm/EventForm';
-import { updateModal } from '../../actions/uiActions';
 import moment from 'moment';
 import { BiUser, BiVideo } from "react-icons/bi";
+import Modal from '../modal/modal';
+import { updateModal } from '../../actions/uiActions';
+import { createEvent } from '../../actions/eventsActions';
 
 const HomeFeed = (props) => {
   const [liveEvents, setLiveEvents] = useState([]);
@@ -23,13 +25,16 @@ const HomeFeed = (props) => {
       })
   }, [])
 
-  const formatDate = (date) => {
-    return;
-  }
 
   return (
     <div>
-      {props.modal === 'createEvent' ? <EventForm /> : ''}
+      {props.modal === 'createEvent' ? 
+        <Modal 
+          name='createEvent' 
+          updateModal={props.updateModal} 
+          createEvent={props.createEvent}
+          history={props.history}
+        /> : ''}
 
       <div className={styles.headerWrapper}>
         <div className={styles.header}>
@@ -37,7 +42,7 @@ const HomeFeed = (props) => {
           <p className={styles.headerSubtitle}>
             Wizard is a streaming platform for the teacher inside all of us. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione beatae tenetur veritatis. Join an event, or create your own.
           </p>
-          <button className={styles.createEventButton} onClick={props.updateModal('createEvent')}>Create an event</button>
+          <button className={styles.createEventButton} onClick={() => props.updateModal('createEvent')}>Create an event</button>
         </div>
       </div>
 
@@ -109,7 +114,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  updateModal: (modalName) => dispatch(updateModal(modalName))
+  updateModal: (modalName) => dispatch(updateModal(modalName)),
+  createEvent: event => dispatch(createEvent(event))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeFeed);

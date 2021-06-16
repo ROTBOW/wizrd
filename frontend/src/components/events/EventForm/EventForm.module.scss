@@ -1,0 +1,32 @@
+@import '../../../styles/variables.scss';
+
+.formWrapper {
+  margin: auto;
+  background-color: white;
+  max-width: 56rem;
+  margin-top: 11.2rem;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+  padding: 1.6rem;
+}
+
+h3 {
+  margin-bottom: 1.6rem;
+}
+
+label {
+  font-size: 1.6rem;
+}
+
+.submit {
+  color: white;
+  background-color: $emerald-400;
+  padding: 0.8rem 1.6rem;
+  border: 0.1rem solid $emerald-900;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+
+  &:hover {
+    background-color: $brand-secondary;
+  }
+}
