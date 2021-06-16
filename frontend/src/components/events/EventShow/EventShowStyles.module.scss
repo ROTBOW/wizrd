@@ -1,0 +1,65 @@
+@import '../../../styles/variables.scss';
+
+.normalText {
+  color: $text-primary;
+}
+
+.specialText {
+  color: $text-secondary;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.wrapper {
+  display: flex;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-top: 25px;
+}
+
+.leftWing {
+  width: 70%;
+  height: 100%;
+  margin-left: 4rem;
+}
+
+.rightWing {
+  width: 34%;
+  height: 100%;
+}
+
+.videoFeed {
+  width: 65rem;
+  height: 45rem;
+  margin-bottom: 1.5rem;
+}
+
+.eventTitle {
+  color: $text-primary;
+  font-size: 32px;
+}
+
+.eventDesc {
+  overflow-y: auto;
+  height: 10rem;
+}
+
+.chatFeed {
+  width: 30rem;
+  height: 70rem;
+  // position: fixed;
+  overflow-x: auto;
+}
+
+.earlyMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.earlyMessageTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
