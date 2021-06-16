@@ -21,12 +21,9 @@ const HomeFeed = (props) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.temp}>
-        <h3>You are logged in. Your username is @{props.user.username}.</h3>
-      </div>
-
-      <div> 
-        <h4>Currently Streaming Events</h4>
+    
+      <div className={styles.sectionWrapper}> 
+        <h2>Currently Streaming Events</h2>
         <ul>
           {liveEvents ? liveEvents.map((e, i) => {
             return <li key={i}>
@@ -38,7 +35,7 @@ const HomeFeed = (props) => {
       </div>
 
       <div> 
-        <h4>Upcoming Events</h4>
+        <h2>Upcoming Events</h2>
         <ul>
           {futureEvents ? futureEvents.map((e, i) => {
             return <li key={i}>
