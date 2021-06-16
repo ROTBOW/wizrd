@@ -7,8 +7,7 @@ const validateEventInput = require('../../validation/events');
 const { v4: uuidv4 } = require('uuid');
 
 // Get all events
-router.get('/:time', (req, res) => {
-  console.log(req.body);
+router.put('/:time', (req, res) => {
   if (req.params.time === 'live') {
     Event.find({startTime: {$lte: new Date()}}, {isOver: false})
       .then((events) => res.json(events))
