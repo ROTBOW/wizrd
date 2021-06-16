@@ -6,7 +6,7 @@ import { fetchLiveEvents, fetchFutureEvents } from '../../util/eventUtil';
 import EventForm from '../events/EventForm/EventForm';
 import { updateModal } from '../../actions/uiActions';
 import moment from 'moment';
-import { BiUser, BiBulb, BiVideo } from "react-icons/bi";
+import { BiUser, BiVideo } from "react-icons/bi";
 
 const HomeFeed = (props) => {
   const [liveEvents, setLiveEvents] = useState([]);
