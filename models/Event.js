@@ -28,9 +28,12 @@ const EventSchema = new Schema(
       type: Date,
       required: true,
     },
-    endTime: {
-      type: Date
-    },
+    // endTime: {
+    //   type: Date
+    // },
+    isOver: {
+      type: Boolean
+    }
   },
   {
     timestamps: true

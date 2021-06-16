@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 // Get all events
 router.get('/', (req, res) => {
   if (req.body.time === 'live') {
-    Event.find({startTime: {$lt: new Date()}}, {endTime: {$gte: new Date()}})
+    Event.find({startTime: {$lt: new Date()}}, {isOver: false})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
   } else if (req.body.time === 'future') {
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
   } else if (req.body.time === 'not over') {
-    Event.find({endTime: {$gte: new Date()}})
+    Event.find({isOver: false})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
   } else {
@@ -49,12 +49,11 @@ router.post('/',
     const newEvent = new Event({
       hostId: req.user.id,
       streamId: uuidv4(),
-      // Add a chatId property
       title: req.body.title,
       topic: req.body.topic,
       description: req.body.description,
       startTime: req.body.startTime,
-      endTime: req.body.endTime
+      isOver: false
     });
 
     newEvent.save().then((event) => res.json(event));
@@ -76,7 +75,7 @@ router.patch('/:eventId', (req, res) => {
       if (topic) event.topic = topic;
       if (description) event.description = description;
       if (req.body.startTime) event.startTime = req.body.startTime;
-      if (req.body.endTime) event.endTime = req.body.endTime;
+      if (req.body.isOver) event.isOver = req.body.isOver;
       event.save().then((event) => res.json(event));
     })
     .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that ID' }));

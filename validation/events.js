@@ -35,15 +35,15 @@ module.exports = function validateEventInput(data) {
     }
   }
 
-  if (data.endTime) {
-    if (!startTime) {
-      errors.starTime = 'You must enter both start time and end time.';
-    }
+  // if (data.endTime) {
+  //   if (!startTime) {
+  //     errors.starTime = 'You must enter both start time and end time.';
+  //   }
 
-    if (startTime > endTime) {
-      errors.endTime = 'End time must be after start time.';
-    }
-  }
+  //   if (startTime > endTime) {
+  //     errors.endTime = 'End time must be after start time.';
+  //   }
+  // }
 
   return {
     errors,
