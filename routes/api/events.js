@@ -7,11 +7,28 @@ const validateEventInput = require('../../validation/events');
 const { v4: uuidv4 } = require('uuid');
 
 // Get all events
-router.get('/', (req, res) => {
-  Event.find()
-    .sort({ date: -1 })
-    .then((events) => res.json(events))
-    .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+router.get('/:time', (req, res) => {
+  console.log(req.body);
+  if (req.params.time === 'live') {
+    Event.find({startTime: {$lte: new Date()}}, {isOver: false})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } else if (req.params.time === 'future') {
+     Event.find({startTime: {$gte: new Date()}})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } 
+  // else if (req.params.time === 'notOver') {
+  //   Event.find({isOver: false})
+  //     .then((events) => res.json(events))
+  //     .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  // } else {
+  //   Event.find()
+  //     .sort({ date: -1 })
+  //     .then((events) => res.json(events))
+  //     .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  // }
+
 });
 
 // Get a specific event
@@ -33,13 +50,11 @@ router.post('/',
 
     const newEvent = new Event({
       hostId: req.user.id,
-      streamId: uuidv4(),
-      // Add a chatId property
       title: req.body.title,
       topic: req.body.topic,
       description: req.body.description,
       startTime: req.body.startTime,
-      endTime: req.body.endTime
+      isOver: false
     });
 
     newEvent.save().then((event) => res.json(event));
@@ -61,7 +76,7 @@ router.patch('/:eventId', (req, res) => {
       if (topic) event.topic = topic;
       if (description) event.description = description;
       if (req.body.startTime) event.startTime = req.body.startTime;
-      if (req.body.endTime) event.endTime = req.body.endTime;
+      if (req.body.isOver) event.isOver = req.body.isOver;
       event.save().then((event) => res.json(event));
     })
     .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that ID' }));

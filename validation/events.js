@@ -8,7 +8,7 @@ module.exports = function validateEventInput(data) {
   data.text = validText(data.topic) ? data.topic : '';
   data.text = validText(data.description) ? data.description : '';
 
-  if (Validator.isEmpty(data.title)) {
+  if (Validator.isEmpty(data.title) || !data.title) {
     errors.title = 'Title field is required';
   }
 
@@ -16,7 +16,7 @@ module.exports = function validateEventInput(data) {
     errors.title = 'Title must be between 1 and 140 characters';
   }
 
-  if (Validator.isEmpty(data.topic)) {
+  if (Validator.isEmpty(data.topic) || !data.topic) {
     errors.topic = 'Topic field is required';
   }
 
@@ -28,20 +28,19 @@ module.exports = function validateEventInput(data) {
     errors.description = 'Description must be between 0 and 1400 characters';
   }
 
-  if (data.startTime) {
-    let currentTime = new Date();
-    if (data.startTime < currentTime) {
-      errors.startTime = 'Start time must be in the future.';
-    }
+  if (Validator.isEmpty(data.startTime) || !data.startTime) {
+    errors.startTime = 'Start time field is required';
   }
 
-  if (data.endTime) {
-    if (!startTime) {
-      errors.starTime = 'You must enter both start time and end time.';
-    }
+  if (data.startTime) {
+    let startTime = data.startTime;
+    if (typeof data.startTime === 'string') {
+      startTime = Date.parse(data.startTime);
+    } 
 
-    if (startTime > endTime) {
-      errors.endTime = 'End time must be after start time.';
+    let currentTime = new Date();
+    if (startTime < currentTime) {
+      errors.startTime = 'Start time must be in the future.';
     }
   }
 
