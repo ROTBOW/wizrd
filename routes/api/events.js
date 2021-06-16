@@ -7,26 +7,27 @@ const validateEventInput = require('../../validation/events');
 const { v4: uuidv4 } = require('uuid');
 
 // Get all events
-router.get('/', (req, res) => {
+router.get('/:time', (req, res) => {
   console.log(req.body);
-  if (req.body.time === 'live') {
-    Event.find({startTime: {$lt: new Date()}}, {isOver: false})
+  if (req.params.time === 'live') {
+    Event.find({startTime: {$lte: new Date()}}, {isOver: false})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
-  } else if (req.body.time === 'future') {
+  } else if (req.params.time === 'future') {
      Event.find({startTime: {$gte: new Date()}})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
-  } else if (req.body.time === 'not over') {
-    Event.find({isOver: false})
-      .then((events) => res.json(events))
-      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
-  } else {
-    Event.find()
-      .sort({ date: -1 })
-      .then((events) => res.json(events))
-      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
-  }
+  } 
+  // else if (req.params.time === 'notOver') {
+  //   Event.find({isOver: false})
+  //     .then((events) => res.json(events))
+  //     .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  // } else {
+  //   Event.find()
+  //     .sort({ date: -1 })
+  //     .then((events) => res.json(events))
+  //     .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  // }
 
 });
 

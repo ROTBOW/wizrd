@@ -13,11 +13,11 @@ export const fetchEvents = () => {
 }
 
 export const fetchLiveEvents = () => {
-    return axios({
-        method: 'GET',
-        url: '/api/events',
-        data: {time: 'live'}
-    })
+    return axios.get(`/api/events/${'live'}`)
+}
+
+export const fetchFutureEvents = () => {
+    return axios.get(`/api/events/${'future'}`)
 }
 
 export const fetchEvent = eventId => { //this might be singular not plural
