@@ -1,6 +1,7 @@
 // Global styles
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import './variables.scss';
 
 * {
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -65,4 +66,10 @@ button {
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
+}
+
+input:focus {
+  outline: none;
+  border: 0.2rem solid $brand-secondary;
+  padding: 3px;
 }

@@ -34,6 +34,7 @@ class EventForm extends React.Component {
         };
         this.props.createEvent(submitForm)
           .then(event => {
+            this.props.updateModal();
             this.props.history.replace(`/event/${event.event.data._id}`)
           })
     }
@@ -95,8 +96,8 @@ class EventForm extends React.Component {
 
         return (
           <div className={styles.formWrapper}>
-            <form onSubmit={this.handleSubmit}>
-                <h1>Create a Event</h1>
+            <form onSubmit={this.handleSubmit} onClick={(e) => e.stopPropagation()}>
+                <h3>Create an Event</h3>
 
                 <label>Title:
                     <input
@@ -110,7 +111,7 @@ class EventForm extends React.Component {
                 <label>Topic:
                     <input
                       type="text"
-                      placeholder="topic"
+                      placeholder="Topic"
                       required
                       onChange={this.update('topic')}
                     />
@@ -126,7 +127,7 @@ class EventForm extends React.Component {
 
                 {liveToggle}
 
-                <button type='submit'>Create Event</button>
+                <button className={styles.submit} type='submit'>Create Event</button>
                 {this.renderErrors()}
             </form>
           </div>

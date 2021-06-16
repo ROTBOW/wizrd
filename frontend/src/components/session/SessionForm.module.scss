@@ -81,11 +81,11 @@ input {
   font-size: inherit;
 }
 
-input:focus {
-  border: 1px solid rgba(46, 170, 220, 40%);
-  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
-    rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
-}
+// input:focus {
+//   border: 1px solid rgba(46, 170, 220, 40%);
+//   box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
+//     rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
+// }
 
 input::placeholder {
   color: $gray-500;

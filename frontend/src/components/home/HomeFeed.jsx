@@ -10,7 +10,6 @@ import { createEvent } from '../../actions/eventsActions';
 const HomeFeed = (props) => {
   const [liveEvents, setLiveEvents] = useState([]);
   const [futureEvents, setFutureEvents] = useState([]);
-  // const [modal, setModal] = useState([]);
 
   useEffect(() => {
     props.fetchLiveEvents()
@@ -23,14 +22,16 @@ const HomeFeed = (props) => {
       })
   }, [])
 
-  // useEffect(() => {
-  //   setModal(props.modal);
-  // }, [modal])
-
   console.log(props);
   return (
     <div>
-      {props.modal === 'createEvent' ? <Modal name='createEvent' updateModal={props.updateModal} createEvent={props.createEvent}/> : ''}
+      {props.modal === 'createEvent' ? 
+        <Modal 
+          name='createEvent' 
+          updateModal={props.updateModal} 
+          createEvent={props.createEvent}
+          history={props.history}
+        /> : ''}
       <div className={styles.wrapper}>
 
         <div>
