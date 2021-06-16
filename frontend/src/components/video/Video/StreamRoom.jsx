@@ -18,10 +18,12 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
   
   console.log(isHost)
 
-  const [peers, setPeers] = useState([]);
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
+  const peerRef = useRef();
+
+  const [ stream, setStream ] = useState(null);
 
   const peerOptions =
   process.env.NODE_ENV === "production"
@@ -45,22 +47,32 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
 
   useEffect(() => {
     socketRef.current = io.connect('/');
+    
+    const peer = new Peer(peerOptions)
+    peerRef.current = peer;
     if (isHost) {
       console.log('i am host')
       navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true}).then(stream => {
-        userVideo.current.srcObject = stream;
-        socketRef.current.emit('joining event');
+      //  userVideo.current.srcObject = stream;
+        setStream(stream)
+        socketRef.current.emit('joining event', eventID);
         
         socketRef.current.on('user request stream', userId => {
           console.log('received request from new user for stream')
           peer.connect(userId)
         })
   
-        const peer = new Peer(peerOptions);
+        //const peer = new Peer(peerOptions);
         peer.on('connection', connection => {
           peer.call(connection.peer, stream);
           peersRef.current.push(peer)
           console.log(peer.connections)
+        })
+        
+        peer.on('disconnected', () => {
+          console.log('host disconnected')
+          socketRef.current.emit('host disconnected')
+          setStream(null)
         })
 
 
@@ -68,9 +80,7 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
       })
     } else {
       console.log('i am audience')
-      socketRef.current.emit('joining event');
-
-      const peer = new Peer(peerOptions)
+      socketRef.current.emit('joining event', eventID);
       peer.on('open', () => {
         socketRef.current.emit('user joined', peer.id);
       })
@@ -83,18 +93,57 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
         console.log('received call from broadcaster')
         call.answer();
         call.on('stream', stream => {
-          userVideo.current.srcObject = stream;
+          //userVideo.current.srcObject = stream;
+          setStream(stream)
         })
+      })
+
+      peer.on('disconnected', () => {
+          console.log('peer disconnected')
+      })
+
+      socketRef.current.on('host disconnected', () => {
+        console.log('host has been dsiconnected')
+        setStream(null)
+      })
+
+      socketRef.current.on('host connected', () => {
+        console.log('host has been connected')
+        socketRef.current.emit('user joined', )
       })
     }
     
+    return () => {
+      peer.disconnect()
+      peer.destroy()
+    }
   }, [])
+
+  useEffect(() => {
+    if (stream) {
+      userVideo.current.srcObject = stream;
+    }
+
+  }, [stream])
+
+  const onHostDisconnect = () => {
+    peerRef.current.disconnect()
+    peerRef.current.destroy()
+  }
+
+  const onHostConnect = () => {
+    socketRef.current.emit('host connected')
+  }
 
 
   return (
     <div>
-      <video muted={isHost} ref={userVideo} autoPlay playsInline />
-     
+      {
+        stream ? <video muted ref={userVideo} autoPlay playsInline /> : null
+      }
+      <button type="button" onClick={onHostDisconnect}>Host Disconnect</button>
+      <button type="button" onClick={onHostConnect}>Host Connect</button>
+    
     </div>
   )
 

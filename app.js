@@ -51,6 +51,7 @@ app.use('/api/events', events);
 
 io.on('connection', (socket) => {
   socket.on('joining event', (eventId) => {
+    console.log({eventId})
     socket.join(eventId);
     console.log('joined event', socket.id)
 
@@ -63,6 +64,15 @@ io.on('connection', (socket) => {
     socket.on('user joined', (userId) => {
       console.log('a new user joined')
       io.to(eventId).emit('user request stream', userId)
+    })
+
+    socket.on('host disconnected', () => {
+      console.log('host disconnecting')
+      io.to(eventId).emit('host disconnected')
+    })
+
+    socket.on('host connected', () => {
+      //io.to(eventId).emit('host connected')
     })
 
   })
