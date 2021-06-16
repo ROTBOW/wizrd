@@ -22,11 +22,13 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
-//
+
   const peerOptions =
   process.env.NODE_ENV === "production"
     ? {
-        secure: true
+        secure: true,
+        host: "distansingpeerserver.herokuapp.com",
+        port: ""
       }
     : {
         // secure: true,
