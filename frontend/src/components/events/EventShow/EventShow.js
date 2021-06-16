@@ -24,12 +24,18 @@ class EventShow extends React.Component {
 
                 return (
                     <div>
-                        <h1>{event.title}</h1>
-                        <p>
-                            Oops... this event hasn't started yet! <br/>
-                            It will be about <i>{event.topic}</i><br/>
-                            come back on <i>{startTime}</i> so you don't miss it!
-                        </p>
+                        <h1 className={styles.earlyMessageTitle}>{event.title}</h1>
+                        <div className={styles.earlyMessageBox}>
+                            <p className={styles.earlyMessage}>
+                                Oops... this event hasn't started yet!
+                            </p>
+                            <p className={styles.earlyMessage}>
+                                It will be on&nbsp;<i className={styles.specialText}>{event.topic}</i>
+                            </p>
+                            <p className={styles.earlyMessage}>
+                                come back on&nbsp;<i className={styles.specialText}>{startTime}</i>&nbsp;so you don't miss it!
+                            </p>
+                        </div>
 
                     </div>
                 )

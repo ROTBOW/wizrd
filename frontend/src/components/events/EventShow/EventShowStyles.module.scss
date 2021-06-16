@@ -51,3 +51,25 @@
     // position: fixed;
     overflow-x: auto;
 }
+
+
+
+.earlyMessage{
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+}
+
+.earlyMessageBox {
+    background-color: $emerald-50;
+    margin: auto 50%;
+    width: fit-content;
+
+}
+
+.earlyMessageTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}
