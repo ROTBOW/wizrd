@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styles from './HomeFeed.module.scss';
 import { fetchLiveEvents, fetchFutureEvents } from '../../util/eventUtil';
-import EventForm from '../events/EventForm/EventForm';
+import Modal from '../modal/modal';
 import { updateModal } from '../../actions/uiActions';
+import { createEvent } from '../../actions/eventsActions';
 
 const HomeFeed = (props) => {
   const [liveEvents, setLiveEvents] = useState([]);
   const [futureEvents, setFutureEvents] = useState([]);
+  // const [modal, setModal] = useState([]);
 
   useEffect(() => {
     props.fetchLiveEvents()
@@ -21,13 +23,18 @@ const HomeFeed = (props) => {
       })
   }, [])
 
+  // useEffect(() => {
+  //   setModal(props.modal);
+  // }, [modal])
+
+  console.log(props);
   return (
     <div>
-      {props.modal === 'createEvent' ? <EventForm /> : ''}
+      {props.modal === 'createEvent' ? <Modal name='createEvent' updateModal={props.updateModal} createEvent={props.createEvent}/> : ''}
       <div className={styles.wrapper}>
 
         <div>
-          <button onClick={props.updateModal('createEvent')}>Create Event</button>
+          <button onClick={() => props.updateModal('createEvent')}>Create Event</button>
         </div>
       
         <div className={styles.sectionWrapper}> 
@@ -70,7 +77,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  updateModal: (modalName) => dispatch(updateModal(modalName))
+  updateModal: (modalName) => dispatch(updateModal(modalName)),
+  createEvent: event => dispatch(createEvent(event))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeFeed);

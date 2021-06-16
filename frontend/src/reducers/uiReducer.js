@@ -5,9 +5,11 @@ const initialState = {
 }
 
 const uiReducer = function (state = initialState, action) {
+  let newState = Object.assign({}, state);
+
   switch (action.type) {
     
-    case UPDATE_MODAL: return assignModal(state, action.modalName);
+    case UPDATE_MODAL: return assignModal(newState, action.modalName);
 
     default: return state;
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './EventForm.module.scss';
 
 
 class EventForm extends React.Component {
@@ -93,6 +94,7 @@ class EventForm extends React.Component {
                   </div>
 
         return (
+          <div className={styles.formWrapper}>
             <form onSubmit={this.handleSubmit}>
                 <h1>Create a Event</h1>
 
@@ -127,6 +129,7 @@ class EventForm extends React.Component {
                 <button type='submit'>Create Event</button>
                 {this.renderErrors()}
             </form>
+          </div>
         )
     }
 }
