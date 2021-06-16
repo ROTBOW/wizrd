@@ -43,7 +43,7 @@ class EventShow extends React.Component {
                             <img src="https://plchldr.co/i/650x450?bg=111111" alt="vid Placeholder" className={styles.videoFeed}/>
                             <p className={styles.normalText}>
                                {this.props.user.username} is streaming about <i className={styles.specialText}>{this.props.event.topic}</i></p>
-                            <p>{this.props.event.description}</p>
+                            <p className={styles.eventDesc}>{this.props.event.description}</p>
 
                         </div>
 

@@ -6,6 +6,8 @@
 
 .specialText {
     color: $text-secondary;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .wrapper {
@@ -35,6 +37,11 @@
 .eventTitle {
     color: $text-primary;
     font-size: 32px;
+}
+
+.eventDesc {
+    overflow-y: auto;
+    height: 10rem;
 }
 
 

@@ -1,6 +1,11 @@
 @import '../../styles/variables.scss';
 
 
+.specialText {
+    color: $text-secondary;
+    font-weight: bold;
+}
+
 .wrapper {
    margin-top: 4.8rem;
    width: 30rem;
@@ -9,30 +14,72 @@
 }
 
 .messageList {
-    background-color: $emerald-200;
+    background-color: $emerald-50;
     border-radius: 8px;
+    border: 1px solid $emerald-900;
     padding: 1rem;
     bottom: 5rem;
     height: 55rem;
     width: 100%;
     
+    // box-shadow: 0px 0px 4px 2px #000000;
     position: column-reverse;
     display: flex;
     flex-direction: column-reverse;
 
-    overflow-y: scroll;
-
+    overflow-y: auto;
 }
 
 .message {
     font-size: 14px;
     margin-top: 0.5rem;
+    background-color: white;
 
+    border-radius: 0.6rem;
+    border: 1px solid $emerald-900;
+    padding-top: 0.3rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
     width: fit-content;
 }
 
 
 .messageInput {
+    display: flex;
     bottom: 0;
     height: 5rem;
+    box-shadow: none;
+    font-size: 14px;
+
+    > input:focus {
+        border: solid 1.5px $brand-primary;
+        box-shadow: none;
+    }
+
+    button {
+        margin-top: 0.3rem;
+        background: linear-gradient(to right, transparent 1%, $emerald-200 20%);
+        height: 3.9rem;
+        width: 3.4rem;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background: linear-gradient(to right, transparent 1%, $emerald-400 20%);
+        }
+
+        &:focus {
+            border: none;
+            box-shadow: none;
+        }
+    }
+}
+
+.arrow {
+    width: 2rem;
+    height: 2rem;
+
 }
