@@ -30,7 +30,7 @@ const HomeFeed = (props) => {
         <ul>
           {liveEvents ? liveEvents.map((e, i) => {
             return <li key={i}>
-                <Link to={`/event/${e.id}`}><h5>{e.title}</h5></Link>
+                <Link to={`/event/${e._id}`}><h5>{e.title}</h5></Link>
                 <p>{e.topic}</p>
               </li>
           }) : ''}
