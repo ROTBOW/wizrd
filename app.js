@@ -57,6 +57,8 @@ io.on('connection', (socket) => {
     console.log('chat message: ' + msg);
     io.to(chatId).emit("new message", {username, msg});
   })
+
+  
 })
 
 const port = process.env.PORT || 5000;

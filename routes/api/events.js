@@ -39,7 +39,7 @@ router.get('/:eventId', (req, res) => {
 
 //Search for events
 router.put('/', (req, res) => {
-  console.log(req.body);
+  console.log(req.body.topic);
   if (req.body.topic) {
     Event.find({topic: req.body.topic})
       .then((events) => res.json(events))
