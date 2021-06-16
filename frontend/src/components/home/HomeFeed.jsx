@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styles from './HomeFeed.module.scss';
 import { fetchLiveEvents, fetchFutureEvents } from '../../util/eventUtil';
 import EventForm from '../events/EventForm/EventForm';
+import { updateModal } from '../../actions/uiActions';
 
 const HomeFeed = (props) => {
   const [liveEvents, setLiveEvents] = useState([]);
@@ -22,11 +23,11 @@ const HomeFeed = (props) => {
 
   return (
     <div>
-      {this.props.modal === 'createEvent' ? <EventForm /> : ''}
+      {props.modal === 'createEvent' ? <EventForm /> : ''}
       <div className={styles.wrapper}>
 
         <div>
-          <button onClick={this.props.updateModal('createEvent')}>Create Event</button>
+          <button onClick={props.updateModal('createEvent')}>Create Event</button>
         </div>
       
         <div className={styles.sectionWrapper}> 
