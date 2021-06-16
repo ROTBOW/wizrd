@@ -27,7 +27,6 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
   process.env.NODE_ENV === "production"
     ? {
         secure: true,
-        host: "distansingpeerserver.herokuapp.com",
         port: ""
       }
     : {
