@@ -57,7 +57,7 @@ const StreamRoom = ({ hostID, eventID, currentUserId }) => {
     const peer = new RTCPeerConnection({
       iceServers: [
         {
-          urls: 'stun:sip1.lakedestiny.cordiaip.com'
+          urls: 'stun:stun.l.google.com:19302'
         }
       ]
     })

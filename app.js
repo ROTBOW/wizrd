@@ -40,7 +40,7 @@ app.post('/consumer', async ({ body }, res) => {
   const peer = new webrtc.RTCPeerConnection({
     iceServers: [
       {
-        urls: "stun:sip1.lakedestiny.cordiaip.com"
+        urls: "stun:stun.l.google.com:19302"
       }
     ]
   });
@@ -63,7 +63,7 @@ app.post('/broadcast', async ({ body }, res) => {
   const peer = new webrtc.RTCPeerConnection({
     iceServers: [
       {
-        urls: "stun:sip1.lakedestiny.cordiaip.com"
+        urls: "stun:stun.l.google.com:19302"
       }
     ]
   });
