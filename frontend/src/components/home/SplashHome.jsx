@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './SplashHome.module.scss';
-import hello from '../../assets/hello.svg';
+// import hello from '../../assets/hello.svg';
 
 const SplashHome = (props) => {
 
@@ -13,7 +13,7 @@ const SplashHome = (props) => {
 
         <div className={styles.heroWrapper}>
           {/* <img className={styles.heroImage} src={hello} /> */}
-          <img className={styles.heroImage} src="https://images.unsplash.com/photo-1613294326794-e7c74fe886e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+          <img className={styles.heroImage} src="https://images.unsplash.com/photo-1613294326794-e7c74fe886e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="hero"/>
         </div>
       </div>
     </div>

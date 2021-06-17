@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
 
-class LoginForm extends React.Component {
+class LoginFormClass extends React.Component {
   constructor(props) {
     super(props);
 
@@ -101,4 +101,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default withRouter(LoginForm);
+export default withRouter(LoginFormClass);

@@ -5,17 +5,17 @@ import styles from '../SessionForm.module.scss';
 const LoginForm = (props) => {
   const [usernameOrEmail, setUserNameOrEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState(props.errors);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    // reset errors on componentDidMount
+    setErrors({});
     document.title = 'Wizrd - Log in';
     return () => document.title = 'Wizrd';
   }, []);
 
   const renderErrors = () => (
     <ul className={styles.errorsWrapper}>
-      {Object.values(errors).map((error, i) => (
+      {Object.values(props.errors).map((error, i) => (
         <li key={`error-${i}`}>
           {error}
         </li>

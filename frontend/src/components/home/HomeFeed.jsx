@@ -22,7 +22,7 @@ const HomeFeed = (props) => {
       .then(events => {
         setFutureEvents(events.data)
       })
-  }, [])
+  })
 
   return (
     <div>

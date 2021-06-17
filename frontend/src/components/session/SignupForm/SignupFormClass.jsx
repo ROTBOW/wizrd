@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
 
-class SignupForm extends React.Component {
+class SignupFormClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -111,4 +111,4 @@ class SignupForm extends React.Component {
   }
 }
 
-export default withRouter(SignupForm);
+export default withRouter(SignupFormClass);
