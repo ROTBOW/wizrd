@@ -79,19 +79,21 @@ const Navbar = (props) => {
                 <img className={styles.logo} src={logo} alt="logo" />
               </Link>
             </div>
+          </div>
 
+          <div className={styles.navbarFill}>
             <div className={styles.searchWrapper}>
-              <form className={styles.search}>
-                <select id="searchParam" class={styles.searchSelect}>
-                  <option value="title">Title</option>
-                  <option value="topic" selected>Topic</option>
-                  <option value="description">Description</option>
-                  <option value="host">Description</option>
-                </select>
-                <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event"/>
-                <button className={styles.searchButton} onClick={search}>Search</button>
-              </form>
-            </div>
+                <form className={styles.search}>
+                  <select id="searchParam" className={styles.searchSelect} defaultValue="topic">
+                    <option value="title">Title</option>
+                    <option value="topic" selected>Topic</option>
+                    <option value="description">Description</option>
+                    <option value="host">Host</option>
+                  </select>
+                  <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event"/>
+                  <button className={styles.searchButton} onClick={search}>Search</button>
+                </form>
+              </div>
           </div>
 
           <div className={styles.navWrapper}>
