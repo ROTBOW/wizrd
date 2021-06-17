@@ -1,5 +1,6 @@
 import React from "react";
 import Chat from '../../chat/Chat';
+import Video from '../../video/Video/Video';
 import styles from './EventShowStyles.module.scss';
 
 
@@ -15,8 +16,10 @@ class EventShow extends React.Component {
     //     e.preventDefault();
     // }
 
+    
     render(){
-        if (this.props.event !== undefined) {
+      if (this.props.event !== undefined) {
+      
             let event = this.props.event
             let startTime = event.startTime;
 
@@ -46,7 +49,9 @@ class EventShow extends React.Component {
                     <div className={styles.wrapper} >
                         <div className={styles.leftWing}>
                             <h1 className={styles.eventTitle}>{event.title}</h1>
-                            <img src="https://plchldr.co/i/650x450?bg=111111" alt="vid Placeholder" className={styles.videoFeed}/>
+                            <div className={styles.videoFeed}>
+                              <Video eventId={this.props.eventId} isHost={this.props.user.id === this.props.event.hostId} />
+                            </div>
                             <p className={styles.normalText}>
                                {this.props.user.username} is streaming about <i className={styles.specialText}>{this.props.event.topic}</i></p>
                             <p className={styles.eventDesc}>{this.props.event.description}</p>
