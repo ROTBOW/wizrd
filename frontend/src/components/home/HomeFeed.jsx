@@ -8,6 +8,7 @@ import { createEvent } from '../../actions/eventsActions';
 import { BiUser, BiVideo } from "react-icons/bi";
 import styles from './HomeFeed.module.scss';
 import moment from 'moment';
+import avatars from '../../assets/avatars/avatars';
 
 const HomeFeed = (props) => {
   const [liveEvents, setLiveEvents] = useState([]);
@@ -40,9 +41,9 @@ const HomeFeed = (props) => {
 
       <div className={styles.headerWrapper}>
         <div className={styles.header}>
-          <h1 className={styles.headerTitle}>Welcome to Wizrd, @{props.user.username}</h1>
+          <h1 className={styles.headerTitle}>Welcome to Wizrd, <img src={avatars[Number(props.user.avatar)]} alt="avatar-Icon" width="45" height="45" className={styles.userAvatar}/>{props.user.username}</h1>
           <p className={styles.headerSubtitle}>
-            Wizard is a streaming platform for the teacher inside all of us. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione beatae tenetur veritatis. Join an event, or create your own.
+            Wizrd is a streaming platform for the teacher inside all of us. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione beatae tenetur veritatis. Join an event, or create your own.
           </p>
           <button className={styles.createEventButton} onClick={() => props.updateModal('createEvent')}>Create an event</button>
         </div>

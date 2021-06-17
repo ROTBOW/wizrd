@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
-import red from '../../../assets/avatars/avatarRed.png';
-import green from '../../../assets/avatars/avatarGreen.png';
-import yellow from '../../../assets/avatars/avatarYellow.png';
+import avatars from '../../../assets/avatars/avatars';
 
 const SignupForm = (props) => {
   const [username, setUsername] = useState("");
@@ -32,15 +30,11 @@ const SignupForm = (props) => {
     };
     props.signup(user, props.history)
       .then((user) => {
-        // console.log('-----------');
-        // console.log(user);
-        // console.log('-----------');
         if (!!user) props.login({
           usernameOrEmail: user.userData.data.usernameOrEmail,
           password: user.userData.data.password
         })
       })
-      // .then((res) => props.history.push('/'));
   };
 
   const renderErrors = () => (
@@ -85,7 +79,7 @@ const SignupForm = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                  <img src={red} className={`${styles.avatarIcon} ${checkIfSelected(0)}`}/>
+                  <img src={avatars[0]} className={`${styles.avatarIcon} ${checkIfSelected(0)}`}/>
               </label>
               
               <label>
@@ -96,7 +90,7 @@ const SignupForm = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                <img src={green} className={`${styles.avatarIcon} ${checkIfSelected(1)}`}/>
+                <img src={avatars[1]} className={`${styles.avatarIcon} ${checkIfSelected(1)}`}/>
               </label>
 
               <label>
@@ -107,7 +101,7 @@ const SignupForm = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                <img src={yellow} className={`${styles.avatarIcon} ${checkIfSelected(2)}`}/>
+                <img src={avatars[2]} className={`${styles.avatarIcon} ${checkIfSelected(2)}`}/>
               </label>
             </div>
 
