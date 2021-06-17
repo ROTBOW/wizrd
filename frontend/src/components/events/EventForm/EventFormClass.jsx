@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './EventForm.module.scss';
 import moment from 'moment';
 
-class EventForm extends React.Component {
+class EventFormClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -128,4 +128,4 @@ class EventForm extends React.Component {
 }
 
 
-export default EventForm;
+export default EventFormClass;

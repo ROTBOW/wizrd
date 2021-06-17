@@ -1,4 +1,4 @@
-import React, { userState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './EventForm.module.scss';
 import moment from 'moment';
 
@@ -8,30 +8,32 @@ const EventForm = (props) => {
   const [description, setDescription] = useState('');
   const [startTime, setStartTime] = useState(moment().format('YYYY-MM-DDTkk:mm'));
   const [liveToggle, setLiveToggle] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(props.errors);
 
   useEffect(() => {
     return () => setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
-
-  }, [liveToggle]);
+  }, [title, topic, description, liveToggle]);
 
   const handleToggle = (e) => {
-    // console.log('handling toggle')
     e.preventDefault();
     setLiveToggle(!liveToggle);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let submitForm = {
+    setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
+    let event = {
       title,
       topic,
       description,
-      startTime: startTime + `:${(new Date()).getSeconds()}.${(new Date()).getMilliseconds()}Z`
+      startTime: startTime + `:${moment().format('ss')}.999Z`
+      // startTime: startTime + `:59.999Z`
     };
-    props.createEvent(submitForm)
+    console.log(event)
+    props.createEvent(event)
       .then((event) => {
         props.updateModal();
+        console.log(event)
         props.history.replace(`/events/${event.event.data._id}`)
       })
   }

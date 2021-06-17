@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { createEvent } from '../../../actions/eventsActions'
-import EventForm from './EventFormClass';
+import EventForm from './EventForm';
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.user,
