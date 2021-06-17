@@ -7,6 +7,7 @@ const LoginForm = (props) => {
  
   return (
     <div className={styles.pageWrapper}>
+      <h1>Log in</h1>
       <LoginFormContent errors={props.errors} login={props.login}/>
 
       <div className={styles.authSectionDivider}></div>

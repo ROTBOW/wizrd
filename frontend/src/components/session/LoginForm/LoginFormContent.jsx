@@ -19,7 +19,10 @@ const LoginFormContent = (props) => {
       usernameOrEmail,
       password
     };
-    props.login(user); 
+    props.login(user) 
+      .then((user) => {if (user && props.modal) {
+          props.updateModal();
+      }})
   }
   
   const renderErrors = () => (
@@ -34,7 +37,6 @@ const LoginFormContent = (props) => {
 
   return (
       <div className={styles.authSectionWrapper}>
-        <h1>Log in</h1>
 
         {renderErrors()}
 

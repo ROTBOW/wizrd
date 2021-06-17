@@ -1,8 +1,17 @@
+@import '../../../styles/variables.scss';
+
 .formWrapper {
   margin: auto;
   background: white;
-  max-width: 48rem;
+  max-width: 42rem;
   border-radius: 0.8rem;
   margin-top: 11.2rem;
   padding: 3.2rem 3.2rem;
+}
+
+.header {
+  font-size: 1.8rem;
+  color: $emerald-800;
+  font-weight: bold;
+  text-align: center;
 }
