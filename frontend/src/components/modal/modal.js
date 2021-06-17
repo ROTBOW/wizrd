@@ -1,5 +1,5 @@
 import React from 'react';
-import EventForm from '../events/EventForm/EventForm';
+import EventFormContainer from '../events/EventForm/EventFormContainer';
 import styles from './modal.module.scss';
 
 const Modal = (props) => {
@@ -9,7 +9,7 @@ const Modal = (props) => {
 
   switch (name) {
     case 'createEvent':
-      modal = <EventForm {...otherProps} />;
+      modal = <EventFormContainer {...otherProps} />;
       break;
     default: 
       return;
