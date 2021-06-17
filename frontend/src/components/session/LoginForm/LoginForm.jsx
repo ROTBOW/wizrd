@@ -12,7 +12,16 @@ const LoginForm = (props) => {
     document.title = 'Wizrd - Log in';
     return () => document.title = 'Wizrd';
   }, []);
-
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let user = { 
+      usernameOrEmail,
+      password
+    };
+    props.login(user); 
+  }
+  
   const renderErrors = () => (
     <ul className={styles.errorsWrapper}>
       {Object.values(props.errors).map((error, i) => (
@@ -22,15 +31,6 @@ const LoginForm = (props) => {
       ))}
     </ul>
   );
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let user = { 
-      usernameOrEmail,
-      password
-    };
-    props.login(user); 
-  }
 
   return (
     <div className={styles.pageWrapper}>

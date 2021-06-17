@@ -14,7 +14,9 @@ const HomeFeed = (props) => {
   const [futureEvents, setFutureEvents] = useState([]);
 
   useEffect(() => {
-    props.fetchLiveEvents()
+    let isOnHomeFeed = true;
+    if (isOnHomeFeed) {
+      props.fetchLiveEvents()
       .then(events => {
         setLiveEvents(events.data)
       });
@@ -22,7 +24,9 @@ const HomeFeed = (props) => {
       .then(events => {
         setFutureEvents(events.data)
       })
-  })
+    }
+    return () => isOnHomeFeed = false;
+  }, [])
 
   return (
     <div>
