@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { signup, login, logout } from '../../actions/sessionActions';
 import Navbar from './Navbar';
+import { findEvents } from '../../actions/eventsActions';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,6 +15,7 @@ const mapDispatchToProps = (dispatch) => {
     signup: (user) => dispatch(signup(user)),
     login: (user) => dispatch(signup(login)),
     logout: () => dispatch(logout()),
+    findEvents: (searchOptions) => dispatch(findEvents(searchOptions))
   };
 };
 

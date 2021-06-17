@@ -24,6 +24,10 @@ export const fetchEvent = eventId => { //this might be singular not plural
     return axios.get(`api/events/${eventId}`)
 }
 
+export const findEvents = (searchOptions) => {
+    return axios.put('/api/events/', searchOptions);
+}
+
 export const createEvent = event => {
     return axios.post('api/events', event)
 }

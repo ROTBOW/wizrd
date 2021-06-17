@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
+import { BiX, BiSearch } from 'react-icons/bi'
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 
 const Navbar = (props) => {
 
   const [meetPos, setMeetPos] = useState(0);
-  // const [meet, setMeet] = useState([
-  //   <a href="https://github.com/brandonfang" target="_blank" rel="noreferrer"  key="1">Meet Brandon</a>,
-  //   <a href="https://github.com/inhojl" target="_blank" rel="noreferrer" key="2" >Meet Joe</a>,
-  //   <a href="https://github.com/melflynn" target="_blank" rel="noreferrer" key="3" >Meet Melissa</a>,
-  //   <a href="https://github.com/ROTBOW" target="_blank" rel="noreferrer" key="4" >Meet Josiah</a>
-  // ]);
+  const [meet, setMeet] = useState([
+    <a href="https://github.com/brandonfang" target="_blank" rel="noreferrer"  key="1">Meet Brandon</a>,
+    <a href="https://github.com/inhojl" target="_blank" rel="noreferrer" key="2" >Meet Joe</a>,
+    <a href="https://github.com/melflynn" target="_blank" rel="noreferrer" key="3" >Meet Melissa</a>,
+    <a href="https://github.com/ROTBOW" target="_blank" rel="noreferrer" key="4" >Meet Josiah</a>
+  ]);
+  const history = useHistory();
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -23,7 +29,21 @@ const Navbar = (props) => {
     };
   });
 
-  const empty = (pojo) => {
+
+  const search = (e) => {
+    e.preventDefault();
+    const input = document.getElementById('searchInput');
+    const param = document.getElementById('searchParam').value;
+    if (input.value) {
+      props.findEvents({[param]: input.value})
+        .then(() => {
+          history.push('/search');
+        })
+    }
+  }
+  
+
+  const empty = pojo => {
     let count = 0;
     for (let i in pojo) count++;
     return count === 0
@@ -54,10 +74,26 @@ const Navbar = (props) => {
     <header className={styles.header}>
       <div className={styles.outer}>
         <div className={styles.inner}>
+
           <div className={styles.logoWrapper}>
-            <Link className={styles.logoLink} to="/">
+            <Link to="/">
               <img className={styles.logo} src={logo} alt="logo" />
             </Link>
+          </div>
+
+          <div className={styles.searchWrapper}>
+            <form className={styles.searchBar}>
+              <select id="searchParam" className={styles.searchSelect} defaultValue="all">
+                <option value="all">All Fields</option>
+                <option value="title">Title</option>
+                <option value="topic" selected>Topic</option>
+                <option value="description">Description</option>
+                <option value="host">Host Name</option>
+              </select>
+              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event" />
+              <button className={styles.searchInputX}><BiX /></button>
+              <button className={styles.searchButton} onClick={search}><BiSearch /></button>
+            </form>
           </div>
 
           <div className={styles.navWrapper}>
@@ -89,6 +125,7 @@ const Navbar = (props) => {
               </TransitionGroup> */}
             </nav>
           </div>
+
         </div>
       </div>
     </header>
