@@ -1,5 +1,7 @@
 import React from "react";
 import Chat from '../../chat/Chat';
+import styles from './EventShowStyles.module.scss';
+import Moment from 'moment';
 
 
 class EventShow extends React.Component {
@@ -10,6 +12,10 @@ class EventShow extends React.Component {
         this.props.fetchEvent(this.props.match.params.eventId);
     }
 
+    // handleStateEvent(e){
+    //     e.preventDefault();
+    // }
+
     render(){
         if (this.props.event !== undefined) {
             let event = this.props.event
@@ -19,12 +25,18 @@ class EventShow extends React.Component {
 
                 return (
                     <div>
-                        <h1>{event.title}</h1>
-                        <p>
-                            Oops... this event hasn't started yet! <br/>
-                            It will be about <i>{event.topic}</i><br/>
-                            come back on <i>{startTime}</i> so you don't miss it!
+                        <h1 className={styles.earlyMessageTitle}>{event.title}</h1>
+                        
+                        <p className={styles.earlyMessage}>
+                            Oops... this event hasn't started yet!
                         </p>
+                        <p className={styles.earlyMessage}>
+                            It will be on&nbsp;<i className={styles.specialText}>{event.topic}</i>
+                        </p>
+                        <p className={styles.earlyMessage}>
+                            come back on&nbsp;<i className={styles.specialText}>{Moment(startTime).format("ddd, MMM D, LT")}</i>&nbsp;so you don't miss it!
+                        </p>
+                    
 
                     </div>
                 )
@@ -32,10 +44,22 @@ class EventShow extends React.Component {
             } else {
 
                 return (
-                    <div>
-                        <h1>{event.title}</h1>
-                        <div>this will be the video feed</div>
-                        <Chat user={this.props.user} chatId={this.props.eventId} />
+                    <div className={styles.wrapper} >
+                        <div className={styles.leftWing}>
+                            <h1 className={styles.eventTitle}>{event.title}</h1>
+                            <img src="https://plchldr.co/i/650x450?bg=111111" alt="vid Placeholder" className={styles.videoFeed}/>
+                            <p className={styles.normalText}>
+                               {this.props.user.username} is streaming about <i className={styles.specialText}>{this.props.event.topic}</i></p>
+                            <p className={styles.eventDesc}>{this.props.event.description}</p>
+
+                        </div>
+
+                        <div className={styles.rightWing}>
+                            <article  className={styles.chatFeed}>
+                                <Chat user={this.props.user} chatId={this.props.eventId}/>
+                            </article>
+                        </div>
+
                     </div>
                 )
 

@@ -1,18 +1,165 @@
 @import '../../styles/variables.scss';
 
-.wrapper {
-  max-width: 1080px;
-  margin: 0 auto;
-  margin-top: 3.2rem;
-  padding: 0 3.2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: 'current' 'future';
-  gap: 32px;
+.feed {
+  width: 100%;
 }
 
 .sectionWrapper {
   width: 100%;
 }
 
+.headerWrapper {
+  width: 100%;
+  background: $emerald-50;
+}
+
+.header {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 64px 32px;
+}
+
+.headerTitle {
+  font-size: 40px;
+  color: $emerald-700;
+}
+
+.headerSubtitle {
+  max-width: 560px;
+  font-size: 18px;
+  color: $gray-600;
+  margin-bottom: 24px;
+}
+
+.createEventButton {
+  height: 44px;
+  border: 1px solid $emerald-900;
+  border-radius: 8px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  background: $emerald-600;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.2s all;
+
+  &:hover {
+    background: $emerald-700;
+    box-shadow: 0px 0px 24px 8px rgba($emerald-900, 0.2);
+  }
+}
+
+.feedWrapper {
+  width: 100%;
+  background: $gray-100;
+}
+
+.sectionWrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+
+.categoryTitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.eventsGrid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: max-content;
+  gap: 24px;
+}
+
+// add media query
+
+.lastGrid {
+  margin-bottom: 40px;
+}
+
+.eventCard {
+  min-width: 256px;
+  background: $white;
+  border-radius: 12px;
+  padding: 24px 20px;
+  // padding: 28px 24px;
+  box-shadow: 0px 0px 24px 8px rgba($emerald-100, 0.3);
+
+  &:hover {
+    box-shadow: 0px 2px 24px 12px rgba($emerald-400, 0.3);
+  }
+}
+
+.noUnderline {
+  text-decoration: none;
+}
+
+.eventTitle {
+  color: $gray-800;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.cardRowWrapper {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.eventTopic {
+  color: $gray-400;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.cardIcon {
+  margin-right: 10px;
+  color: $emerald-700;
+}
+
+.eventHost {
+  color: $emerald-600;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.eventStartTime {
+  color: $emerald-600;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.eventDescription {
+  color: $gray-800;
+  font-size: 15px;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.footerWrapper {
+  width: 100%;
+  height: 160px;
+  background: $emerald-900;
+  color: white;
+}
+
+.footer {
+  max-width: 1080px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 40px 32px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
