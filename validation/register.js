@@ -5,10 +5,11 @@ const validText = require('./valid-text');
 module.exports = function validateRegisterInput(data) {
   let errors = {};
 
-  data.username = validText(data.username) ? data.username : '';
   data.email = validText(data.email) ? data.email : '';
+  data.username = validText(data.username) ? data.username : '';
   data.password = validText(data.password) ? data.password : '';
   data.password2 = validText(data.password2) ? data.password2 : '';
+  data.avatar = validText(data.avatar) ? data.avatar : '0'
 
   if (!Validator.isLength(data.username, { min: 2, max: 30 })) {
     errors.username = 'Username must be between 2 and 30 characters';

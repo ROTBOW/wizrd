@@ -27,6 +27,7 @@ router.post('/register', (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
+        avatar: req.body.avatar
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -52,6 +53,10 @@ router.post('/register', (req, res) => {
             .catch((err) => console.log(err));
         });
       });
+      return res.status(200).json({
+        usernameOrEmail: newUser.email,
+        password: newUser.password
+      })
     }
   });
 });
@@ -82,7 +87,7 @@ router.post('/login', (req, res) => {
 
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
-        const payload = { id: user.id, username: user.username, email: user.email };
+        const payload = { id: user.id, username: user.username, email: user.email, avatar: user.avatar };
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -108,6 +113,7 @@ router.get('/current',
       id: req.user.id,
       username: req.user.username,
       email: req.user.email,
+      avatar: req.user.avatar
     });
   }
 );
