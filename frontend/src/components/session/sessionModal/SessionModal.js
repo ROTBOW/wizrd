@@ -16,7 +16,7 @@ const SessionModal = (props) => {
       </div>
       : 
       <div>
-        <SignupFormContent errors={props.errors} login={props.login} signup={props.signup} />
+        <SignupFormContent errors={props.errors} login={props.login} signup={props.signup} modal={true} updateModal={props.updateModal}/>
         <p className={styles.authParagraph}>Already have an account? <a onClick={() => setView('login')}>Log in</a></p>  
       </div>}
     </div>

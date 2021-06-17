@@ -10,6 +10,7 @@ const SignupFormContent = (props) => {
   const [password2, setPassword2] = useState("");
   const [errors, setErrors] = useState({});
   const [avatar, setAvatar] = useState();
+  const [loginButton, setLoginButton] = useState("");
 
   useEffect(() => {
     setErrors({});
@@ -19,7 +20,14 @@ const SignupFormContent = (props) => {
     }
   }, [])
 
-    const onValueChange = (event) => {
+  // useEffect(() => {
+  //   console.log(loginButton, props.errors);
+  //   if (loginButton === 'clicked' && Object.values(props.errors).length === 0) {
+  //     props.updateModal();
+  //   }
+  // }, [loginButton, props.errors])
+
+  const onValueChange = (event) => {
     setAvatar(
       event.target.value
     );
@@ -42,10 +50,13 @@ const SignupFormContent = (props) => {
     };
     props.signup(user, props.history)
       .then((user) => {
-        if (!!user) props.login({
-          usernameOrEmail: user.userData.data.usernameOrEmail,
-          password: user.userData.data.password
-        })
+        if (!!user) {
+          props.login({
+            usernameOrEmail: user.userData.data.usernameOrEmail,
+            password: user.userData.data.password
+          })
+          if (props.modal) props.updateModal();
+        }
       })
   };
 
