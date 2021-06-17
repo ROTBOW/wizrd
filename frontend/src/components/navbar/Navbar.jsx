@@ -78,15 +78,15 @@ const Navbar = (props) => {
               </Link>
             </div>
 
-            <div>
+            <div className={styles.searchWrapper}>
               <form className={styles.search}>
-                <select id="searchParam">
+                <select id="searchParam" class={styles.searchSelect}>
                   <option value="title">Title</option>
                   <option value="topic" selected>Topic</option>
                   <option value="description">Description</option>
                 </select>
                 <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event"/>
-                <button onClick={search}>Search</button>
+                <button className={styles.searchButton} onClick={search}>Search</button>
               </form>
             </div>
           </div>
