@@ -1,14 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import rightArrow from '../../assets/rightArrow.png';
 import io from 'socket.io-client';
-
 import styles from './Chat.module.scss';
-
 
 const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(null);
-  
   
   useEffect(() => {
     let newSocket;

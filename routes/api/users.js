@@ -27,6 +27,7 @@ router.post('/register', (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
+        avatar: req.body.avatar
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -40,7 +41,7 @@ router.post('/register', (req, res) => {
               jwt.sign(
                 payload,
                 keys.secretOrKey,
-                { expiresIn: 3600 },
+                { expiresIn: 14400 },
                 (err, token) => {
                   res.json({
                     success: true,
@@ -52,6 +53,10 @@ router.post('/register', (req, res) => {
             .catch((err) => console.log(err));
         });
       });
+      return res.status(200).json({
+        usernameOrEmail: newUser.email,
+        password: newUser.password
+      })
     }
   });
 });
@@ -86,7 +91,7 @@ router.post('/login', (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 3600 },
+          { expiresIn: 14400 },
           (err, token) => {
             res.json({
               success: true,

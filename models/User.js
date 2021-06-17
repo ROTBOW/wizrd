@@ -17,8 +17,8 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    icon: {
-      type: Number,
+    avatar: {
+      type: String,
       required: true
     }
   },

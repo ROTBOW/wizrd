@@ -2,9 +2,9 @@
 
 // Styles for LoginForm and SignupForm
 
-.authPageWrapper {
+.pageWrapper {
   max-width: 1080px;
-  margin: 48px auto 48px auto;
+  margin: 48px auto 96px auto;
   padding: 0 32px;
   display: flex;
   flex-direction: column;
@@ -16,126 +16,105 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // margin-bottom: 32px;
 }
 
-// .auth-section-divider {
-//   height: 1px;
-//   width: 340px;
-//   background: rgba(0, 0, 0, 0.2);
-//   margin: 24px 0;
-// }
-
-// .auth-header-wrapper {
-//   width: 340px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   text-align: center;
-// }
-
-// .auth-title {
-//   line-height: 1;
-//   margin-bottom: 16px;
-// }
-
-// .auth-subtitle {
-//   font-size: 25px;
-//   line-height: 1.25;
-//   // margin-bottom: 0px;
-// }
-
-// .form-wrapper {
-//   width: 340px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
-
-// .auth-form {
-//   width: 100%;
-//   margin: 16px auto;
-
-//   .input-subtext {
-//     font-size: 13px;
-//     margin-top: -4px;
-//     color: $medium-light-gray;
-//     margin-bottom: 10px;
-//   }
-// }
-
-input {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  border-radius: 3px;
-  border: 1px solid $gray-700;
-  margin-top: 3px;
-  margin-bottom: 10px;
-
-  padding: 4px 10px;
-  text-indent: 5px;
-  padding-left: 5px;
-
-  font-family: inherit;
-  font-size: inherit;
+.authSectionDivider {
+  height: 1px;
+  width: 340px;
+  background: rgba(black, 0.2);
+  margin: 24px 0;
 }
 
-// input:focus {
-//   border: 1px solid rgba(46, 170, 220, 40%);
-//   box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
-//     rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
-// }
-
-input::placeholder {
-  color: $gray-500;
-}
-
-// .spacer-8 {
-//   height: 8px;
-// }
-
-// .spacer-16 {
-//   height: 16px;
-// }
-
-// .errors-wrapper {
-//   width: 340px;
-//   color: $red-400;
-//   font-weight: 500;
-//   margin: 8px 0;
-// }
-
-button {
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-button:focus {
-  border: 1px solid rgba(46, 170, 220, 40%);
-  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
-    rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
-}
-
-// button:active {
-//   border: none;
-//   box-shadow: none;
-// }
-
-.submitButton {
-  display: block;
-  width: 100%;
-  margin-top: 8px;
-  border-radius: 3px;
-  border: 1px solid black;
-  color: black;
-  padding: 8px 0px;
-  background: $gray-300;
+.authHeaderWrapper {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.authTitle {
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.authSubtitle {
+  font-size: 25px;
+  line-height: 1.25;
+}
+
+.authParagraph {
+  font-size: 15px;
+
+  > a {
+    font-size: inherit
+  }
+}
+
+.spacer8 {
+  height: 8px;
+}
+
+.spacer16 {
+  height: 16px;
+}
+
+.formWrapper {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+  margin-bottom: 24px;
+
+  > label {
+    font-size: 15px;
+
+    > input {
+      padding: 8px 8px;
+      font-size: 15px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+  }
+}
+
+.button {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid $emerald-700;
+  padding: 12px 0px;
+  color: $white;
+  background: $emerald-500;
+  text-align: center;
+  font-size: 16px;
   font-weight: 500;
-  box-shadow: 0px 1px 2px rgba(15, 15, 15, 10%);
-  transition: all 0.1s;
+  transition: all 0.15s;
+
+  &:hover, &:focus {
+    background: $emerald-700;
+    box-shadow: 0px 0px 8px 6px rgba($emerald-700, 0.15);
+  }
+
+  &:active {
+    box-shadow: none;
+    outline: none;
+  }
+
+  &.secondary {
+    background: $emerald-100;
+    color: $emerald-700;
+
+    &:hover {
+      background: $emerald-200;
+      color: $emerald-900;
+    }
+  }
 }
 
 // button.auth-submit-primary:hover {
@@ -198,6 +177,15 @@ button:focus {
 .avatarWrapper {
   display: flex;
   width: 24rem;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 0.5rem;
+  margin-left: 13%;
+}
+
+.errorsWrapper {
+  width: 340px;
+  color: $red-500;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 8px 0 16px 0;
 }
