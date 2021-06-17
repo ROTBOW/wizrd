@@ -105,6 +105,16 @@
   margin-bottom: 4px;
 }
 
+.userAvatar {
+  width: 45px;
+  height: 45px;
+  display: inline;
+  border: solid 3px $gray-500;
+  border-radius: 100%;
+  position: relative;
+  top: 0.7rem;
+}
+
 .cardRowWrapper {
   width: 100%;
   height: 24px;

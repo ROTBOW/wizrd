@@ -41,6 +41,19 @@ const SignupForm = (props) => {
   //   </ul>
   // );
 
+  const onValueChange = (event) => {
+    setAvatar(
+      event.target.value
+    );
+  }
+
+  const checkIfSelected = (pos) => {
+    if (avatar === String(pos)) {
+      return styles.avatarSelected;
+    }
+    return ''
+  }
+
   return (
     <div className={styles.pageWrapper}>
       <SignupFormContent errors={props.errors} signup={props.signup} login={props.login}/>
@@ -51,6 +64,42 @@ const SignupForm = (props) => {
 
         <div className={styles.formWrapper}>
           <form className={styles.form} onSubmit={handleSubmit}>
+
+            <div className={styles.avatarWrapper}>
+              <label>
+                <input
+                  type="radio"
+                  value="0"
+                  checked={avatar === '0'}
+                  onChange={onValueChange}
+                  className={styles.hideMe}
+                />
+                  <img src={avatars[0]} className={`${styles.avatarIcon} ${checkIfSelected(0)}`}/>
+              </label>
+              
+              <label>
+                <input
+                  type="radio"
+                  value="1"
+                  checked={avatar === '1'}
+                  onChange={onValueChange}
+                  className={styles.hideMe}
+                />
+                <img src={avatars[1]} className={`${styles.avatarIcon} ${checkIfSelected(1)}`}/>
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  value="2"
+                  checked={avatar === '2'}
+                  onChange={onValueChange}
+                  className={styles.hideMe}
+                />
+                <img src={avatars[2]} className={`${styles.avatarIcon} ${checkIfSelected(2)}`}/>
+              </label>
+            </div>
+
             <label>Username:
               <input type="text" required spellCheck="false" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Your username" />
             </label>
