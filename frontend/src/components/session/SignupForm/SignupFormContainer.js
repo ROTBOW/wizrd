@@ -13,6 +13,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     signup: (user) => dispatch(signup(user)),
     login: (user) => dispatch(login(user)),
+    // add demo login disp
   };
 }
 
