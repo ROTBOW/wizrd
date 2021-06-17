@@ -31,7 +31,7 @@ const SearchResults = (props) => {
       <ul className={styles.eventsGrid}>
         {results ? results.map((e, i) => {
           return <li key={i} className={styles.eventCard}>
-            <Link to={`/event/${e._id}`} className={styles.noUnderline}>
+            <Link to={`/events/${e._id}`} className={styles.noUnderline}>
               <h3 className={styles.eventTitle}>{e.title}</h3>
             </Link>
             <div className={styles.cardRowWrapper}>
