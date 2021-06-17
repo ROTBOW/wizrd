@@ -29,7 +29,8 @@ const EventForm = (props) => {
         title,
         topic,
         description,
-        startTime: startTime + `:${moment().tz('America/Los_Angeles').format('ss')}.999Z`
+        startTime: moment(startTime).tz('America/Los_Angeles').format()
+        // startTime: startTime + `:${moment().tz('America/Los_Angeles').format('ss')}.999Z`
         // startTime: startTime + `:59.999Z`
       };
       console.log(event)
