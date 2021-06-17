@@ -74,6 +74,7 @@ io.on('connection', (socket) => {
     socket.on('host joined', (hostId) => io.to(eventId).emit('host request connection', hostId))
     socket.on('user joined', (userId) => io.to(eventId).emit('user request stream', userId))
     socket.on('host disconnected', () => io.to(eventId).emit('host disconnected'))
+    socket.on('disconnect', () => io.to(eventId).emit('host disconnected'))
   })
 
 })
