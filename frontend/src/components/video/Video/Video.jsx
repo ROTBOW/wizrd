@@ -26,7 +26,7 @@ const Video = ({ eventId, isHost }) => {
   const [stream, setStream] = useState(null);
   const socketRef = useRef();
   const peerRef = useRef();
-  const peersRef = useRef([]);
+  const peersRef = useRef(new Set());
   const videoRef = useRef();
 
   useEffect(() => {
@@ -39,29 +39,36 @@ const Video = ({ eventId, isHost }) => {
   }, [])
 
   useEffect(() => {
-    if (stream) videoRef.current.srcObject = stream;
+    if (stream) {
+      videoRef.current.srcObject = stream;
+    }
   }, [stream])
+  console.log(peersRef.current)
 
   function startBroadcast() {
     console.log('i am host')
     socketRef.current = io.connect('/');
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       setStream(stream)
-
+      
       const peer = new Peer(PEER_CONFIG)
       peerRef.current = peer;
-
+      
       socketRef.current.emit('joining event', eventId);
       socketRef.current.on('user request stream', userId => peer.connect(userId))
-
+      
       peer.on('open', () => socketRef.current.emit('host joined', peer.id))
       peer.on('connection', connection => {
         peer.call(connection.peer, stream);
-        peersRef.current.push(peer)
+        peersRef.current.add(peer)
+        console.log('peersRef', peersRef.current)
         console.log(peer.connections)
       })
       peer.on('disconnected', () => {
         socketRef.current.emit('host disconnected')
+        stream.getTracks().forEach((track) => {
+          track.stop();
+        })
         setStream(null)
       })
     })

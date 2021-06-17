@@ -44,6 +44,11 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api/users', users);
 app.use('/api/events', events);
 
+
+
+
+const hosts = {};
+
 io.on('connection', (socket) => {
 
   // Chat sockets
@@ -71,10 +76,19 @@ io.on('connection', (socket) => {
   socket.on('joining event', (eventId) => {
     socket.join(eventId);
     socket.on('stream', (data) => io.to(eventId).emit('stream', data))
-    socket.on('host joined', (hostId) => io.to(eventId).emit('host request connection', hostId))
+    socket.on('host joined', (hostId) => {
+      hosts[eventId] = socket.id;
+      io.to(eventId).emit('host request connection', hostId)
+    })
     socket.on('user joined', (userId) => io.to(eventId).emit('user request stream', userId))
     socket.on('host disconnected', () => io.to(eventId).emit('host disconnected'))
-    socket.on('disconnect', () => io.to(eventId).emit('host disconnected'))
+    socket.on('disconnect', () => {
+      if (socket.id === hosts[eventId]) {
+        console.log('here')
+        delete hosts[eventId]
+        io.to(eventId).emit('host disconnected')
+      }
+    })
   })
 
 })
