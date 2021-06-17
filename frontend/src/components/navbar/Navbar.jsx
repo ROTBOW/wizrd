@@ -73,7 +73,6 @@ const Navbar = (props) => {
     <header className={styles.header}>
       <div className={styles.outer}>
         <div className={styles.inner}>
-<<<<<<< HEAD
           <div className={styles.navBarLeft}>
             <div className={styles.logoWrapper}>
               <Link to="/">
@@ -93,12 +92,6 @@ const Navbar = (props) => {
                 <button className={styles.searchButton} onClick={search}>Search</button>
               </form>
             </div>
-=======
-          <div className={styles.logoWrapper}>
-            <Link className={styles.logoLink} to="/">
-              <img className={styles.logo} src={logo} alt="logo" />
-            </Link>
->>>>>>> main
           </div>
 
           <div className={styles.navWrapper}>
