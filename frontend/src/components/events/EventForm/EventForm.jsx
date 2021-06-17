@@ -11,6 +11,7 @@ const EventForm = (props) => {
   const [errors, setErrors] = useState(props.errors);
 
   useEffect(() => {
+    // start a time ticker, but remove second argument
     return () => setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
   }, [title, topic, description, liveToggle]);
 
