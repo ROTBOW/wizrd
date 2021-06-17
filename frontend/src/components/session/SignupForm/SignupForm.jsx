@@ -1,48 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
+import SignupFormContent from './SignupFormContent';
 
 const SignupForm = (props) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [errors, setErrors] = useState({});
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [password2, setPassword2] = useState("");
+  // const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    setErrors({});
-    document.title = 'Wizrd - Log in';
-    return () => {
-      document.title = 'Wizrd';
-    }
-  }, [])
+  // useEffect(() => {
+  //   setErrors({});
+  //   document.title = 'Wizrd - Log in';
+  //   return () => {
+  //     document.title = 'Wizrd';
+  //   }
+  // }, [])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let user = {
-      email,
-      username,
-      password,
-      password2
-    };
-    props.signup(user, props.history)
-      .then((user) => props.login(user))
-      // .then((res) => props.history.push('/'));
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let user = {
+  //     email,
+  //     username,
+  //     password,
+  //     password2
+  //   };
+  //   props.signup(user, props.history)
+  //     .then((user) => props.login(user))
+  //     // .then((res) => props.history.push('/'));
+  // };
 
-  const renderErrors = () => (
-    <ul className={styles.errorsWrapper}>
-      {Object.values(props.errors).map((error, i) => (
-        <li key={`error-${i}`}>
-          {error}
-        </li>
-      ))}
-    </ul>
-  );
+  // const renderErrors = () => (
+  //   <ul className={styles.errorsWrapper}>
+  //     {Object.values(props.errors).map((error, i) => (
+  //       <li key={`error-${i}`}>
+  //         {error}
+  //       </li>
+  //     ))}
+  //   </ul>
+  // );
 
   return (
     <div className={styles.pageWrapper}>
-      <section className={styles.authSectionWrapper}>
+      <SignupFormContent errors={props.errors} signup={props.signup} login={props.login}/>
+      {/* <section className={styles.authSectionWrapper}>
         <h1>Sign up</h1>
         
         {renderErrors()}
@@ -72,7 +74,7 @@ const SignupForm = (props) => {
 
           <p className={styles.authParagraph}>Already have an account? <Link className={styles.authParagraph} to="/login">Log in</Link></p>
         </div>
-      </section>
+      </section> */}
 
       <div className={styles.authSectionDivider}></div>
 
