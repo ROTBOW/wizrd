@@ -33,22 +33,25 @@ const Navbar = (props) => {
     return count === 0
   }
 
-  const loginButtons = () => {
+  const sessionButtons = () => {
     if (empty(props.user)) {
-      return [
-        <li className={styles.navLink} key="1">
-          <Link to="/login">Log in</Link>
-        </li>,
-        <li className={styles.navLink} key="2">
-          <Link to="/signup">Sign up</Link>
-        </li>
-      ]
+      return (
+        <>
+          <Link to="/login"  className={styles.navLink}>
+            <li>Log in</li>
+          </Link>
+          <Link to="/signup" className={styles.navLink}>
+            <li>Sign up</li>
+          </Link>
+        </>
+      );
     } else {
-      return [
+      return (
         <li className={styles.navLink}>
           <a onClick={props.logout}>Log out</a>
         </li>
-      ]
+        
+      );
     }
   }
 
@@ -57,7 +60,7 @@ const Navbar = (props) => {
       <div className={styles.outer}>
         <div className={styles.inner}>
           <div className={styles.logoWrapper}>
-            <Link to="/">
+            <Link className={styles.logoLink} to="/">
               <img className={styles.logo} src={logo} alt="logo" />
             </Link>
           </div>
@@ -65,27 +68,18 @@ const Navbar = (props) => {
           <div className={styles.navWrapper}>
             <nav className={styles.nav}>
               <ul className={styles.navList}>
-                {/* <li className={styles.navLink}>
-                  <Link to="/login">Log in</Link>
-                </li>
-                <li className={styles.navLink}>
-                  <Link to="/signup">Sign up</Link>
-                </li> */}
-                {loginButtons()}
-                {/* <li className={styles.navLink}>
-                  <a onClick={props.logout}>Log out</a>
-                </li> */}
+                {sessionButtons()}
               </ul>
 
               <div className={styles.divider}></div>
 
               <ul className={styles.navList}>
-                <li className={styles.navLink}>
-                  <Link to="/about">About</Link>
-                </li>
-                <li className={styles.navLink}>
-                  <a href="https://github.com/ROTBOW/wizrd" target="_blank" rel="noreferrer">GitHub</a>
-                </li>
+                <Link to="/about" className={styles.navLink}>
+                  <li>About</li>
+                </Link>
+                <a className={styles.navLink} href="https://github.com/ROTBOW/wizrd" target="_blank" rel="noreferrer">
+                  <li>GitHub</li>
+                </a>
               </ul>
 
 
