@@ -7,6 +7,7 @@ import moment from 'moment';
 const SearchResults = (props) => {
   const [results, setResults] = useState('');
   const [errors, setErrors] = useState([]);
+  // const [modal, setModal] = useState(null);
 
   useEffect(() => {
     if (Object.keys(props.errors).length > 0) {
@@ -22,14 +23,27 @@ const SearchResults = (props) => {
     }
   }, [props.events, props.errors])
 
-  return (
+  // useEffect(() => {
+  //   if (!props.isLoggedIn) {
+  //     setModal()
+  //   }
+  // }, [props.isLoggedIn])
 
+  const auth = (e) => {
+    console.log('auth');
+    e.preventDefault();
+    if (!props.isLoggedIn) {
+      props.updateModal('sessionModal');
+    }
+  }
+
+  return (
     <section className={styles.sectionWrapper}> 
       <h2 className={styles.categoryTitle}>Results</h2>
       <ul className={styles.eventsGrid}>
         {errors ? <li className={styles.errorItem}>{errors}</li> :
         results ? results.map((e, i) => {
-          return <li key={i} className={styles.eventCard}>
+          return <li key={i} className={styles.eventCard} onClick={auth}>
             <Link to={`/events/${e._id}`} className={styles.noUnderline}>
               <h3 className={styles.eventTitle}>{e.title}</h3>
             </Link>
