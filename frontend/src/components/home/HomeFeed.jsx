@@ -51,7 +51,7 @@ const HomeFeed = (props) => {
           <h2 className={styles.categoryTitle}>Currently Streaming Events</h2>
           <ul className={styles.eventsGrid}>
             {liveEvents ? liveEvents.map((e, i) => (
-              <Link to={`/event/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}  key={i}>
+              <Link to={`/events/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}  key={i}>
                 <li>
                   <h3 className={styles.eventTitle}>{e.title}</h3>
                   <p className={styles.eventTopic}>{e.topic}</p>
@@ -74,7 +74,7 @@ const HomeFeed = (props) => {
           <h2 className={styles.categoryTitle}>Upcoming Events</h2>
           <ul className={`${styles.eventsGrid} ${styles.lastGrid}`}>
             {futureEvents ? futureEvents.map((e, i) => (
-              <Link to={`/event/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`} key={i}>
+              <Link to={`/events/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`} key={i}>
                 <li>
                   <h3 className={styles.eventTitle}>{e.title}</h3>
                   <p className={styles.eventTopic}>{e.topic}</p>
