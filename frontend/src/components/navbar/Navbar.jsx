@@ -25,9 +25,9 @@ const Navbar = (props) => {
     return () => {
       clearTimeout(timer);
     };
-  })
+  });
 
-  const empty = pojo => {
+  const empty = (pojo) => {
     let count = 0;
     for (let i in pojo) count++;
     return count === 0
@@ -47,10 +47,9 @@ const Navbar = (props) => {
       );
     } else {
       return (
-        <li className={styles.navLink}>
-          <a onClick={props.logout}>Log out</a>
-        </li>
-        
+        <a className={styles.navLink} onClick={props.logout} href="/">
+          <li>Log out</li>
+        </a>        
       );
     }
   }
@@ -82,7 +81,6 @@ const Navbar = (props) => {
                 </a>
               </ul>
 
-
               {/* <TransitionGroup className={styles.navLink}>
                 <CSSTransition
                   timeout={500}
@@ -93,11 +91,8 @@ const Navbar = (props) => {
                 </div> */}
                 {/* </CSSTransition>
               </TransitionGroup> */}
-              
-
             </nav>
           </div>
-          
         </div>
       </div>
     </header>

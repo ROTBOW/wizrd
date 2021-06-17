@@ -1,104 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
 
-class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
+const LoginForm = (props) => {
+  const [usernameOrEmail, setUserNameOrEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState(props.errors);
 
-    this.state = {
-      usernameOrEmail: '',
-      password: '',
-      errors: {}
-    };
+  useEffect(() => {
+    // reset errors on componentDidMount
+    document.title = 'Wizrd - Log in';
+    return () => document.title = 'Wizrd';
+  }, []);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
-  }
+  const renderErrors = () => (
+    <ul className={styles.errorsWrapper}>
+      {Object.values(errors).map((error, i) => (
+        <li key={`error-${i}`}>
+          {error}
+        </li>
+      ))}
+    </ul>
+  );
 
-  // Once the user has been authenticated, redirect to the Home page
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser === true) {
-      this.props.history.push('/');
-    }
-
-    // Set or clear errors
-    this.setState({errors: nextProps.errors})
-  }
-
-  // Handle field updates
-  update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
-  }
-
-  // Handle form submission
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let user = {
-      usernameOrEmail: this.state.usernameOrEmail,
-      password: this.state.password
+    let user = { 
+      usernameOrEmail,
+      password
     };
-    this.props.login(user); 
+    props.login(user); 
   }
 
-  // Render the session errors if there are any
-  renderErrors() {
-    return(
-      <ul className={styles.errorsWrapper}>
-        {Object.values(this.props.errors).map((error, i) => (
-          <li key={`error-${i}`}>
-            {this.state.errors[error]}
-          </li>
-        ))}
-      </ul>
-    );
-  }
+  return (
+    <div className={styles.pageWrapper}>
+      <div className={styles.authSectionWrapper}>
+        <h1>Log in</h1>
 
-  render() {
-    return (
-      <div className={styles.pageWrapper}>
-        <div className={styles.authSectionWrapper}>
-          <h1>Log in</h1>
+        {renderErrors()}
 
-          {this.renderErrors()}
+        <div className={styles.formWrapper}>
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <label>Username or email:
+              <input type="text" required spellCheck="false" value={usernameOrEmail} onChange={(e) => setUserNameOrEmail(e.target.value)} placeholder="Your username or email" />
+            </label>
 
-          <div className={styles.formWrapper}>
-            <form className={styles.form} onSubmit={this.handleSubmit}>
-              <label>Username or email:
-                <input type="text" spellCheck="false" value={this.state.usernameOrEmail} onChange={this.update('usernameOrEmail')}placeholder="Your username or email" />
-              </label>
+            <label>Password:
+              <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Your password" />
+            </label>
 
-              <label>Password:
-                <input type="password" value={this.state.password} onChange={this.update('password')} placeholder="Your password" />
-              </label>
+            <div className={styles.spacer8}></div>
 
-              <div className={styles.spacer8}></div>
+            <button type="submit" className={styles.button}>Sign in</button>
+          </form>
 
-              <button type="submit" className={styles.button}>Sign in</button>
-            </form>
-
-            <p className={styles.authParagraph}>New to Wizrd? <Link to="/signup">Sign up</Link></p>
-          </div>
+          <p className={styles.authParagraph}>New to Wizrd? <Link to="/signup">Sign up</Link></p>
         </div>
-
-        <div className={styles.authSectionDivider}></div>
-
-        <section className={styles.authSectionWrapper}>
-          <div className={styles.authHeaderWrapper}>
-            <h2 className={styles.authSubtitle}>Want to try Wizrd without making an account?</h2>
-            <p className={styles.authParagraph}>You can log in as one of our demo users.</p>
-          </div>
-          <div className={styles.formWrapper}>
-            <form onSubmit={this.loginDemo} className={styles.form}>
-              <button type="submit" className={`${styles.button} ${styles.secondary}`}>Log in as demo user</button>
-            </form>
-          </div>
-        </section>
       </div>
-    );
-  }
+
+      <div className={styles.authSectionDivider}></div>
+
+      <section className={styles.authSectionWrapper}>
+        <div className={styles.authHeaderWrapper}>
+          <h2 className={styles.authSubtitle}>Want to try Wizrd without making an account?</h2>
+          <p className={styles.authParagraph}>You can log in as one of our demo users.</p>
+        </div>
+        <div className={styles.formWrapper}>
+          <form onSubmit={props.loginDemo} className={styles.form}>
+            <button type="submit" className={`${styles.button} ${styles.secondary}`}>Log in as demo user</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  );
 }
 
 export default withRouter(LoginForm);

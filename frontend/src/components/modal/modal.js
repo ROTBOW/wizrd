@@ -5,12 +5,14 @@ import styles from './modal.module.scss';
 const Modal = (props) => {
 
   let modal;
-  let {name, ...otherProps} = props;
+  let { name, ...otherProps } = props;
 
   switch (name) {
     case 'createEvent':
       modal = <EventForm {...otherProps} />;
       break;
+    default: 
+      return;
   }
 
   return (

@@ -9,7 +9,12 @@ class EventShow extends React.Component {
 
 
     componentDidMount(){
-        this.props.fetchEvent(this.props.match.params.eventId);
+      this.props.fetchEvent(this.props.match.params.eventId)
+        .then((res) => document.title = `Wizrd - ${res.event.data.title}`);
+    }
+    
+    componentWillUnmount() {
+      document.title = 'Wizrd';
     }
 
     // handleStateEvent(e){

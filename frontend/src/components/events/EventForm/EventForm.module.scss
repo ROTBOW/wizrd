@@ -4,25 +4,67 @@
   margin: auto;
   background-color: white;
   max-width: 56rem;
-  margin-top: 11.2rem;
-  padding: 0.8rem;
   border-radius: 0.8rem;
-  padding: 1.6rem;
+  margin-top: 11.2rem;
+  padding: 3.2rem 3.2rem;
+}
+
+.form {
+  width: 100%;
+
+  > label {
+    font-size: 1.5rem;
+
+    > input, textarea {
+      padding: 0.6rem 0.8rem;
+      font-size: 1.5rem;
+      line-height: 1;
+      margin-bottom: 1.2rem;
+      resize: none;
+    }
+  }
 }
 
 h3 {
   margin-bottom: 1.6rem;
 }
 
-label {
-  font-size: 1.6rem;
+.info {
+  font-size: 1.5rem;
+  color: $gray-600;
 }
 
-.submit {
-  color: white;
-  background-color: $emerald-400;
+.dateGrid{
+  width: 100%;
+  // height: 12rem;
+  background: $emerald-100;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 5.6rem 4.0rem;
+  gap: 1.6rem;
+  // flex-direction: row;
+  // align-items: center;
+}
+
+.toggleButton {
+  display: block;
+  height: 3.2rem;
+  background: $emerald-500;
   padding: 0.8rem 1.6rem;
-  border: 0.1rem solid $emerald-900;
+  border: 0.1rem solid $emerald-800;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+
+}
+
+.submitButton {
+  display: block;
+  // margin-top: 32px;
+  height: 40px;
+  color: white;
+  background-color: $emerald-500;
+  padding: 0.8rem 1.6rem;
+  border: 0.1rem solid $emerald-800;
   border-radius: 0.8rem;
   font-size: 1.6rem;
 
