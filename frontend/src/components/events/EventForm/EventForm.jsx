@@ -1,17 +1,16 @@
 import React from 'react';
 import styles from './EventForm.module.scss';
-
+import moment from 'moment';
 
 class EventForm extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       title: '',
       topic: '',
       description: '',
-      startTime: this.getTime(),
+      startTime: moment().format('YYYY-MM-DDTkk:mm'),
       liveToggle: false,
       errors: {}
     }
@@ -42,30 +41,12 @@ class EventForm extends React.Component {
       this.setState({ [key]: e.target.value })
     }
   }
-
-  addZeroIfNeeded(val) {
-    if (val < 10) {
-      return `0${val}`
-    }
-    return val;
-  }
-
-  getTime() {
-    let datetime = new Date();
-    let month = this.addZeroIfNeeded(datetime.getMonth()+1);
-    let day = this.addZeroIfNeeded(datetime.getDate());
-    let hour = this.addZeroIfNeeded(datetime.getHours())
-    let second = this.addZeroIfNeeded(datetime.getSeconds());
-
-    return `${datetime.getFullYear()}-${month}-${day}T${hour}:${second}`
-  }
-
+  
   handleToggle(e){
     e.preventDefault();
     this.setState({liveToggle: !this.state.liveToggle})
   }
-
-  // Render the session errors if there are any
+  
   renderErrors() {
     return(
       <ul>
@@ -81,8 +62,10 @@ class EventForm extends React.Component {
   render(){
     return (
       <div className={styles.formWrapper}>
-        <form className={styles.form} onSubmit={this.handleSubmit}onClick={(e) => e.stopPropagation()}>
+        <form className={styles.form} onSubmit={this.handleSubmit} onClick={(e) => e.stopPropagation()}>
           <h2>Create an Event</h2>
+
+          {this.renderErrors()}
 
           <label>Title:
             <input
@@ -96,7 +79,7 @@ class EventForm extends React.Component {
           <label>Topic:
             <input
               type='text'
-              placeholder="What's the topic of your stream?"
+              placeholder="What's the topic?"
               required
               onChange={this.update('topic')}
             />
@@ -110,38 +93,34 @@ class EventForm extends React.Component {
             />
           </label>
 
-          <p className={styles.info}>Consequuntur beatae saepe incidunt quidem voluptatum, ab odit earum optio molestiae</p>
+          <p className={styles.info}>Choose to start your event now, or set a later start time to schedule your event in the future</p>
 
           {(this.state.liveToggle) ? (
-            // first option
-            <div className={styles.datetimeWrapper}>
-              <button className={styles.toggleButton}onClick={this.handleToggle}>
-                Schedule event for later
-              </button>
+            <>
+              <div className={styles.dateTimeWrapper}>
+                <button className={styles.toggleButton} onClick={this.handleToggle}>Switch to future event</button>
+                <p className={styles.liveInfo}>Your event will start as soon as you press <em>Create a live event now</em></p>
+              </div>
               <button className={styles.submitButton} type='submit'>Create a live event now</button>
-            </div>
+            </>
           ) : (
-            // second option
-            <div className={styles.dateGrid}>
-              <label>Start time:
-                <input
-                  type='datetime-local'
-                  min={this.getTime()}
-                  value={this.state.startTime}
-                  onChange={this.update('startTime')}
-                />
+            <>
+              <div className={styles.dateTimeWrapper}>
                 <button className={styles.toggleButton} onClick={this.handleToggle}>Switch to live event</button>
-              </label>
 
+                <label className={styles.startTime}>Start time:
+                  <input
+                    className={styles.startTimeInput}
+                    type='datetime-local'
+                    min={moment().format('YYYY-MM-DDTkk:mm')}
+                    value={this.state.startTime}
+                    onChange={this.update('startTime')}
+                  />
+                </label>
+              </div>
               <button className={styles.submitButton} type='submit'>Create an event for later</button>
-            </div>
+            </>
           )}
-
-
-          {/* <button className={styles.submitButton} type='submit'>Create a live event now</button>
-          <button className={styles.submitButton} type='submit'>Create an event for later</button> */}
-
-          {this.renderErrors()}
         </form>
       </div>
     );

@@ -2,7 +2,7 @@
 
 .formWrapper {
   margin: auto;
-  background-color: white;
+  background: white;
   max-width: 56rem;
   border-radius: 0.8rem;
   margin-top: 11.2rem;
@@ -32,43 +32,69 @@ h3 {
 .info {
   font-size: 1.5rem;
   color: $gray-600;
+  margin-bottom: 0;
 }
 
-.dateGrid{
+.dateTimeWrapper {
   width: 100%;
-  // height: 12rem;
-  background: $emerald-100;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 5.6rem 4.0rem;
-  gap: 1.6rem;
-  // flex-direction: row;
-  // align-items: center;
+  height: 5.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.2rem;
+
+  > label {
+      font-size: 1.5rem;
+  }
 }
 
 .toggleButton {
   display: block;
+  width: fit-content;
   height: 3.2rem;
-  background: $emerald-500;
+  background: $white;
   padding: 0.8rem 1.6rem;
-  border: 0.1rem solid $emerald-800;
-  border-radius: 0.8rem;
+  border: 0.1rem solid $emerald-600;
+  border-radius: 0.4rem;
   font-size: 1.6rem;
+  color: $emerald-500;
 
+  &:hover {
+    color: $emerald-600;
+    border: 0.1rem solid $emerald-700;
+    background: $emerald-50;
+  }
 }
 
+.startTime {
+  width: 254px;
+
+  .startTimeInput {
+    margin-bottom: 0;
+    height: 32px;
+  }
+}
+
+.liveInfo {
+  width: 254px;
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+  
 .submitButton {
   display: block;
-  // margin-top: 32px;
+  width: fit-content;
   height: 40px;
   color: white;
-  background-color: $emerald-500;
+  background: $emerald-600;
   padding: 0.8rem 1.6rem;
   border: 0.1rem solid $emerald-800;
-  border-radius: 0.8rem;
+  border-radius: 0.4rem;
   font-size: 1.6rem;
 
   &:hover {
-    background-color: $brand-secondary;
+    background: $emerald-800;
   }
 }
