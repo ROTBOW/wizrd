@@ -1,4 +1,5 @@
 const Validator = require('validator');
+
 const validText = require('./valid-text');
 
 module.exports = function validateRegisterInput(data) {
@@ -14,13 +15,13 @@ module.exports = function validateRegisterInput(data) {
   }
 
   if (Validator.isEmpty(data.username)) {
-    errors.username = 'Username field is required';
+    errors.username = 'Username is required';
   }
 
   // Add validation for username and email uniqueness
 
   if (Validator.isEmpty(data.email)) {
-    errors.email = 'Email field is required';
+    errors.email = 'Email is required';
   }
 
   if (!Validator.isEmail(data.email)) {
@@ -28,7 +29,7 @@ module.exports = function validateRegisterInput(data) {
   }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = 'Password field is required';
+    errors.password = 'Password is required';
   }
 
   if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
@@ -36,7 +37,7 @@ module.exports = function validateRegisterInput(data) {
   }
 
   if (Validator.isEmpty(data.password2)) {
-    errors.password2 = 'Confirm Password field is required';
+    errors.password2 = 'Confirm password is required';
   }
 
   if (!Validator.equals(data.password, data.password2)) {

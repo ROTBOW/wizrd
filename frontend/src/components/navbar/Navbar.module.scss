@@ -3,7 +3,7 @@
 .header {
   height: 72px;
   box-sizing: border-box;
-  box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
+  box-shadow: 0 0 16px 6px rgba($gray-800, 0.05);
 }
 
 .outer {
@@ -64,13 +64,17 @@
 .navLink {
   height: 32px;
   padding: 0px 12px;
-  border-radius: 3px;
+  border-radius: 4px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 
   &:hover {
     background-color: $gray-200;
+  }
+
+  &:focus {
+
   }
 
   a,
@@ -86,7 +90,7 @@
 
 // .navLogout {
 //   cursor: pointer;
-//   border-radius: 3px;
+//   border-radius: 4px;
 
 //   &:focus {
 //     box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset, rgba(46, 170, 220, 40%) 0px 0px 0px 2px;

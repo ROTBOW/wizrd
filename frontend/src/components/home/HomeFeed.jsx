@@ -95,12 +95,6 @@ const HomeFeed = (props) => {
         </section>
 
       </main>
-
-      <div className={styles.footerWrapper}>
-        <div className={styles.footer}>
-            <h3>Wizrd</h3>
-        </div>
-      </div>
     </div>
   );
 };

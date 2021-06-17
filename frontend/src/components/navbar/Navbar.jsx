@@ -27,15 +27,6 @@ const Navbar = (props) => {
     };
   })
 
-
-  // const greeting = () => {
-  //   if (loggedIn) {
-  //     return <div></div>
-  //   } else {
-  //     return <div></div>
-  //   }
-  // };
-
   const empty = pojo => {
     let count = 0;
     for (let i in pojo) count++;
@@ -90,10 +81,10 @@ const Navbar = (props) => {
 
               <ul className={styles.navList}>
                 <li className={styles.navLink}>
-                  <a href="https://github.com/ROTBOW/MERN-stack-project" target="_blank" rel="noreferrer">GitHub</a>
+                  <Link to="/about">About</Link>
                 </li>
                 <li className={styles.navLink}>
-                  <Link to="/team">Team</Link>
+                  <a href="https://github.com/ROTBOW/wizrd" target="_blank" rel="noreferrer">GitHub</a>
                 </li>
               </ul>
 

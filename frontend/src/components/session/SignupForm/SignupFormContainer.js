@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { signup } from '../../../actions/sessionActions';
-import SignupForm from './SignupForm';
+import { signup, login } from '../../../actions/sessionActions';
+import SignupForm from './SignupForm.jsx';
 
 const mapStateToProps = (state) => {
   return {
@@ -11,8 +11,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signup: user => dispatch(signup(user))
-  }
+    signup: (user) => dispatch(signup(user)),
+    login: (user) => dispatch(login(user)),
+  };
 }
 
 export default connect(

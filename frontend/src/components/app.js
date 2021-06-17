@@ -8,6 +8,7 @@ import EventFormContainer from './events/EventForm/EventFormContainer';
 import Video from './video/Video/Video';
 import NavbarContainer from './navbar/NavbarContainer'
 import EventShowContainer from './events/EventShow/EventShowContainer'
+import Footer from './footer/Footer';
 
 const App = () => (
   <>
@@ -19,6 +20,7 @@ const App = () => (
       <ProtectedRoute exact path="/event/:eventId" component={EventShowContainer}/>
       <HomeRoute path="/" /> 
     </Switch>
+    <Footer />
   </>
 );
 
