@@ -41,18 +41,7 @@ const SignupForm = (props) => {
   //   </ul>
   // );
 
-  const onValueChange = (event) => {
-    setAvatar(
-      event.target.value
-    );
-  }
 
-  const checkIfSelected = (pos) => {
-    if (avatar === String(pos)) {
-      return styles.avatarSelected;
-    }
-    return ''
-  }
 
   return (
     <div className={styles.pageWrapper}>
