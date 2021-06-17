@@ -6,12 +6,20 @@ const LoginFormContent = (props) => {
   const [usernameOrEmail, setUserNameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [loginButton, setLoginButton] = useState("");
 
   useEffect(() => {
     setErrors({});
     document.title = 'Wizrd - Log in';
     return () => document.title = 'Wizrd';
   }, []);
+
+  useEffect(() => {
+    console.log(loginButton, props.errors);
+    if (loginButton === 'clicked' && Object.values(props.errors).length === 0) {
+      props.updateModal();
+    }
+  }, [loginButton, props.errors])
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +27,8 @@ const LoginFormContent = (props) => {
       usernameOrEmail,
       password
     };
-    props.login(user) 
+    props.login(user)
+      .then(() => setLoginButton('clicked'));
   }
   
   const renderErrors = () => (
@@ -52,7 +61,6 @@ const LoginFormContent = (props) => {
             <button type="submit" className={styles.button}>Sign in</button>
           </form>
 
-          {/* <p className={styles.authParagraph}>New to Wizrd? <Link to="/signup">Sign up</Link></p> */}
         </div>
       </div>
 
