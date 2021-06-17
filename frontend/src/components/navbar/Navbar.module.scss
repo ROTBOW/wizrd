@@ -4,20 +4,20 @@ $nav-item-hover-background: rgb(249, 245, 241);
 $light-gray: rgba(15, 15, 15, 0.1);
 
 .header {
-  height: 72px;
+  height: 58px;
   box-sizing: border-box;
   box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
+  border-bottom: 2px solid $emerald-700;
 }
 
 .outer {
-  max-width: 1080px;
-  height: 72px;
+  height: 58px;
   margin: 0 auto;
   padding: 0 32px;
 }
 
 .inner {
-  height: 72px;
+  height: 58px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -25,7 +25,7 @@ $light-gray: rgba(15, 15, 15, 0.1);
 }
 
 .logoWrapper {
-  height: 72px;
+  height: 58px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -51,7 +51,7 @@ $light-gray: rgba(15, 15, 15, 0.1);
 }
 
 .nav {
-  height: 72px;
+  height: 58px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;

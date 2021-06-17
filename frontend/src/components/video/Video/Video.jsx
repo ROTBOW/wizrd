@@ -43,10 +43,8 @@ const Video = ({ eventId, isHost }) => {
       videoRef.current.srcObject = stream;
     }
   }, [stream])
-  console.log(peersRef.current)
 
   function startBroadcast() {
-    console.log('i am host')
     socketRef.current = io.connect('/');
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       setStream(stream)
@@ -139,7 +137,6 @@ const Video = ({ eventId, isHost }) => {
 
   return (
     <div className={styles.videoContainer}>
-
       <StreamVideo />
       <ToggleStreamButton />
     </div>
