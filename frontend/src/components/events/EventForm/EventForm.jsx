@@ -3,7 +3,6 @@ import styles from './EventForm.module.scss';
 import moment from 'moment';
 
 class EventForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -27,11 +26,12 @@ class EventForm extends React.Component {
       title: this.state.title,
       topic: this.state.topic,
       description: this.state.description,
-      startTime: this.state.startTime
+      startTime: this.state.startTime + ':59.999Z'
     };
     this.props.createEvent(submitForm)
-      .then(event => {
+      .then((event) => {
         this.props.updateModal();
+        console.log(event);
         this.props.history.replace(`/events/${event.event.data._id}`)
       })
   }
@@ -50,9 +50,9 @@ class EventForm extends React.Component {
   renderErrors() {
     return(
       <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
+        {Object.values(this.state.errors).map((error, i) => (
           <li key={`error-${i}`}>
-            {this.state.errors[error]}
+            {error}
           </li>
         ))}
       </ul>

@@ -21,12 +21,18 @@ class EventShow extends React.Component {
     //     e.preventDefault();
     // }
 
+    getPST() {
+      let now = new Date();
+      now.setHours(now.getHours() - 7);
+      return now;
+    }
+
     render(){
         if (this.props.event !== undefined) {
             let event = this.props.event
             let startTime = event.startTime;
 
-            if (new Date(startTime) > new Date()) {
+            if (new Date(startTime) > this.getPST()) {
 
                 return (
                     <div>

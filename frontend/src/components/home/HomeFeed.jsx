@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchLiveEvents, fetchFutureEvents } from '../../util/eventUtil';
-import EventForm from '../events/EventForm/EventForm';
 import Modal from '../modal/modal';
 import { updateModal } from '../../actions/uiActions';
 import { createEvent } from '../../actions/eventsActions';

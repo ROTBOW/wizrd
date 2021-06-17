@@ -16,10 +16,8 @@ const Modal = (props) => {
   }
 
   return (
-    <div>
-      <div className={styles.background} onClick={props.updateModal}>
-        {modal}
-      </div>
+    <div className={styles.background} onClick={props.updateModal}>
+      {modal}
     </div>
   )
 }
