@@ -10,6 +10,7 @@ const LoginForm = (props) => {
       <h1>Log in</h1>
       <LoginFormContent errors={props.errors} login={props.login}/>
 
+      <p className={styles.authParagraph}>New to Wizrd? <Link to="/signup">Sign up</Link></p>
       <div className={styles.authSectionDivider}></div>
 
       <section className={styles.authSectionWrapper}>

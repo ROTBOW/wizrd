@@ -15,12 +15,12 @@ const SearchResults = (props) => {
       setErrors(props.errors.noEventsFound);
       setResults([]);
     } else {
-      let events = [];
-      for (let key in props.events) {
-        events.push(props.events[key])
-      }
+      // let events = [];
+      // for (let key in props.events) {
+      //   events.push(props.events[key])
+      // }
       setErrors('');
-      setResults(events);
+      setResults(Object.values(props.events));
     }
   }, [props.events, props.errors])
 

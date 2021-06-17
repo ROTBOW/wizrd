@@ -61,7 +61,6 @@ const SignupFormContent = (props) => {
 
   return (
       <section className={styles.authSectionWrapper}>
-        <h1>Sign up</h1>
         
         {renderErrors()}
 
@@ -124,7 +123,7 @@ const SignupFormContent = (props) => {
             <button type="submit" className={styles.button}>Create a new account</button>
           </form>
 
-          <p className={styles.authParagraph}>Already have an account? <Link className={styles.authParagraph} to="/login">Log in</Link></p>
+          
         </div>
       </section>
   );

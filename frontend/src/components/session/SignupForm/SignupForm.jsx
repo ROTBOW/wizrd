@@ -7,7 +7,11 @@ const SignupForm = (props) => {
   
   return (
     <div className={styles.pageWrapper}>
+      <h1>Sign up</h1>
+
       <SignupFormContent errors={props.errors} signup={props.signup} login={props.login}/>
+
+      <p className={styles.authParagraph}>Already have an account? <Link className={styles.authParagraph} to="/login">Log in</Link></p>
 
       <div className={styles.authSectionDivider}></div>
 

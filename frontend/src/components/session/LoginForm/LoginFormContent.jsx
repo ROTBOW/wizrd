@@ -20,9 +20,6 @@ const LoginFormContent = (props) => {
       password
     };
     props.login(user) 
-      .then((user) => {if (user && props.modal) {
-          props.updateModal();
-      }})
   }
   
   const renderErrors = () => (
@@ -55,7 +52,7 @@ const LoginFormContent = (props) => {
             <button type="submit" className={styles.button}>Sign in</button>
           </form>
 
-          <p className={styles.authParagraph}>New to Wizrd? <Link to="/signup">Sign up</Link></p>
+          {/* <p className={styles.authParagraph}>New to Wizrd? <Link to="/signup">Sign up</Link></p> */}
         </div>
       </div>
 
