@@ -56,7 +56,7 @@ const HomeFeed = (props) => {
                   <p className={styles.eventTopic}>{e.topic}</p>
                   <div className={styles.cardRowWrapper}>
                     <BiUser className={styles.cardIcon}/>
-                    <p className={styles.eventHost}>username</p>
+                    <p className={styles.eventHost}>{e.hostUsername}</p>
                   </div>
                   <div className={styles.cardRowWrapper}>
                     <BiVideo className={styles.cardIcon}/>
@@ -79,7 +79,7 @@ const HomeFeed = (props) => {
                   <p className={styles.eventTopic}>{e.topic}</p>
                   <div className={styles.cardRowWrapper}>
                     <BiUser className={styles.cardIcon}/>
-                    <p className={styles.eventHost}>username</p>
+                    <p className={styles.eventHost}>{e.hostUsername}</p>
                   </div>
                   <div className={styles.cardRowWrapper}>
                     <BiVideo className={styles.cardIcon}/>

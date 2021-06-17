@@ -3,7 +3,6 @@ import { signup, login, logout } from '../../actions/sessionActions';
 import Navbar from './Navbar';
 
 const mapStateToProps = (state) => {
-  // console.log(state);
   return {
     user: state.session.user,
     errors: state.errors.session,

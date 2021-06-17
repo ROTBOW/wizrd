@@ -1,5 +1,5 @@
 import React from 'react';
-import EventForm from '../events/EventForm/EventForm';
+import EventForm from '../events/EventForm/EventFormClass';
 import styles from './modal.module.scss';
 
 const Modal = (props) => {

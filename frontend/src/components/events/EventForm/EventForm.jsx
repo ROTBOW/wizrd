@@ -1,56 +1,45 @@
-import React from 'react';
+import React, { userState, useEffect } from 'react';
 import styles from './EventForm.module.scss';
 import moment from 'moment';
 
-class EventForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      topic: '',
-      description: '',
-      startTime: moment().format('YYYY-MM-DDTkk:mm'),
-      liveToggle: false,
-      errors: {}
-    }
+const EventForm = (props) => {
+  const [title, setTitle] = useState('');
+  const [topic, setTopic] = useState('');
+  const [description, setDescription] = useState('');
+  const [startTime, setStartTime] = useState(moment().format('YYYY-MM-DDTkk:mm'));
+  const [liveToggle, setLiveToggle] = useState(false);
+  const [errors, setErrors] = useState({});
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
+  useEffect(() => {
+    return () => setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
+
+  }, [liveToggle]);
+
+  const handleToggle = (e) => {
+    // console.log('handling toggle')
+    e.preventDefault();
+    setLiveToggle(!liveToggle);
   }
 
-
-  handleSubmit(e){
+  const handleSubmit = (e) => {
     e.preventDefault();
     let submitForm = {
-      title: this.state.title,
-      topic: this.state.topic,
-      description: this.state.description,
-      startTime: this.state.startTime + ':59.999Z'
+      title,
+      topic,
+      description,
+      startTime: startTime + `:${(new Date()).getSeconds()}.${(new Date()).getMilliseconds()}Z`
     };
-    this.props.createEvent(submitForm)
+    props.createEvent(submitForm)
       .then((event) => {
-        this.props.updateModal();
-        console.log(event);
-        this.props.history.replace(`/events/${event.event.data._id}`)
+        props.updateModal();
+        props.history.replace(`/events/${event.event.data._id}`)
       })
   }
 
-  update(key) {
-    return e => {
-      this.setState({ [key]: e.target.value })
-    }
-  }
-  
-  handleToggle(e){
-    e.preventDefault();
-    this.setState({liveToggle: !this.state.liveToggle})
-  }
-  
-  renderErrors() {
+  const renderErrors = () => {
     return(
       <ul>
-        {Object.values(this.state.errors).map((error, i) => (
+        {Object.values(errors).map((error, i) => (
           <li key={`error-${i}`}>
             {error}
           </li>
@@ -59,73 +48,71 @@ class EventForm extends React.Component {
     );
   }
 
-  render(){
-    return (
-      <div className={styles.formWrapper}>
-        <form className={styles.form} onSubmit={this.handleSubmit} onClick={(e) => e.stopPropagation()}>
-          <h2>Create an Event</h2>
+  return (
+    <div className={styles.formWrapper}>
+      <form className={styles.form} onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
+        <h2>Create an Event</h2>
 
-          {this.renderErrors()}
+        {renderErrors()}
 
-          <label>Title:
-            <input
-              type='text'
-              placeholder='Give your event an eye-catching title!'
-              onChange={this.update('title')}
-              required
-            />
-          </label>
+        <label>Title:
+          <input
+            type='text'
+            placeholder='Give your event an eye-catching title!'
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </label>
 
-          <label>Topic:
-            <input
-              type='text'
-              placeholder="What's the topic?"
-              required
-              onChange={this.update('topic')}
-            />
-          </label>
+        <label>Topic:
+          <input
+            type='text'
+            placeholder="What's the topic?"
+            required
+            onChange={(e) => setTopic(e.target.value)}
+          />
+        </label>
 
-          <label>Description:
-            <textarea
-              rows='3'
-              placeholder='Give your event a longer description (optional)'
-              onChange={this.update('description')}
-            />
-          </label>
+        <label>Description:
+          <textarea
+            rows='3'
+            placeholder='Give your event a longer description (optional)'
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
 
-          <p className={styles.info}>Choose to start your event now, or set a later start time to schedule your event in the future</p>
+        <p className={styles.info}>Choose to start your event now, or set a later start time to schedule your event in the future</p>
 
-          {(this.state.liveToggle) ? (
-            <>
-              <div className={styles.dateTimeWrapper}>
-                <button className={styles.toggleButton} onClick={this.handleToggle}>Switch to future event</button>
-                <p className={styles.liveInfo}>Your event will start as soon as you press <em>Create a live event now</em></p>
-              </div>
-              <button className={styles.submitButton} type='submit'>Create a live event now</button>
-            </>
-          ) : (
-            <>
-              <div className={styles.dateTimeWrapper}>
-                <button className={styles.toggleButton} onClick={this.handleToggle}>Switch to live event</button>
+        {liveToggle ? (
+          <>
+            <div className={styles.dateTimeWrapper}>
+              <button className={styles.toggleButton} onClick={(e) => handleToggle(e)}>Switch to future event</button>
+              <p className={styles.liveInfo}>Your event will start as soon as you press <em>Create a live event now</em></p>
+            </div>
+            <button className={styles.submitButton} type='submit'>Create a live event now</button>
+          </>
+        ) : (
+          <>
+            <div className={styles.dateTimeWrapper}>
+              <button className={styles.toggleButton} onClick={(e) => handleToggle(e)}>Switch to live event</button>
 
-                <label className={styles.startTime}>Start time:
-                  <input
-                    className={styles.startTimeInput}
-                    type='datetime-local'
-                    min={moment().format('YYYY-MM-DDTkk:mm')}
-                    value={this.state.startTime}
-                    onChange={this.update('startTime')}
-                  />
-                </label>
-              </div>
-              <button className={styles.submitButton} type='submit'>Create an event for later</button>
-            </>
-          )}
-        </form>
-      </div>
-    );
-  }
-}
+              <label className={styles.startTime}>Start time:
+                <input
+                  className={styles.startTimeInput}
+                  type='datetime-local'
+                  min={moment().format('YYYY-MM-DDTkk:mm')}
+                  value={startTime}
+                  onChange={(e) => setStartTime(e.target.value)}
+                />
+              </label>
+            </div>
+            <button className={styles.submitButton} type='submit'>Create an event for later</button>
+          </>
+        )}
+      </form>
+    </div>
+  );
 
+};
 
 export default EventForm;
