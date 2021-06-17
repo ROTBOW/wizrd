@@ -84,6 +84,7 @@ const Navbar = (props) => {
                   <option value="title">Title</option>
                   <option value="topic" selected>Topic</option>
                   <option value="description">Description</option>
+                  <option value="host">Description</option>
                 </select>
                 <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event"/>
                 <button className={styles.searchButton} onClick={search}>Search</button>

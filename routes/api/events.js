@@ -54,6 +54,11 @@ router.put('/', (req, res) => {
     Event.find({description: match})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that description' }));
+  } else if (req.body.host) {
+    const match = new RegExp(req.body.host, 'i');
+    Event.find({host: match})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that host' }));
   }
 })
 
