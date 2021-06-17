@@ -2,20 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
 
 const Navbar = (props) => {
 
   const [meetPos, setMeetPos] = useState(0);
-  const [meet, setMeet] = useState([
-    <a href="https://github.com/brandonfang" target="_blank" rel="noreferrer"  key="1">Meet Brandon</a>,
-    <a href="https://github.com/inhojl" target="_blank" rel="noreferrer" key="2" >Meet Joe</a>,
-    <a href="https://github.com/melflynn" target="_blank" rel="noreferrer" key="3" >Meet Melissa</a>,
-    <a href="https://github.com/ROTBOW" target="_blank" rel="noreferrer" key="4" >Meet Josiah</a>
-  ]);
+  // const [meet, setMeet] = useState([
+  //   <a href="https://github.com/brandonfang" target="_blank" rel="noreferrer"  key="1">Meet Brandon</a>,
+  //   <a href="https://github.com/inhojl" target="_blank" rel="noreferrer" key="2" >Meet Joe</a>,
+  //   <a href="https://github.com/melflynn" target="_blank" rel="noreferrer" key="3" >Meet Melissa</a>,
+  //   <a href="https://github.com/ROTBOW" target="_blank" rel="noreferrer" key="4" >Meet Josiah</a>
+  // ]);
 
   useEffect(() => {
     let timer = setInterval(() => {

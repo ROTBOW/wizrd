@@ -6,7 +6,7 @@ const EventForm = (props) => {
   const [title, setTitle] = useState('');
   const [topic, setTopic] = useState('');
   const [description, setDescription] = useState('');
-  const [startTime, setStartTime] = useState(moment().format('YYYY-MM-DDTkk:mm'));
+  const [startTime, setStartTime] = useState(moment().tz('America/Los_Angeles').format('YYYY-MM-DDTkk:mm'));
   const [liveToggle, setLiveToggle] = useState(false);
   const [errors, setErrors] = useState(props.errors);
 
@@ -29,7 +29,7 @@ const EventForm = (props) => {
         title,
         topic,
         description,
-        startTime: startTime + `:${moment().format('ss')}.999Z`
+        startTime: startTime + `:${moment().tz('America/Los_Angeles').format('ss')}.999Z`
         // startTime: startTime + `:59.999Z`
       };
       console.log(event)
@@ -38,7 +38,7 @@ const EventForm = (props) => {
         title,
         topic,
         description,
-        startTime: moment().format()
+        startTime: moment().tz('America/Los_Angeles').format()
         // startTime: startTime + `:59.999Z`
       };
     }

@@ -6,7 +6,6 @@ import MomentTimezone from 'moment-timezone';
 
 
 class EventShow extends React.Component {
-    // Needs logic to check if the event has started yet, should show something if it hasn't started yet
 
 
     componentDidMount(){
@@ -22,10 +21,10 @@ class EventShow extends React.Component {
     //     e.preventDefault();
     // }
 
-    getPST() {
-      let now = new Date();
-      now.setHours(now.getHours() - 7);
-      return Moment(now).format();
+    getPST(now) {
+      now = new Date(now)
+      now.setHours(now.getHours() + 7);
+      return Moment(now).tz('America/Los_Angeles');
     }
 
     render(){
@@ -33,9 +32,11 @@ class EventShow extends React.Component {
             let event = this.props.event
             let startTime = event.startTime;
 
-            console.log(Moment());
+            console.log(this.getPST(startTime).format());
+            console.log(Moment().tz('America/Los_Angeles').format());
+            console.log(this.getPST(startTime).isBefore(Moment().tz('America/Los_Angeles')));
 
-            if (new Date(startTime) > this.getPST()) {
+            if (this.getPST(startTime).isAfter(Moment().tz('America/Los_Angeles'))) {
 
                 return (
                     <div>
