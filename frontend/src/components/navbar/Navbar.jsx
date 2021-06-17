@@ -41,7 +41,6 @@ const Navbar = (props) => {
     }
   }
   
-  // console.log(props)
 
   return (
     <header className={styles.header}>

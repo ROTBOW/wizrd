@@ -39,15 +39,21 @@ router.get('/:eventId', (req, res) => {
 
 //Search for events
 router.put('/', (req, res) => {
-  console.log(req.body.topic);
   if (req.body.topic) {
-    Event.find({topic: req.body.topic})
+    const match = new RegExp(req.body.topic, 'i');
+    Event.find({topic: match})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that topic' }));
   } else if (req.body.title) {
-    Event.find({title: req.body.title})
+    const match = new RegExp(req.body.title, 'i');
+    Event.find({title: match})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that title' }));
+  } else if (req.body.description) {
+    const match = new RegExp(req.body.description, 'i');
+    Event.find({description: match})
+      .then((events) => res.json(events))
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that description' }));
   }
 })
 
