@@ -22,15 +22,28 @@ const EventForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
-    let event = {
-      title,
-      topic,
-      description,
-      startTime: startTime + `:${moment().format('ss')}.999Z`
-      // startTime: startTime + `:59.999Z`
-    };
-    console.log(event)
+    let event;
+    if (!liveToggle) {
+      // setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
+      event = {
+        title,
+        topic,
+        description,
+        startTime: startTime + `:${moment().format('ss')}.999Z`
+        // startTime: startTime + `:59.999Z`
+      };
+      console.log(event)
+    } else {
+      event = {
+        title,
+        topic,
+        description,
+        startTime: moment().format()
+        // startTime: startTime + `:59.999Z`
+      };
+    }
+
+
     props.createEvent(event)
       .then((event) => {
         props.updateModal();
