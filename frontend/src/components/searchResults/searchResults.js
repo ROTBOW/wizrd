@@ -61,7 +61,9 @@ const SearchResults = (props) => {
               </div>
               <div className={styles.cardRowWrapper}>
                 <BiVideo className={styles.cardIcon}/>
-                <p className={styles.eventStartTime}>{moment(e.startTime).format("ddd, MMM D, LT")}</p>
+                <p className={styles.eventStartTime}>
+                  {moment(e.startTime).format("ddd, MMM D, LT")}
+                </p>
               </div>
               {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
           </li>

@@ -88,7 +88,7 @@
   // padding: 28px 24px;
   box-shadow: 0px 0px 24px 8px rgba($emerald-100, 0.3);
 
-  &:hover {
+  &:hover, &:focus {
     box-shadow: 0px 2px 24px 12px rgba($emerald-400, 0.3);
   }
 }
