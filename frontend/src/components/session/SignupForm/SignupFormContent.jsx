@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
+import avatars from '../../../assets/avatars/avatars';
 
 const SignupFormContent = (props) => {
   const [username, setUsername] = useState("");
