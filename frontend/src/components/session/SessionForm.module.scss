@@ -174,3 +174,30 @@ button:focus {
 //   font-size: 14px;
 //   text-align: center
 // }
+
+
+.avatarIcon {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  
+}
+
+.avatarSelected {
+  border: solid 4px $emerald-300;
+}
+
+.hideMe {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+
+.avatarWrapper {
+  display: flex;
+  width: 24rem;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
