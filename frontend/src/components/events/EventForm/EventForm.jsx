@@ -24,14 +24,12 @@ const EventForm = (props) => {
     e.preventDefault();
     let event;
     if (!liveToggle) {
-      // setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
+
       event = {
         title,
         topic,
         description,
         startTime: moment(startTime).tz('America/Los_Angeles').format()
-        // startTime: startTime + `:${moment().tz('America/Los_Angeles').format('ss')}.999Z`
-        // startTime: startTime + `:59.999Z`
       };
       console.log(event)
     } else {
@@ -40,7 +38,6 @@ const EventForm = (props) => {
         topic,
         description,
         startTime: moment().tz('America/Los_Angeles').format()
-        // startTime: startTime + `:59.999Z`
       };
     }
 

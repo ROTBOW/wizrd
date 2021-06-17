@@ -32,10 +32,6 @@ class EventShow extends React.Component {
             let event = this.props.event
             let startTime = event.startTime;
 
-            console.log(Moment(startTime).format());
-            console.log(Moment().tz('America/Los_Angeles').format());
-            console.log(Moment(startTime).isBefore(Moment().tz('America/Los_Angeles')));
-
             if (Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) {
 
                 return (
