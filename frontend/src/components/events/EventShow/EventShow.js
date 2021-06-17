@@ -2,6 +2,7 @@ import React from "react";
 import Chat from '../../chat/Chat';
 import styles from './EventShowStyles.module.scss';
 import Moment from 'moment';
+import MomentTimezone from 'moment-timezone';
 
 
 class EventShow extends React.Component {
@@ -32,8 +33,7 @@ class EventShow extends React.Component {
             let event = this.props.event
             let startTime = event.startTime;
 
-            console.log(startTime);
-            console.log(this.getPST());
+            console.log(Moment());
 
             if (new Date(startTime) > this.getPST()) {
 
