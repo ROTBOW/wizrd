@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import styles from './HomeFeed.module.scss';
 import { fetchLiveEvents, fetchFutureEvents } from '../../util/eventUtil';
-import EventForm from '../events/EventForm/EventForm';
-import moment from 'moment';
-import { BiUser, BiVideo } from "react-icons/bi";
 import Modal from '../modal/modal';
 import { updateModal } from '../../actions/uiActions';
 import { createEvent } from '../../actions/eventsActions';
+import { BiUser, BiVideo } from "react-icons/bi";
+import styles from './HomeFeed.module.scss';
+import moment from 'moment';
 
 const HomeFeed = (props) => {
   const [liveEvents, setLiveEvents] = useState([]);
   const [futureEvents, setFutureEvents] = useState([]);
 
   useEffect(() => {
-    props.fetchLiveEvents()
+    let isOnHomeFeed = true;
+    if (isOnHomeFeed) {
+      props.fetchLiveEvents()
       .then(events => {
         setLiveEvents(events.data)
       });
@@ -23,8 +24,9 @@ const HomeFeed = (props) => {
       .then(events => {
         setFutureEvents(events.data)
       })
+    }
+    return () => isOnHomeFeed = false;
   }, [])
-
 
   return (
     <div>
@@ -52,13 +54,13 @@ const HomeFeed = (props) => {
           <h2 className={styles.categoryTitle}>Currently Streaming Events</h2>
           <ul className={styles.eventsGrid}>
             {liveEvents ? liveEvents.map((e, i) => (
-              <Link to={`/event/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}>
-                <li key={i}>
+              <Link to={`/events/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}  key={i}>
+                <li>
                   <h3 className={styles.eventTitle}>{e.title}</h3>
                   <p className={styles.eventTopic}>{e.topic}</p>
                   <div className={styles.cardRowWrapper}>
                     <BiUser className={styles.cardIcon}/>
-                    <p className={styles.eventHost}>username</p>
+                    <p className={styles.eventHost}>{e.hostUsername}</p>
                   </div>
                   <div className={styles.cardRowWrapper}>
                     <BiVideo className={styles.cardIcon}/>
@@ -75,13 +77,13 @@ const HomeFeed = (props) => {
           <h2 className={styles.categoryTitle}>Upcoming Events</h2>
           <ul className={`${styles.eventsGrid} ${styles.lastGrid}`}>
             {futureEvents ? futureEvents.map((e, i) => (
-              <Link to={`/event/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}>
-                <li key={i}>
+              <Link to={`/events/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`} key={i}>
+                <li>
                   <h3 className={styles.eventTitle}>{e.title}</h3>
                   <p className={styles.eventTopic}>{e.topic}</p>
                   <div className={styles.cardRowWrapper}>
                     <BiUser className={styles.cardIcon}/>
-                    <p className={styles.eventHost}>username</p>
+                    <p className={styles.eventHost}>{e.hostUsername}</p>
                   </div>
                   <div className={styles.cardRowWrapper}>
                     <BiVideo className={styles.cardIcon}/>
@@ -95,12 +97,6 @@ const HomeFeed = (props) => {
         </section>
 
       </main>
-
-      <div className={styles.footerWrapper}>
-        <div className={styles.footer}>
-            <h3>Wizrd</h3>
-        </div>
-      </div>
     </div>
   );
 };

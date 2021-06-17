@@ -8,9 +8,13 @@ const EventSchema = new Schema(
       ref: 'users',
       required: true
     },
+    hostUsername: {
+      type: String,
+      required: true
+    },
     title: {
       type: String,
-      required: true,
+      required: true
     },
     topic: {
       type: String,

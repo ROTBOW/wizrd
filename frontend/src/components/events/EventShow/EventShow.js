@@ -9,19 +9,30 @@ class EventShow extends React.Component {
 
 
     componentDidMount(){
-        this.props.fetchEvent(this.props.match.params.eventId);
+      this.props.fetchEvent(this.props.match.params.eventId)
+        .then((res) => document.title = `Wizrd - ${res.event.data.title}`);
+    }
+    
+    componentWillUnmount() {
+      document.title = 'Wizrd';
     }
 
     // handleStateEvent(e){
     //     e.preventDefault();
     // }
 
+    getPST() {
+      let now = new Date();
+      now.setHours(now.getHours() - 7);
+      return now;
+    }
+
     render(){
         if (this.props.event !== undefined) {
             let event = this.props.event
             let startTime = event.startTime;
 
-            if (new Date(startTime) > new Date()) {
+            if (new Date(startTime) > this.getPST()) {
 
                 return (
                     <div>

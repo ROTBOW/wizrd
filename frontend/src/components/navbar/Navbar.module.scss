@@ -3,7 +3,7 @@
 .header {
   height: 72px;
   box-sizing: border-box;
-  box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
+  box-shadow: 0 0 16px 6px rgba($gray-800, 0.05);
 }
 
 .outer {
@@ -36,15 +36,19 @@
 .logo {
   display: block;
   height: 32px;
+  padding-right: 8px;
 }
 
-.logo:focus {
-  box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset,
-    rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
-}
+.logoLink {
+  border-radius: 4px;
+  
+  &:focus {
+    box-shadow: 0px 0px 16px 8px rgba($emerald-300, 0.4);
+  }
 
-.logo:active {
-  box-shadow: none;
+  &:active {
+    box-shadow: none;
+  }
 }
 
 .navWrapper {
@@ -68,31 +72,43 @@
 
 .navLink {
   height: 32px;
-  padding: 0px 12px;
-  border-radius: 3px;
+  margin-left: 8px;
+  padding: 0px 16px;
+  border-radius: 4px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-
+  text-decoration: none;
+  
   &:hover {
     background-color: $gray-200;
     cursor: pointer;
+    background: $emerald-100;
+    box-shadow: none;
   }
 
-  a,
-  a:visited {
-    color: inherit;
-    text-decoration: none;
+  &:focus {
+    box-shadow: 0px 0px 16px 4px rgba($emerald-300, 0.4);
   }
 
-  > div {
-    font-size: 16px;
+  &:active {
+
   }
+
+  // a,
+  // a:visited {
+  //   color: inherit;
+  //   text-decoration: none;
+  // }
+
+  // > div {
+  //   font-size: 16px;
+  // }
 }
 
 // .navLogout {
 //   cursor: pointer;
-//   border-radius: 3px;
+//   border-radius: 4px;
 
 //   &:focus {
 //     box-shadow: rgba(46, 170, 220, 70%) 0px 0px 0px 1px inset, rgba(46, 170, 220, 40%) 0px 0px 0px 2px;
@@ -106,8 +122,9 @@
 .divider {
   width: 1px;
   height: 20px;
-  margin: 0 10px;
-  background: $gray-200;
+  // margin: 0 10px;
+  margin: 0 8px 0 16px;;
+  background: $emerald-500;
 }
 
 .navGreeting {

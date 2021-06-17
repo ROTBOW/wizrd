@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthRoute, ProtectedRoute, HomeRoute } from '../util/routeUtil';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import LoginFormContainer from './session/LoginForm/LoginFormContainer';
 import SignupFormContainer from './session/SignupForm/SignupFormContainer';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import Video from './video/Video/Video';
 import NavbarContainer from './navbar/NavbarContainer';
 import EventShowContainer from './events/EventShow/EventShowContainer';
 import SearchResultsContainer from './searchResults/searchResultsContainer';
+import Footer from './footer/Footer';
 
 const App = () => (
   <>
@@ -19,8 +20,10 @@ const App = () => (
       <ProtectedRoute exact path="/event/create" component={EventFormContainer}/>
       <ProtectedRoute exact path="/event/:eventId" component={EventShowContainer}/>
       <ProtectedRoute exact path="/search" component={SearchResultsContainer}/>
+      <Route exact path="/about" component={About} />
       <HomeRoute path="/" /> 
     </Switch>
+    <Footer />
   </>
 );
 

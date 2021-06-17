@@ -38,8 +38,12 @@ module.exports = function validateEventInput(data) {
       startTime = Date.parse(data.startTime);
     } 
 
-    let currentTime = new Date();
-    if (startTime < currentTime) {
+    // Subtract 7 hours from UTC to get PST. 
+    // Need to change to local time difference
+    let now = new Date();
+    now.setHours(now.getHours() - 7);
+
+    if (startTime < now) {
       errors.startTime = 'Start time must be in the future.';
     }
   }
