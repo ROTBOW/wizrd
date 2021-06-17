@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
+import { BiX, BiSearch } from 'react-icons/bi'
 import {
   CSSTransition,
   TransitionGroup,
@@ -73,27 +74,26 @@ const Navbar = (props) => {
     <header className={styles.header}>
       <div className={styles.outer}>
         <div className={styles.inner}>
-          <div className={styles.navBarLeft}>
-            <div className={styles.logoWrapper}>
-              <Link to="/">
-                <img className={styles.logo} src={logo} alt="logo" />
-              </Link>
-            </div>
+
+          <div className={styles.logoWrapper}>
+            <Link to="/">
+              <img className={styles.logo} src={logo} alt="logo" />
+            </Link>
           </div>
 
-          <div className={styles.navbarFill}>
-            <div className={styles.searchWrapper}>
-                <form className={styles.search}>
-                  <select id="searchParam" className={styles.searchSelect} defaultValue="topic">
-                    <option value="title">Title</option>
-                    <option value="topic" selected>Topic</option>
-                    <option value="description">Description</option>
-                    <option value="host">Host</option>
-                  </select>
-                  <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event"/>
-                  <button className={styles.searchButton} onClick={search}>Search</button>
-                </form>
-              </div>
+          <div className={styles.searchWrapper}>
+            <form className={styles.searchBar}>
+              <select id="searchParam" className={styles.searchSelect} defaultValue="all">
+                <option value="all">All Fields</option>
+                <option value="title">Title</option>
+                <option value="topic" selected>Topic</option>
+                <option value="description">Description</option>
+                <option value="host">Host Name</option>
+              </select>
+              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event" />
+              <button className={styles.searchInputX}><BiX /></button>
+              <button className={styles.searchButton} onClick={search}><BiSearch /></button>
+            </form>
           </div>
 
           <div className={styles.navWrapper}>
@@ -125,6 +125,7 @@ const Navbar = (props) => {
               </TransitionGroup> */}
             </nav>
           </div>
+
         </div>
       </div>
     </header>
