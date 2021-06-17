@@ -3,7 +3,8 @@ import SearchResults from './searchResults';
 import { findEvents } from '../../actions/eventsActions';
 
 const mapStateToProps = (state, ownProps) => ({
-  events: state.entities.events
+  events: state.entities.events,
+  errors: state.errors.events
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

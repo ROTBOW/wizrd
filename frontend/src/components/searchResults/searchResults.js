@@ -6,17 +6,23 @@ import moment from 'moment';
 
 const SearchResults = (props) => {
   const [results, setResults] = useState([]);
+  const [errors, setErrors] = useState([]);
   
   useEffect(() => {
-    if (results.length === 0) {
-      let events = [];
-      for (let key in props.events) {
-        events.push(props.events[key])
-      }
-      setResults(events);
+    let events = [];
+    for (let key in props.events) {
+      events.push(props.events[key])
     }
-    console.log(props.events);
-  }, [results])
+    setResults(events);
+  }, [])
+
+  useEffect(() => {
+    let events = [];
+    for (let key in props.events) {
+      events.push(props.events[key])
+    }
+    setResults(events);
+  }, [props.events])
 
   return (
 

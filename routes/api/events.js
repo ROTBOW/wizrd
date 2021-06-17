@@ -39,25 +39,50 @@ router.get('/:eventId', (req, res) => {
 
 //Search for events
 router.put('/', (req, res) => {
+  
   if (req.body.topic) {
     const match = new RegExp(req.body.topic, 'i');
     Event.find({topic: match})
-      .then((events) => res.json(events))
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found with that topic' });
+        } else {
+          return res.json(events);
+        }
+      })
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that topic' }));
   } else if (req.body.title) {
     const match = new RegExp(req.body.title, 'i');
     Event.find({title: match})
-      .then((events) => res.json(events))
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found with that title' });
+        } else {
+          return res.json(events);
+        }
+      })
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that title' }));
   } else if (req.body.description) {
     const match = new RegExp(req.body.description, 'i');
     Event.find({description: match})
-      .then((events) => res.json(events))
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found with that description' });
+        } else {
+          return res.json(events);
+        }
+      })
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that description' }));
   } else if (req.body.host) {
     const match = new RegExp(req.body.host, 'i');
-    Event.find({host: match})
-      .then((events) => res.json(events))
+    Event.find({hostUsername: match})
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found with that host' });
+        } else {
+          return res.json(events);
+        }
+      })
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that host' }));
   }
 })
