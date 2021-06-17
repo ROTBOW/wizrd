@@ -4,15 +4,15 @@ import {
   RECEIVE_EVENT
 } from '../actions/eventsActions';
 
-const eventErrorsReducer = (state = [], action) => {
+const eventErrorsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_EVENT_ERRORS:
       return action.errors;
     case RECEIVE_ALL_EVENTS:
-      return [];
+      return {};
     case RECEIVE_EVENT:
-      return [];
+      return {};
     default:
       return state;
   }
