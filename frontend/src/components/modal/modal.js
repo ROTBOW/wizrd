@@ -1,4 +1,5 @@
 import React from 'react';
+import SessionModalContainer from '../session/sessionModal/SessionModalContainer';
 import EventFormContainer from '../events/EventForm/EventFormContainer';
 import styles from './modal.module.scss';
 
@@ -10,6 +11,9 @@ const Modal = (props) => {
   switch (name) {
     case 'createEvent':
       modal = <EventFormContainer {...otherProps} />;
+      break;
+    case 'sessionModal':
+      modal = <SessionModalContainer {...otherProps} />;
       break;
     default: 
       return;

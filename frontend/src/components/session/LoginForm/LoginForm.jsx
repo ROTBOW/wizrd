@@ -1,40 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
+import LoginFormContent from './LoginFormContent';
 
 const LoginForm = (props) => {
-  const [usernameOrEmail, setUserNameOrEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  // const [usernameOrEmail, setUserNameOrEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    setErrors({});
-    document.title = 'Wizrd - Log in';
-    return () => document.title = 'Wizrd';
-  }, []);
+  // useEffect(() => {
+  //   setErrors({});
+  //   document.title = 'Wizrd - Log in';
+  //   return () => document.title = 'Wizrd';
+  // }, []);
   
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let user = { 
-      usernameOrEmail,
-      password
-    };
-    props.login(user); 
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let user = { 
+  //     usernameOrEmail,
+  //     password
+  //   };
+  //   props.login(user); 
+  // }
   
-  const renderErrors = () => (
-    <ul className={styles.errorsWrapper}>
-      {Object.values(props.errors).map((error, i) => (
-        <li key={`error-${i}`}>
-          {error}
-        </li>
-      ))}
-    </ul>
-  );
+  // const renderErrors = () => (
+  //   <ul className={styles.errorsWrapper}>
+  //     {Object.values(props.errors).map((error, i) => (
+  //       <li key={`error-${i}`}>
+  //         {error}
+  //       </li>
+  //     ))}
+  //   </ul>
+  // );
 
   return (
     <div className={styles.pageWrapper}>
-      <div className={styles.authSectionWrapper}>
+      <LoginFormContent errors={props.errors} login={props.login}/>
+      {/* <div className={styles.authSectionWrapper}>
         <h1>Log in</h1>
 
         {renderErrors()}
@@ -56,7 +58,7 @@ const LoginForm = (props) => {
 
           <p className={styles.authParagraph}>New to Wizrd? <Link to="/signup">Sign up</Link></p>
         </div>
-      </div>
+      </div> */}
 
       <div className={styles.authSectionDivider}></div>
 
