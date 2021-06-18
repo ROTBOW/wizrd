@@ -13,11 +13,11 @@ We will need to:
  - Set up chat rooms for events
 
 ## Functionality & MVP
-- [ ] Live on Heroku
-- [ ] User authorization (signup, login)
+- [x] Live on Heroku
+- [x] User authorization (signup, login)
 - [ ] Events (create, update, delete)
-- [ ] Chat and messaging
-- [ ] Video streaming
+- [x] Chat and messaging
+- [x] Video streaming
 - [ ] Production README
 
 **Bonus Features**
