@@ -5,12 +5,7 @@ import logo from '../../assets/logo.svg';
 import { BiX, BiSearch } from 'react-icons/bi'
 
 const Navbar = (props) => {
-
-  useEffect(() => {
-    document.getElementById('searchInput').onkeydown = (e) => {
-      if(e.key == 13) search();
-    };
-  })
+  const [searchValue, setSearchValue] = useState('');
 
   const history = useHistory();
 
@@ -80,11 +75,11 @@ const Navbar = (props) => {
                   <option value="host">Host Name</option>
                 </select>
               </div>
-              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search" />
-              {/* <div className={styles.searchInputXWrapper}>
-                <button className={styles.searchInputX} onClick={clearSearch}><BiX /></button>
-              </div> */}
-              <button className={styles.searchButton} onClick={search}><BiSearch /></button>
+              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+              <div className={styles.searchInputXWrapper}>
+                <button type="button" className={styles.searchInputX} onClick={clearSearch}><BiX /></button>
+              </div>
+              <button type="submit" className={styles.searchButton} onClick={search}><BiSearch /></button>
             </form>
           </div>
 
