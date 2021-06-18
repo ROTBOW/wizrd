@@ -10,7 +10,8 @@
 
 .headerWrapper {
   width: 100%;
-  background: $emerald-50;
+  background: rgb(52,211,153);
+  background: linear-gradient(142deg, rgba(52,211,153,1) 0%, rgba(16,185,129,1) 15%, rgba(5,150,105,1) 72%, rgba(4,120,87,1) 100%);
 }
 
 .header {
@@ -22,6 +23,7 @@
 .headerTitle {
   font-size: 40px;
   color: $emerald-700;
+  color: white;
 }
 
 .headerSubtitle {
@@ -29,24 +31,29 @@
   font-size: 18px;
   color: $gray-600;
   margin-bottom: 24px;
+  color: white;
 }
 
 .createEventButton {
   height: 44px;
-  border: 1px solid $emerald-900;
   border-radius: 4px;
   padding: 0 20px;
   display: flex;
   align-items: center;
-  background: $emerald-600;
-  color: white;
+  background-color: rgb(235, 211, 75);
+  box-shadow: 0 2px 3px 5px rgba($emerald-900, 0.1);
+  color: $emerald-900;
   font-size: 18px;
   font-weight: 500;
-  transition: 0.2s all;
+  transition: 0.2s all linear;
 
   &:hover {
-    background: $emerald-700;
-    box-shadow: 0px 0px 24px 8px rgba($emerald-900, 0.2);
+    filter: brightness(90%);
+    
+  }
+
+  &:active {
+    filter: brightness(80%);
   }
 }
 
@@ -81,6 +88,7 @@
 }
 
 .eventsGridHorizontal {
+  
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
   // grid-template-rows: max-content;
@@ -89,8 +97,30 @@
   overflow-x: auto;
   grid-template-rows: 1fr 1fr;
   gap: 24px;
-  padding: 24px 0px;
+  border-radius: 8px;
+  padding: 24px 8px;
   // margin-left: -24px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e4e4e4;
+    border-radius: 8px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: #bbb;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+  }
 }
 
 // add media query
@@ -134,11 +164,11 @@
   border-radius: 12px;
   padding: 24px 20px;
   // padding: 28px 24px;
-  box-shadow: 0px 0px 24px 8px rgba($emerald-100, 0.1);
-
+  box-shadow: 0px 0px 4px 4px rgba($emerald-100, 0.1);
+  transition: box-shadow .2s linear;
   &:hover,
   &:focus {
-    box-shadow: 0px 2px 24px 12px rgba($emerald-400, 0.1);
+    box-shadow: 0px 0px 4px 4px rgba($emerald-400, 0.2);
   }
 }
 
@@ -162,11 +192,11 @@
   width: 45px;
   height: 45px;
   display: inline;
-  border: solid 3px $gray-500;
+  padding: 2px;
   border-radius: 100%;
   position: relative;
   top: 0.7rem;
-  margin-right: 6px;
+  margin-left: 4px;
 }
 
 .cardRowWrapper {

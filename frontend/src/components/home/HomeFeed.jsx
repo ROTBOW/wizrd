@@ -47,7 +47,7 @@ const HomeFeed = (props) => {
 
       <div className={styles.headerWrapper}>
         <div className={styles.header}>
-          <h1 className={styles.headerTitle}>Welcome to Wizrd, <img src={avatars[Number(props.user.avatar)]} alt="avatar-Icon" width="45" height="45" className={styles.userAvatar}/>{props.user.username}</h1>
+          <h1 className={styles.headerTitle}>Welcome to Wizrd, {props.user.username}<img src={avatars[Number(props.user.avatar)]} alt="avatar-Icon" width="45" height="45" className={styles.userAvatar}/></h1>
           <p className={styles.headerSubtitle}>
             Wizrd is a streaming platform for the teacher inside all of us. Experience the magic of learning by joining an event or creating your own.
           </p>

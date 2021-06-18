@@ -115,11 +115,11 @@ button {
   box-sizing: border-box;
 }
 
-button:focus {
-  border: 1px solid $emerald-600;
-  box-shadow: 0px 0px 4px 4px rgba($brand-primary, 0.2),
-    0px 0px 0px 1px rgba($brand-primary, 0.2) inset;
-}
+// button:focus {
+//   border: 1px solid $emerald-600;
+//   box-shadow: 0px 0px 4px 4px rgba($brand-primary, 0.2),
+//     0px 0px 0px 1px rgba($brand-primary, 0.2) inset;
+// }
 
 input,
 textarea {
