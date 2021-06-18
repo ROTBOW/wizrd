@@ -16,8 +16,6 @@
   width: calc(100%);
   height: calc(100%);
   object-fit: cover;
-  
-
 }
 
 .button {
@@ -37,4 +35,56 @@
   &:active {
     filter: brightness(80%);
   }
+}
+
+.streamOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  transition: background-color .2s linear;
+  
+  &:hover {
+    background-color: rgba(0,0,0,0.7);
+
+  }
+
+  &:hover .videoButton {
+    display: block;
+    color: rgba(white, 0.5);
+  }
+  .videoButton {
+    color: transparent;
+    border-radius: 50%;
+    padding: 1.5vw;
+    transition: all .2s linear;
+    &:hover {
+      color: white;
+      background-color: rgba(white, 0.1);
+    }
+  }
+}
+
+.videoIcon {
+  font-size: 7vw;
+  
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1vw;
+  color: white;
 }

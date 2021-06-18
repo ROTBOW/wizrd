@@ -82,7 +82,7 @@
 }
 
 .hostAvatar {
-  background-color: $emerald-700;
+  background-color: $emerald-500;
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
@@ -107,10 +107,12 @@
   margin-top: 1.4rem;
   font-size: 2rem;
   font-weight: 500;
+  color: #424242;
 }
 
 .eventDescription {
   margin-bottom: 2rem;
+  color: #424242;
 }
 
 .userCount {
@@ -200,4 +202,20 @@
   justify-content: center;
   align-items: center;
   margin-top: 1.5rem;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.endEventButton {
+  padding: 0 1rem;
+  background-color: $red-500;
+  color: white;
+  border-radius: 0.8rem;
+  font-size: 1.5rem;
+  height: 4rem;
 }
