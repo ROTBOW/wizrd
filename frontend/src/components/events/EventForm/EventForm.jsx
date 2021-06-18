@@ -31,7 +31,6 @@ const EventForm = (props) => {
         description,
         startTime: moment(startTime).tz('America/Los_Angeles').format()
       };
-      console.log(event)
     } else {
       event = {
         title,
@@ -45,7 +44,6 @@ const EventForm = (props) => {
     props.createEvent(event)
       .then((event) => {
         props.updateModal();
-        console.log(event)
         props.history.replace(`/events/${event.event.data._id}`)
       })
   }

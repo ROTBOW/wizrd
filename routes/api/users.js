@@ -16,52 +16,57 @@ router.post('/register', (req, res) => {
   }
 
   // Check to make sure nobody has already registered with a duplicate email
-  User.findOne({ email: req.body.email }).then((user) => {
+  User.findOne({ email: req.body.email}).then(user => {
     if (user) {
-      // Use the validations to send the error
-      errors.email = 'Email already exists';
-      return res.status(400).json(errors);
+        errors.email = 'Email already exists';
+        return res.status(400).json(errors);
     } else {
-      // Otherwise create a new user
-      const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        avatar: req.body.avatar
-      });
-
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          let password = newUser.password;
-          newUser.password = hash;
-          newUser
-            .save()
-            .then((user) => {
-              const payload = { id: user.id, username: user.username };
-              jwt.sign(
-                payload,
-                keys.secretOrKey,
-                { expiresIn: 14400 },
-                (err, token) => {
-                  res.json({
-                    success: true,
-                    token: 'Bearer ' + token,
+        User.findOne({username: req.body.username}).then(user => {
+            if (user) {
+                errors.username = 'Username already exists';
+                return res.status(400).json(errors);
+            } else {
+                const newUser = new User({
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: req.body.password,
+                    avatar: req.body.avatar
                   });
-                }
-              );
-            })
-            .then(() => {
-              return res.status(200).json({
-              usernameOrEmail: newUser.email,
-              password: password
-              })
-            })
-            .catch((err) => console.log(err));
-        });
-      });
+
+                  bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                      if (err) throw err;
+                      let password = newUser.password;
+                      newUser.password = hash;
+                      newUser
+                        .save()
+                        .then((user) => {
+                          const payload = { id: user.id, username: user.username };
+                          jwt.sign(
+                            payload,
+                            keys.secretOrKey,
+                            { expiresIn: 14400 },
+                            (err, token) => {
+                              res.json({
+                                success: true,
+                                token: 'Bearer ' + token,
+                              });
+                            }
+                          );
+                        })
+                        .then(() => {
+                          return res.status(200).json({
+                          usernameOrEmail: newUser.email,
+                          password: password
+                          })
+                        })
+                        .catch((err) => console.log(err));
+                    });
+                  });
+            }
+        })
     }
-  });
+})
 });
 
 router.post('/login', (req, res) => {
@@ -80,7 +85,7 @@ router.post('/login', (req, res) => {
   } else {
     queryField = 'username'
   }
-  console.log(req.body);
+
   User.findOne({ [queryField]: usernameOrEmail }).then((user) => {
     if (!user) {
       // Use the validations to send the error
