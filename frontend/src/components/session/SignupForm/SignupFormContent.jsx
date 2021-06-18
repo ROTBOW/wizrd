@@ -9,7 +9,7 @@ const SignupFormContent = (props) => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [errors, setErrors] = useState({});
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState('0');
   const [loginButton, setLoginButton] = useState("");
 
   useEffect(() => {
@@ -28,16 +28,14 @@ const SignupFormContent = (props) => {
   // }, [loginButton, props.errors])
 
   const onValueChange = (event) => {
-    setAvatar(
-      event.target.value
-    );
+    setAvatar(event.target.value);
   }
 
   const checkIfSelected = (pos) => {
     if (avatar === String(pos)) {
       return styles.avatarSelected;
     }
-    return ''
+    return '';
   }
 
   const handleSubmit = (e) => {
@@ -58,7 +56,7 @@ const SignupFormContent = (props) => {
           })
           if (props.modal) props.updateModal();
         }
-      })
+      });
   };
 
   const renderErrors = () => (
@@ -89,7 +87,7 @@ const SignupFormContent = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                  <img src={avatars[0]} className={`${styles.avatarIcon} ${checkIfSelected(0)}`}/>
+                <img src={avatars[0]} className={`${styles.avatarIcon} ${checkIfSelected(0)}`}/>
               </label>
               
               <label>
@@ -158,7 +156,6 @@ const SignupFormContent = (props) => {
             <button type="submit" className={styles.button}>Create a new account</button>
           </form>
 
-          
         </div>
       </section>
   );
