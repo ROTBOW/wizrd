@@ -83,14 +83,17 @@ const Navbar = (props) => {
 
           <div className={styles.searchWrapper}>
             <form className={styles.searchBar}>
-              <select id="searchParam" className={styles.searchSelect} defaultValue="all">
-                <option value="all">All Fields</option>
-                <option value="title">Title</option>
-                <option value="topic" selected>Topic</option>
-                <option value="description">Description</option>
-                <option value="host">Host Name</option>
-              </select>
-              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event" />
+              <div className={styles.selectWrapper}>
+                <select id="searchParam" className={styles.searchSelect} defaultValue="all">
+                  <option value="all">All Fields</option>
+                  <option value="title">Title</option>
+                  <option value="topic" selected>Topic</option>
+                  <option value="description">Description</option>
+                  <option value="host">Host Name</option>
+                </select>
+              </div>
+
+              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search" />
               <button className={styles.searchInputX}><BiX /></button>
               <button className={styles.searchButton} onClick={search}><BiSearch /></button>
             </form>

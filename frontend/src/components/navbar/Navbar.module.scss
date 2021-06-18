@@ -51,9 +51,9 @@
 .searchWrapper {
   width: 100%;
   height: 72px;
-  // background: lightpink;
   display: flex;
   align-items: center;
+  // background: lightpink;
 }
 
 .searchBar {
@@ -72,26 +72,50 @@
   }
 }
 
+.selectWrapper {
+  
+}
+
 .searchSelect {
+  width: 100%;
+  min-width: 5ch;
+  max-width: 12ch;
   height: 40px;
-  width: fit-content;
   margin: 0;
   border-radius: 4px 0 0 4px;
-  border: none;
-  // padding: 0 12px;
-  background: $emerald-200;
-  // color: white
+  // border: 1px solid red;
+  padding: 4px 8px;
+  background: $gray-200;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+
+  display: grid;
+  grid-template-areas: 'select';
 
   &:focus, &:active {
-    border: none;
-    outline: none;
-    box-shadow: none;
+//     border: none;
+//     outline: none;
+//     box-shadow: none;
+  }
+
+  > option {
+//     text-align: center;
   }
 }
+
+.searchSelect::after {
+  content: "";
+  width: 8px;
+  height: 5px;
+  background-color: red;
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+
+
+
 
 .searchInput {
   box-sizing: border-box;
@@ -100,7 +124,7 @@
   margin: 0;
   border-radius: 0;
   border: none;
-  background: $gray-200;
+  background: $gray-100;
 
   &:focus, &:active {
     border: none;
@@ -110,30 +134,32 @@
 }
 
 .searchInputX {
-  right: 0;
-  background: lightsalmon;
-  font-size: 20px;
-  line-height: 1;
+//   right: 0;
+//   background: lightsalmon;
+//   font-size: 20px;
+//   line-height: 1;
 }
 
 .searchButton {
-  height: 40px;
-  padding: 0 12px;
-  margin: 0;
-  border-radius: 0 4px 4px 0;
-  // border: 1px solid red;
-  background: $emerald-200;
-  // color: white;
-  font-size: 20px;
-  line-height: 1;
+//   height: 40px;
+//   padding: 0 12px;
+//   margin: 0;
+//   border-radius: 0 4px 4px 0;
+//   // border: 1px solid red;
+//   background: $emerald-200;
+//   // color: white;
+//   font-size: 20px;
+//   line-height: 1;
 
-  display: flex;
-  align-items: center;
+//   display: flex;
+//   align-items: center;
 
   &:focus, &:active {
-    border: none;
+//     border: none;
   }
 }
+
+
 
 .navWrapper {
   display: flex;
@@ -159,8 +185,8 @@
   height: 32px;
   width: auto;
   white-space: nowrap;
-  margin-left: 8px;
-  padding: 0px 16px;
+  // margin-left: 8px;
+  padding: 0px 12px;
   border-radius: 4px;
   display: flex;
   flex-flow: row nowrap;
@@ -168,10 +194,9 @@
   text-decoration: none;
   
   &:hover {
-    background-color: $gray-200;
     cursor: pointer;
-    background: $emerald-100;
     box-shadow: none;
+    background: $emerald-100;
   }
 
   &:focus {
@@ -187,8 +212,8 @@
 .divider {
   width: 1px;
   height: 20px;
-  // margin: 0 10px;
-  margin: 0 8px 0 16px;;
+  margin: 0 10px;
+  // margin: 0 8px 0 16px;;
   background: $emerald-500;
 }
 
