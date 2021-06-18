@@ -16,7 +16,11 @@ const SearchResults = (props) => {
       setResults([]);
     } else {
       setErrors('');
-      setResults(Object.values(props.events));
+      setResults(Object.values(props.events).sort(function(a, b) {
+          const first = a['startTime'];
+          const second = b['startTime'];
+          return (first > second) ? 1 : (first < second) ? -1 : 0;
+        }));
     }
   }, [props.events, props.errors])
 
