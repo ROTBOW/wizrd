@@ -8,6 +8,7 @@ import Moment from 'moment';
 import MomentTimezone from 'moment-timezone';
 import { updateEvent } from "../../../actions/eventsActions";
 import avatars from '../../../assets/avatars/avatars';
+import forest from '../../../assets/sebastian-unrau-sp-p7uuT0tw-unsplash (1).jpg';
 
 
 class EventShow extends React.Component {
@@ -48,7 +49,8 @@ class EventShow extends React.Component {
 
       if (Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) {
         return (
-          <div>
+          <div className={}>
+            <img src={forest}/>
             <h1 className={styles.earlyMessageTitle}>{event.title}</h1>
             <p className={styles.earlyMessage}>
               Oops... this event hasn't started yet!
