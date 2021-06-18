@@ -1,20 +1,20 @@
 @import '../../styles/variables.scss';
 
 .header {
-  height: 58px;
+  height: 64px;
   box-sizing: border-box;
   box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
   border-bottom: 2px solid $emerald-600;
 }
 
 .outer {
-  height: 58px;
+  height: 64px;
   margin: 0 auto;
   padding: 0 32px;
 }
 
 .inner {
-  height: 58px;
+  height: 64px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -22,7 +22,7 @@
 }
 
 .logoWrapper {
-  height: 58px;
+  height: 64px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -201,7 +201,7 @@ select {
 }
 
 .nav {
-  height: 58px;
+  height: 64px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;

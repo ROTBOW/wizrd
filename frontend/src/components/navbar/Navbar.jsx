@@ -3,33 +3,10 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
 import { BiX, BiSearch } from 'react-icons/bi'
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
 
 const Navbar = (props) => {
 
-  // const [meetPos, setMeetPos] = useState(0);
-  // const [meet, setMeet] = useState([
-  //   <a href="https://github.com/brandonfang" target="_blank" rel="noreferrer"  key="1">Meet Brandon</a>,
-  //   <a href="https://github.com/inhojl" target="_blank" rel="noreferrer" key="2" >Meet Joe</a>,
-  //   <a href="https://github.com/melflynn" target="_blank" rel="noreferrer" key="3" >Meet Melissa</a>,
-  //   <a href="https://github.com/ROTBOW" target="_blank" rel="noreferrer" key="4" >Meet Josiah</a>
-  // ]);
-
   const history = useHistory();
-
-  // useEffect(() => {
-  //   let timer = setInterval(() => {
-  //     setMeetPos(meetPos + 1);
-  //     if (meetPos >= 3) setMeetPos(0)
-  //   }, 3000);
-  //   return () => {
-  //     clearTimeout(timer);
-  //   };
-  // });
-
 
   const search = (e) => {
     e.preventDefault();
@@ -123,17 +100,6 @@ const Navbar = (props) => {
                   <li>GitHub</li>
                 </a>
               </ul>
-
-              {/* <TransitionGroup className={styles.navLink}>
-                <CSSTransition
-                  timeout={500}
-                  classNames={styles.example}
-                > */}
-                {/* <div className={styles.navLink}>
-                  {meet[meetPos]}
-                </div> */}
-                {/* </CSSTransition>
-              </TransitionGroup> */}
             </nav>
           </div>
 
