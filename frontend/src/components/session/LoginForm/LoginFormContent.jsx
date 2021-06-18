@@ -42,18 +42,32 @@ const LoginFormContent = (props) => {
   );
 
   return (
-      <div className={styles.authSectionWrapper}>
+      <div className={styles.authSectionWrapper} id="login-form">
 
         {renderErrors()}
 
         <div className={styles.formWrapper}>
           <form className={styles.form} onSubmit={handleSubmit}>
             <label>Username or email:
-              <input type="text" required spellCheck="false" value={usernameOrEmail} onChange={(e) => setUserNameOrEmail(e.target.value)} placeholder="Your username or email" />
+              <input
+                type="text"
+                required
+                spellCheck="false"
+                value={usernameOrEmail}
+                onChange={(e) => setUserNameOrEmail(e.target.value)}
+                placeholder="Your username or email"
+                id="email-input"
+              />
             </label>
 
             <label>Password:
-              <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Your password" />
+              <input
+                type="password"
+                required value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Your password"
+                id="password-input"
+              />
             </label>
 
             <div className={styles.spacer8}></div>
