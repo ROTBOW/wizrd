@@ -28,7 +28,8 @@ const EventSchema = new Schema(
       required: true,
     },
     isOver: {
-      type: Boolean
+      type: Boolean,
+      required: true
     }
   },
   {
