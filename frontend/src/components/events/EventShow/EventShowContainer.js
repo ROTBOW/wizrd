@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import EventShow from './EventShow';
-import { fetchAllEvents, fetchEvent } from '../../../actions/eventsActions'
+import { fetchAllEvents, fetchEvent, updateEvent } from '../../../actions/eventsActions'
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchEvent: eventId => dispatch(fetchEvent(eventId)),
-        fetchAllEvents: () => dispatch(fetchAllEvents())
+        fetchAllEvents: () => dispatch(fetchAllEvents()),
+        updateEvent: event => dispatch(updateEvent(event))
     }
 }
 

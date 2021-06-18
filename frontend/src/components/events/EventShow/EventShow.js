@@ -6,6 +6,7 @@ import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import styles from './EventShowStyles.module.scss';
 import Moment from 'moment';
 import MomentTimezone from 'moment-timezone';
+import { updateEvent } from "../../../actions/eventsActions";
 
 
 class EventShow extends React.Component {
@@ -23,6 +24,18 @@ class EventShow extends React.Component {
     now = new Date(now)
     now.setHours(now.getHours() + 7);
     return Moment(now).tz('America/Los_Angeles');
+  }
+
+  onEndEvent = (e) => {
+
+    if (window.confirm('Are you sure you want to end the event?')) {
+      console.log('ending event')
+      const event = {
+        ...this.props.event,
+        isOver: true
+      }
+      this.props.updateEvent(event);
+    }
   }
 
   render() {
@@ -47,6 +60,12 @@ class EventShow extends React.Component {
             </p>
           </div>
         )
+      } else if (this.props.event.isOver) {
+        return (
+          <div>
+            The event is over.
+          </div>
+        )
       } else {
         return (
           <div className={styles.eventShowContainer}>
@@ -66,7 +85,7 @@ class EventShow extends React.Component {
                     <div className={styles.broadcastHeading}>
                       <div className={styles.hostNameContainer}>
                         <span className={styles.hostName}>
-                          Host Name
+                          {event.hostUsername}
                         </span>
                         <span className={styles.userCount}>
                           <FontAwesomeIcon className={styles.userCountIcon} icon={faUserFriends} /> <span id="viewerCount">0</span>
@@ -79,7 +98,7 @@ class EventShow extends React.Component {
                     {
                       isHost ? (
                         <div className={styles.buttonContainer}>
-                          <button className={styles.endEventButton}>
+                          <button onClick={this.onEndEvent} className={styles.endEventButton}>
                             End Event
                           </button>
                         </div>

@@ -72,6 +72,8 @@ const Video = ({ eventId, isHost }) => {
         peer.call(connection.peer, stream);
         peersRef.current.add(peer)
 
+    
+
         const viewerCountEl = document.getElementById('viewerCount');
         viewerCountEl.innerHTML = parseInt(viewerCountEl.innerHTML) + 1;
         socketRef.current.emit('update viewer count', parseInt(viewerCountEl.innerHTML))
