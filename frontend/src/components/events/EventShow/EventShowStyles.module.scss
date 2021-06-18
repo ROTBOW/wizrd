@@ -23,6 +23,7 @@
 }
 
 .broadcastContainer {
+  flex-grow: 1;
   border-right: 1px solid #f0f0f0;
   right: 297px;
   bottom: 0;
@@ -53,27 +54,85 @@
   position: relative;
 }
 
-.broadcastInfo {
-  position: relative;
-  margin-top: 1.2rem;
-}
 
 .textInfo {
   position: relative;
-  padding-left: 7.2rem;
-  margin: 0 1rem 0 0;
-  font-size: 4rem;
+  padding-left: 6.7rem;
+  margin: 1.4rem 1rem 0 0;
+  font-size: 1.4rem;
 }
 
 .chatContainer {
   border-right: 1px solid #f0f0f0;
-  // position: absolute;
-  // top: 0;
-  // bottom: 0;
-  // height: 100%;
-  // min-width: 29.6rem;
-  // width: 29.6rem;
-  // min-height: 200px;
+}
+
+.broadcastInfo {
+  position: relative;
+  margin-top: 1.4rem;
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+  padding-bottom: 2rem;
+}
+
+.infoHeader {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1.7rem;
+}
+
+.hostAvatar {
+  background-color: $emerald-700;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+
+.broadcastHeading {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.7rem;
+}
+
+.hostNameContainer {
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.hostName {
+  color: $emerald-600;
+}
+
+.eventHeading {
+  margin-top: 1.4rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.eventDescription {
+  margin-bottom: 2rem;
+}
+
+.userCount {
+  margin-left: 1.2rem;
+  color: #767676;
+}
+
+.userCountIcon {
+  color: #b6b6b6;
+}
+
+.detailItem {
+  display: flex;
+  color: #787878;
+  padding-bottom: 1.2rem;
+}
+
+.detailLabel {
+  display: block;
+  width: 12.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 

@@ -1,6 +1,8 @@
 import React from "react";
 import Chat from '../../chat/Chat';
 import Video from '../../video/Video/Video';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import styles from './EventShowStyles.module.scss';
 
 
@@ -54,10 +56,45 @@ class EventShow extends React.Component {
                 </div>
                 <div className={styles.broadcastInfo}>
                   <div className={styles.infoHeader}>
+                    <div className={styles.hostAvatar}>
 
+                    </div>
+                    <div className={styles.broadcastHeading}>
+                      <div className={styles.hostNameContainer}>
+                        <span className={styles.hostName}>
+                          Host Name
+                        </span>
+                        <span className={styles.userCount}>
+                          <FontAwesomeIcon className={styles.userCountIcon} icon={faUserFriends} /> 14
+                        </span>
+                      </div>
+                      <div className={styles.eventHeading}>
+                        {event.title}
+                      </div>
+                    </div>
                   </div>
                   <div className={styles.textInfo}>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum odio commodi placeat a dicta dolore quia exercitationem totam numquam, amet reiciendis blanditiis aspernatur recusandae adipisci, itaque facilis temporibus, magni corporis?Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptatum debitis iure eos repellat non, enim est quam et nesciunt rem impedit nostrum laboriosam culpa ipsum dolor dolorum vero doloribus.lorem
+                    <div className={styles.eventDescription}>
+                      {event.description}
+                    </div>
+                    <ul className={styles.detailsList}>
+                      <li className={styles.detailItem}>
+                        <label className={styles.detailLabel}>
+                          Start Time
+                        </label>
+                        <span className={styles.detailInfo}>
+                          {new Date(event.startTime).toLocaleString()}
+                        </span>
+                      </li>
+                      <li className={styles.detailItem}>
+                        <label className={styles.detailLabel}>
+                          Topic
+                        </label>
+                        <span className={styles.detailInfo}>
+                          {event.topic}
+                        </span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>

@@ -77,8 +77,6 @@ const Chat = (props) => {
     };
   };
 
-  const usernameStyle = [ styles.username ]
-  usernameStyle.push(COLORS[stringHash(props.user.username) % COLORS.length])
   console.log(messages)
   return (
     <div className={styles.chatbox}>
@@ -89,6 +87,7 @@ const Chat = (props) => {
         {
           messages.slice().reverse().map((message, i) => {
             const usernameStyle = [ styles.username ]
+            console.log(message)
             usernameStyle.push(COLORS[stringHash(message[0]) % COLORS.length]);
             return (
               <li key={i} className={styles.message}>
