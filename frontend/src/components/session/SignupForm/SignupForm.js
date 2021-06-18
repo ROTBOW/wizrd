@@ -122,6 +122,17 @@ class SignupForm extends React.Component {
                   />
                   <img src={yellow} className={`${styles.avatarIcon} ${this.checkIfSelected(2)}`}/>
                 </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    value="3"
+                    checked={this.state.avatar === '3'}
+                    onChange={this.onValueChange}
+                    className={styles.hideMe}
+                  />
+                  <img src={yellow} className={`${styles.avatarIcon} ${this.checkIfSelected(3)}`}/>
+                </label>
               </div>
 
               <label>Email:

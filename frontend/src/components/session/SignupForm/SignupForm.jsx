@@ -4,6 +4,14 @@ import styles from '../SessionForm.module.scss';
 import SignupFormContent from './SignupFormContent';
 
 const SignupForm = (props) => {
+
+  const logMeIn = (e) => {
+      e.preventDefault();
+      props.login({
+        usernameOrEmail: 'demo@mail.com',
+        password: '123456'
+      });
+  }
   
   return (
     <div className={styles.pageWrapper}>
@@ -22,7 +30,7 @@ const SignupForm = (props) => {
         </div>
         <div className={styles.formWrapper}>
           <form onSubmit={props.loginDemo} className={styles.form}>
-            <button type="submit" className={`${styles.button} ${styles.secondary}`}>Log in as demo user</button>
+            <button type="submit" className={`${styles.button} ${styles.secondary}`} onClick={logMeIn}>Log in as demo user</button>
           </form>
         </div>
       </section>

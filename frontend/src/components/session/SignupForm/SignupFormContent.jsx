@@ -111,6 +111,28 @@ const SignupFormContent = (props) => {
                 />
                 <img src={avatars[2]} className={`${styles.avatarIcon} ${checkIfSelected(2)}`}/>
               </label>
+
+              <label>
+                <input
+                  type="radio"
+                  value="3"
+                  checked={avatar === '3'}
+                  onChange={onValueChange}
+                  className={styles.hideMe}
+                />
+                <img src={avatars[3]} className={`${styles.avatarIcon} ${checkIfSelected(3)}`}/>
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  value="4"
+                  checked={avatar === '4'}
+                  onChange={onValueChange}
+                  className={styles.hideMe}
+                />
+                <img src={avatars[4]} className={`${styles.avatarIcon} ${checkIfSelected(4)}`}/>
+              </label>
             </div>
 
             <label>Username:
