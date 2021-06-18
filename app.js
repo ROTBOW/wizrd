@@ -87,7 +87,14 @@ io.on('connection', (socket) => {
         console.log('here')
         delete hosts[eventId]
         io.to(eventId).emit('host disconnected')
+      } else {
+        io.to(eventId).emit('user disconnected')
       }
+    })
+    socket.on('user disconnected', () => console.log('disconnecasdjflkasdklfjlsdkf'))
+    socket.on('update viewer count', (viewerCount) => {
+      console.log(viewerCount)
+      io.to(eventId).emit('viewer count', viewerCount)
     })
   })
 

@@ -27,8 +27,10 @@ class EventShow extends React.Component {
 
   render() {
     if (this.props.event !== undefined) {
+      console.log('event', this.props.event)
       let event = this.props.event
       let startTime = event.startTime;
+      const isHost = this.props.user.id === this.props.event.hostId;
 
       if (Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) {
         return (
@@ -51,7 +53,10 @@ class EventShow extends React.Component {
             <div className={styles.eventShowContent}>
               <div className={styles.broadcastContainer}>
                 <div className={styles.broadcastVideo}>
-                  <Video eventId={this.props.eventId} isHost={this.props.user.id === this.props.event.hostId} />
+                  <Video
+                    eventId={this.props.eventId} 
+                    isHost={isHost}
+                   />
                 </div>
                 <div className={styles.broadcastInfo}>
                   <div className={styles.infoHeader}>
@@ -64,13 +69,22 @@ class EventShow extends React.Component {
                           Host Name
                         </span>
                         <span className={styles.userCount}>
-                          <FontAwesomeIcon className={styles.userCountIcon} icon={faUserFriends} /> 14
+                          <FontAwesomeIcon className={styles.userCountIcon} icon={faUserFriends} /> <span id="viewerCount">0</span>
                         </span>
                       </div>
                       <div className={styles.eventHeading}>
                         {event.title}
                       </div>
                     </div>
+                    {
+                      isHost ? (
+                        <div className={styles.buttonContainer}>
+                          <button className={styles.endEventButton}>
+                            End Event
+                          </button>
+                        </div>
+                      ) : null
+                    }
                   </div>
                   <div className={styles.textInfo}>
                     <div className={styles.eventDescription}>

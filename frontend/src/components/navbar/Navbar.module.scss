@@ -1,20 +1,20 @@
 @import '../../styles/variables.scss';
 
 .header {
-  height: 58px;
+  height: 64px;
   box-sizing: border-box;
   box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
-  border-bottom: 2px solid $emerald-700;
+  border-bottom: 2px solid $emerald-600;
 }
 
 .outer {
-  height: 58px;
+  height: 64px;
   margin: 0 auto;
   padding: 0 32px;
 }
 
 .inner {
-  height: 58px;
+  height: 64px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -22,7 +22,7 @@
 }
 
 .logoWrapper {
-  height: 58px;
+  height: 64px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -50,17 +50,18 @@
 
 .searchWrapper {
   width: 100%;
+  max-width: 440px;
   height: 72px;
-  // background: lightpink;
   display: flex;
   align-items: center;
 }
 
 .searchBar {
+  position: relative;
   width: 100%;
   height: 40px;
   border-radius: 4px;
-  background: lightskyblue;
+  background: $gray-100;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -72,19 +73,55 @@
   }
 }
 
-.searchSelect {
+select {
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.selectWrapper {
   height: 40px;
+  // min-width: 5ch;
+  // max-width: 12ch;
   width: fit-content;
+  border-radius: 4px 0 0 4px;
+  padding: 0 8px 0 0;
+  font-size: 14px;
+  background: $gray-200;
+  display: grid;
+  grid-template-areas: 'select';
+  align-items: center;
+}
+
+.selectWrapper::after {
+  content: "";
+  width: 8px;
+  height: 5px;
+  background: $gray-700;
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  justify-self: end;
+  grid-area: select;
+}
+
+.searchSelect {
+  grid-area: select;
+  width: fit-content;
+  // min-width: 5ch;
+  // max-width: 12ch;
+  height: 40px;
   margin: 0;
   border-radius: 4px 0 0 4px;
-  border: none;
-  // padding: 0 12px;
-  background: $emerald-200;
-  // color: white
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 13px 8px;
+  background: $gray-200;
+  text-align-last: center;
 
   &:focus, &:active {
     border: none;
@@ -96,11 +133,10 @@
 .searchInput {
   box-sizing: border-box;
   height: 40px;
-  // width: 220px;
   margin: 0;
   border-radius: 0;
   border: none;
-  background: $gray-200;
+  background: $gray-100;
 
   &:focus, &:active {
     border: none;
@@ -109,11 +145,31 @@
   }
 }
 
+.searchInputXWrapper {
+  position: absolute;
+  right: 44px;
+  height: 40px;
+  padding-right: 8px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .searchInputX {
-  right: 0;
-  background: lightsalmon;
+  margin: 0 2px;
+  padding: 2px;
   font-size: 20px;
   line-height: 1;
+  color: $gray-400;
+  border-radius: 4px;
+
+  &:focus, &:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
 }
 
 .searchButton {
@@ -121,17 +177,20 @@
   padding: 0 12px;
   margin: 0;
   border-radius: 0 4px 4px 0;
-  // border: 1px solid red;
-  background: $emerald-200;
-  // color: white;
+  background: $emerald-500;
   font-size: 20px;
   line-height: 1;
-
   display: flex;
   align-items: center;
 
-  &:focus, &:active {
+  &:focus {
     border: none;
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:active {
+    box-shadow: 0px 0px 16px 4px rgba($emerald-300, 0.4)
   }
 }
 
@@ -142,7 +201,7 @@
 }
 
 .nav {
-  height: 58px;
+  height: 64px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -159,8 +218,7 @@
   height: 32px;
   width: auto;
   white-space: nowrap;
-  margin-left: 8px;
-  padding: 0px 16px;
+  padding: 0px 12px;
   border-radius: 4px;
   display: flex;
   flex-flow: row nowrap;
@@ -168,28 +226,25 @@
   text-decoration: none;
   
   &:hover {
-    background-color: $gray-200;
     cursor: pointer;
-    background: $emerald-100;
     box-shadow: none;
+    background: $emerald-100;
   }
 
   &:focus {
-    box-shadow: 0px 0px 16px 4px rgba($emerald-300, 0.4);
+    box-shadow: 0px 0px 16px 4px rgba($emerald-300, 0.3);
   }
 
   &:active {
-
+    box-shadow: none;
   }
-
 }
 
 .divider {
   width: 1px;
   height: 20px;
-  // margin: 0 10px;
-  margin: 0 8px 0 16px;;
-  background: $emerald-500;
+  margin: 0 10px;
+  background: $emerald-400;
 }
 
 .navGreeting {

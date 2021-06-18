@@ -3,32 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
 import { BiX, BiSearch } from 'react-icons/bi'
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
 
 const Navbar = (props) => {
+  const [searchValue, setSearchValue] = useState('');
 
-  const [meetPos, setMeetPos] = useState(0);
-  const [meet, setMeet] = useState([
-    <a href="https://github.com/brandonfang" target="_blank" rel="noreferrer"  key="1">Meet Brandon</a>,
-    <a href="https://github.com/inhojl" target="_blank" rel="noreferrer" key="2" >Meet Joe</a>,
-    <a href="https://github.com/melflynn" target="_blank" rel="noreferrer" key="3" >Meet Melissa</a>,
-    <a href="https://github.com/ROTBOW" target="_blank" rel="noreferrer" key="4" >Meet Josiah</a>
-  ]);
   const history = useHistory();
-
-  useEffect(() => {
-    let timer = setInterval(() => {
-      setMeetPos(meetPos + 1);
-      if (meetPos >= 3) setMeetPos(0)
-    }, 3000);
-    return () => {
-      clearTimeout(timer);
-    };
-  });
-
 
   const search = (e) => {
     e.preventDefault();
@@ -38,11 +17,16 @@ const Navbar = (props) => {
       props.findEvents({[param]: input.value})
         .then(() => {
           history.push('/search');
-        })
+        });
     }
-  }
-  
+  };
 
+  const clearSearch = (e) => {
+    e.preventDefault();
+    const input = document.getElementById('searchInput');
+    input.value = '';
+  };
+  
   const empty = pojo => {
     let count = 0;
     for (let i in pojo) count++;
@@ -74,7 +58,6 @@ const Navbar = (props) => {
     <header className={styles.header}>
       <div className={styles.outer}>
         <div className={styles.inner}>
-
           <div className={styles.logoWrapper}>
             <Link to="/">
               <img className={styles.logo} src={logo} alt="logo" />
@@ -83,16 +66,20 @@ const Navbar = (props) => {
 
           <div className={styles.searchWrapper}>
             <form className={styles.searchBar}>
-              <select id="searchParam" className={styles.searchSelect} defaultValue="all">
-                <option value="all">All Fields</option>
-                <option value="title">Title</option>
-                <option value="topic" selected>Topic</option>
-                <option value="description">Description</option>
-                <option value="host">Host Name</option>
-              </select>
-              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event" />
-              <button className={styles.searchInputX}><BiX /></button>
-              <button className={styles.searchButton} onClick={search}><BiSearch /></button>
+              <div className={styles.selectWrapper}>
+                <select id="searchParam" className={styles.searchSelect} defaultValue="all">
+                  <option value="all">All Fields</option>
+                  <option value="title">Title</option>
+                  <option value="topic" selected>Topic</option>
+                  <option value="description">Description</option>
+                  <option value="host">Host Name</option>
+                </select>
+              </div>
+              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+              <div className={styles.searchInputXWrapper}>
+                <button type="button" className={styles.searchInputX} onClick={clearSearch}><BiX /></button>
+              </div>
+              <button type="submit" className={styles.searchButton} onClick={search}><BiSearch /></button>
             </form>
           </div>
 
@@ -112,17 +99,6 @@ const Navbar = (props) => {
                   <li>GitHub</li>
                 </a>
               </ul>
-
-              {/* <TransitionGroup className={styles.navLink}>
-                <CSSTransition
-                  timeout={500}
-                  classNames={styles.example}
-                > */}
-                {/* <div className={styles.navLink}>
-                  {meet[meetPos]}
-                </div> */}
-                {/* </CSSTransition>
-              </TransitionGroup> */}
             </nav>
           </div>
 
