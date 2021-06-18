@@ -50,18 +50,16 @@ const SearchResults = (props) => {
             return <a className={`${styles.noUnderline} ${styles.eventCard}`} key={i} onClick={() => auth(e._id)}>
               <li>
                 <h3 className={styles.eventTitle}>{e.title}</h3>
-                <div className={styles.cardRowWrapper}>
-                  <BiBulb className={styles.cardIcon}/>
                   <p className={styles.eventTopic}>{e.topic}</p>
-                </div>
-                <div className={styles.cardRowWrapper}>
-                  <BiVideo className={styles.cardIcon}/>
-                  <p className={styles.eventStartTime}>
-                    {moment(e.startTime).format("ddd, MMM D, LT")}
-                  </p>
-                </div>
-                
-                {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
+                  <div className={styles.cardRowWrapper}>
+                    <BiUser className={styles.cardIcon}/>
+                    <p className={styles.eventHost}>{e.hostUsername}</p>
+                  </div>
+                  <div className={styles.cardRowWrapper}>
+                    <BiVideo className={styles.cardIcon}/>
+                    <p className={styles.eventStartTime}>{moment(e.startTime).format("ddd, MMM D, LT")}</p>
+                  </div>
+                  {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
               </li>
             </a>
           }) : ''
