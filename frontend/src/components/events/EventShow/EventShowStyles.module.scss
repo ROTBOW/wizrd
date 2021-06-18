@@ -212,10 +212,27 @@
 }
 
 .endEventButton {
-  padding: 0 1rem;
+  padding: 0 1.4rem;
   background-color: $red-500;
   color: white;
   border-radius: 0.8rem;
   font-size: 1.5rem;
   height: 4rem;
+  border: none;
+  box-shadow: none;
+  transition: all .1s linear;
+  &:hover {
+    filter: brightness(95%);
+  }
+  &:active {
+    filter: brightness(90%);
+    transform: scale(.95);
+    box-shadow: none;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+
 }

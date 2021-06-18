@@ -132,8 +132,11 @@ const Video = ({ eventId, isHost }) => {
   }
 
   function onHostDisconnect() {
-    peerRef.current.disconnect()
-    peerRef.current.destroy()
+    if (window.confirm('Are you sure you want to disconnect stream?')) {
+      peerRef.current.disconnect()
+      peerRef.current.destroy()
+    }
+
   }
 
   function onHostConnect() {
