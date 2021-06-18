@@ -1,5 +1,143 @@
 @import '../../../styles/variables.scss';
 
+
+
+.eventShowContainer {
+  position: absolute;
+  top: 5.8rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: all 0.5s cubic-bezier(0.56, 0.12, 0.12, 0.98);
+  overflow: hidden;
+}
+
+.eventShowContent {
+  position: relative;
+  min-width: 79.7rem;
+  max-width: calc( ( ( ( 100vh - 120px ) * 16 ) / 9 ) + 297px );
+  overflow: hidden;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.broadcastContainer {
+  flex-grow: 1;
+  border-right: 1px solid #f0f0f0;
+  right: 297px;
+  bottom: 0;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e4e4e4;
+    border-radius: 8px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: #bbb;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+  }
+}
+
+.broadcastVideo {
+  position: relative;
+}
+
+
+.textInfo {
+  position: relative;
+  padding-left: 6.7rem;
+  margin: 1.4rem 1rem 0 0;
+  font-size: 1.4rem;
+}
+
+.chatContainer {
+  border-right: 1px solid #f0f0f0;
+}
+
+.broadcastInfo {
+  position: relative;
+  margin-top: 1.4rem;
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+  padding-bottom: 2rem;
+}
+
+.infoHeader {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1.7rem;
+}
+
+.hostAvatar {
+  background-color: $emerald-700;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+
+.broadcastHeading {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.7rem;
+}
+
+.hostNameContainer {
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.hostName {
+  color: $emerald-600;
+}
+
+.eventHeading {
+  margin-top: 1.4rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.eventDescription {
+  margin-bottom: 2rem;
+}
+
+.userCount {
+  margin-left: 1.2rem;
+  color: #767676;
+}
+
+.userCountIcon {
+  color: #b6b6b6;
+}
+
+.detailItem {
+  display: flex;
+  color: #787878;
+  padding-bottom: 1.2rem;
+}
+
+.detailLabel {
+  display: block;
+  width: 12.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+
+
+
 .normalText {
   color: $text-primary;
 }

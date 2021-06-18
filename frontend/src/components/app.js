@@ -22,7 +22,7 @@ const App = () => (
       <Route exact path="/about" component={About} />
       <HomeRoute path="/" /> 
     </Switch>
-    <Footer />
+    {/* <Footer /> */}
   </>
 );
 
