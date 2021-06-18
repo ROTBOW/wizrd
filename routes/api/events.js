@@ -44,7 +44,7 @@ router.put('/', (req, res) => {
   
   if (req.body.topic) {
     const match = new RegExp(req.body.topic, 'i');
-    Event.find({topic: match}, {isOver: false})
+    Event.find({$and: [{topic: match}, {isOver: false}]})
       .then((events) => {
         if (events.length === 0) {
           return json({ noEventsFound: 'No events found with that topic' });
@@ -55,7 +55,7 @@ router.put('/', (req, res) => {
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
   } else if (req.body.title) {
     const match = new RegExp(req.body.title, 'i');
-    Event.find({title: match}, {isOver: false})
+    Event.find({$and: [{title: match}, {isOver: false}]})
       .then((events) => {
         if (events.length === 0) {
           return json({ noEventsFound: 'No events found' });
@@ -66,7 +66,7 @@ router.put('/', (req, res) => {
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
   } else if (req.body.description) {
     const match = new RegExp(req.body.description, 'i');
-    Event.find({description: match}, {isOver: false})
+    Event.find({$and: [{description: match}, {isOver: false}]})
       .then((events) => {
         if (events.length === 0) {
           return json({ noEventsFound: 'No events found' });
@@ -88,7 +88,7 @@ router.put('/', (req, res) => {
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
   } else if (req.body.all) {
     const match = new RegExp(req.body.all, 'i');
-    Event.find({$or: [{hostUsername: match}, {topic: match}, {title: match}, {description: match}]}, {isOver: false})
+    Event.find({$and: [{$or: [{hostUsername: match}, {topic: match}, {title: match}, {description: match}]}, {isOver: false}]})
       .then((events) => {
         if (events.length === 0) {
           return json({ noEventsFound: 'No events found' });
