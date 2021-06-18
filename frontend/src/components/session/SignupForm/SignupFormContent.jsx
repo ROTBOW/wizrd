@@ -78,6 +78,7 @@ const SignupFormContent = (props) => {
         <div className={styles.formWrapper}>
           <form className={styles.form} onSubmit={handleSubmit}>
 
+            <p className={styles.inputSubtext}>Choose an avatar</p>
             <div className={styles.avatarWrapper}>
               <label>
                 <input
