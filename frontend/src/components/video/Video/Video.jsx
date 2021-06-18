@@ -149,7 +149,7 @@ const Video = ({ eventId, isHost }) => {
   const StreamVideo = () => (
     stream ?
       <video
-        muted
+        muted={isHost}
         autoPlay
         playsInline
         className={styles.video}
