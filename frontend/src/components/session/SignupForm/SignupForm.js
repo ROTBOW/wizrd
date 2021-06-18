@@ -1,6 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
+import red from '../../../assets/avatars/avatarRed.png';
+import green from '../../../assets/avatars/avatarGreen.png';
+import yellow from '../../../assets/avatars/avatarYellow.png';
+
+
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -10,12 +15,16 @@ class SignupForm extends React.Component {
       username: '',
       password: '',
       password2: '',
+      avatar: '0',
       errors: {}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
+    this.checkIfSelected = this.checkIfSelected.bind(this);
     this.clearedErrors = false;
   }
+
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSignedUp === true) {
@@ -37,7 +46,8 @@ class SignupForm extends React.Component {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      avatar: this.state.avatar
     };
     console.log(user)
 
@@ -56,6 +66,19 @@ class SignupForm extends React.Component {
     );
   }
 
+  onValueChange(event) {
+    this.setState({
+      avatar: event.target.value
+    });
+  }
+
+  checkIfSelected(pos) {
+    if (this.state.avatar === String(pos)) {
+      return styles.avatarSelected;
+    }
+    return ''
+  }
+
   render() {
     return (
       <div className={styles.authPageWrapper}>
@@ -65,6 +88,42 @@ class SignupForm extends React.Component {
           
           <form onSubmit={this.handleSubmit}>
             <div className="signup-form">
+
+              <div className={styles.avatarWrapper}>
+                <label>
+                  <input
+                    type="radio"
+                    value="0"
+                    checked={this.state.avatar === '0'}
+                    onChange={this.onValueChange}
+                    className={styles.hideMe}
+                  />
+                   <img src={red} className={`${styles.avatarIcon} ${this.checkIfSelected(0)}`}/>
+                </label>
+                
+                <label>
+                  <input
+                    type="radio"
+                    value="1"
+                    checked={this.state.avatar === '1'}
+                    onChange={this.onValueChange}
+                    className={styles.hideMe}
+                  />
+                  <img src={green} className={`${styles.avatarIcon} ${this.checkIfSelected(1)}`}/>
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    value="2"
+                    checked={this.state.avatar === '2'}
+                    onChange={this.onValueChange}
+                    className={styles.hideMe}
+                  />
+                  <img src={yellow} className={`${styles.avatarIcon} ${this.checkIfSelected(2)}`}/>
+                </label>
+              </div>
+
               <label>Email:
                 <input type="email"
                   value={this.state.email}

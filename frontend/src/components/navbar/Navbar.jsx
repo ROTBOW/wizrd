@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
+import { BiX, BiSearch } from 'react-icons/bi'
 import {
   CSSTransition,
   TransitionGroup,
@@ -16,6 +17,7 @@ const Navbar = (props) => {
     <a href="https://github.com/melflynn" target="_blank" rel="noreferrer" key="3" >Meet Melissa</a>,
     <a href="https://github.com/ROTBOW" target="_blank" rel="noreferrer" key="4" >Meet Josiah</a>
   ]);
+  const history = useHistory();
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -25,65 +27,105 @@ const Navbar = (props) => {
     return () => {
       clearTimeout(timer);
     };
-  })
+  });
 
 
-  // const greeting = () => {
-  //   if (loggedIn) {
-  //     return <div></div>
-  //   } else {
-  //     return <div></div>
-  //   }
-  // };
+  const search = (e) => {
+    e.preventDefault();
+    const input = document.getElementById('searchInput');
+    const param = document.getElementById('searchParam').value;
+    if (input.value) {
+      props.findEvents({[param]: input.value})
+        .then(() => {
+          history.push('/search');
+        })
+    }
+  }
+  
+
+  const empty = pojo => {
+    let count = 0;
+    for (let i in pojo) count++;
+    return count === 0
+  }
+
+  const sessionButtons = () => {
+    if (empty(props.user)) {
+      return (
+        <>
+          <Link to="/login"  className={styles.navLink}>
+            <li>Log in</li>
+          </Link>
+          <Link to="/signup" className={styles.navLink}>
+            <li>Sign up</li>
+          </Link>
+        </>
+      );
+    } else {
+      return (
+        <a className={styles.navLink} onClick={props.logout} href="/">
+          <li>Log out</li>
+        </a>        
+      );
+    }
+  }
 
   return (
     <header className={styles.header}>
       <div className={styles.outer}>
         <div className={styles.inner}>
+
           <div className={styles.logoWrapper}>
             <Link to="/">
               <img className={styles.logo} src={logo} alt="logo" />
             </Link>
           </div>
 
+          <div className={styles.searchWrapper}>
+            <form className={styles.searchBar}>
+              <select id="searchParam" className={styles.searchSelect} defaultValue="all">
+                <option value="all">All Fields</option>
+                <option value="title">Title</option>
+                <option value="topic" selected>Topic</option>
+                <option value="description">Description</option>
+                <option value="host">Host Name</option>
+              </select>
+              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for an event" />
+              <button className={styles.searchInputX}><BiX /></button>
+              <button className={styles.searchButton} onClick={search}><BiSearch /></button>
+            </form>
+          </div>
+
           <div className={styles.navWrapper}>
             <nav className={styles.nav}>
               <ul className={styles.navList}>
-                <li className={styles.navLink}>
-                  <Link to="/login">Log in</Link>
-                </li>
-                <li className={styles.navLink}>
-                  <Link to="/signup">Sign up</Link>
-                </li>
-                <li className={styles.navLink}>
-                  <div onClick={props.logout}>Log out</div>
-                </li>
+                {sessionButtons()}
               </ul>
 
               <div className={styles.divider}></div>
 
               <ul className={styles.navList}>
-                <li className={styles.navLink}>
-                  <a href="https://github.com/ROTBOW/MERN-stack-project" target="_blank" rel="noreferrer">GitHub</a>
-                </li>
+                <Link to="/about" className={styles.navLink}>
+                  <li>About</li>
+                </Link>
+                <a className={styles.navLink} href="https://github.com/ROTBOW/wizrd" target="_blank" rel="noreferrer">
+                  <li>GitHub</li>
+                </a>
               </ul>
-
 
               {/* <TransitionGroup className={styles.navLink}>
                 <CSSTransition
                   timeout={500}
                   classNames={styles.example}
                 > */}
-                <div className={styles.navLink}>
+                {/* <div className={styles.navLink}>
                   {meet[meetPos]}
-                </div>
+                </div> */}
                 {/* </CSSTransition>
               </TransitionGroup> */}
-
-
             </nav>
           </div>
-          
+
         </div>
       </div>
     </header>

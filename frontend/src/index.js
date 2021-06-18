@@ -6,7 +6,7 @@ import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/sessionUtil';
 import { logout } from './actions/sessionActions';
-import { fetchEvent } from './actions/eventsActions';
+import { findEvents } from './actions/eventsActions';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,14 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (decodedUser.exp < currentTime) {
       store.dispatch(logout());
-      window.location.href = '/login';
+      window.location.href = '/';
     }
   } else {
     store = configureStore({});
   }
   const root = document.getElementById('root');
   window.store = store;
-  window.fetchEvent = fetchEvent;
+  window.findEvents = findEvents;
 
   ReactDOM.render(<Root store={store} />, root);
 });

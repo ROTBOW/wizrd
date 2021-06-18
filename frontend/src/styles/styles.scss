@@ -1,7 +1,8 @@
 // Global styles
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import './variables.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -28,7 +29,7 @@ html {
 
 h1 {
   font-size: 4.8rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 1.6rem;
 }
 
@@ -54,6 +55,7 @@ p {
   font-size: 1.6rem;
   font-weight: 400;
   margin-bottom: 0.8rem;
+  line-height: 1.5;
 }
 
 a {
@@ -61,17 +63,86 @@ a {
   text-decoration: underline;
 }
 
+em {
+  font-weight: 600;
+}
+
+i {
+  font-style: italic;
+}
+
+// h1 {
+//   font-size: 48px;
+//   font-weight: 600;
+//   margin-bottom: 16px;
+// }
+
+// h2 {
+//   font-size: 28px;
+//   font-weight: 600;
+//   margin-bottom: 16px;
+// }
+
+// h3 {
+//   font-size: 24px;
+//   font-weight: 600;
+//   margin-bottom: 8px;
+// }
+
+// h4 {
+//   font-size: 20px;
+//   font-weight: 500;
+//   margin-bottom: 8px;
+// }
+
+// p {
+//   font-size: 16px;
+//   font-weight: 400;
+//   line-height: 1.5;
+//   margin-bottom: 8px;
+// }
+
+// a {
+//   text-decoration: underline;
+// }
+
 button {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
-input:focus {
+button:focus {
+  border: 1px solid $emerald-600;
+  box-shadow: 0px 0px 4px 4px rgba($brand-primary, 0.2), 0px 0px 0px 1px rgba($brand-primary, 0.2) inset;
+}
+
+input, textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid $gray-800;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  text-indent: 5px;
+  padding-left: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  // padding: 0.6rem 0.8rem;
+}
+
+input:focus, textarea:focus {
   outline: none;
-  border: 0.2rem solid $brand-secondary;
-  padding: 3px;
+  border: 1px solid $emerald-600;
+  box-shadow: 0px 0px 0px 2px rgba($brand-primary, 0.2), 0px 0px 0px 1px rgba($brand-primary, 0.2) inset;
 }
 
+input::placeholder, textarea::placeholder {
+  color: $gray-400;
+}
 
+// add styles for textarea

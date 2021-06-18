@@ -1,13 +1,15 @@
 import React from 'react';
 import { AuthRoute, ProtectedRoute, HomeRoute } from '../util/routeUtil';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import LoginFormContainer from './session/LoginForm/LoginFormContainer';
 import SignupFormContainer from './session/SignupForm/SignupFormContainer';
 import { Link } from 'react-router-dom';
-import EventFormContainer from './events/EventForm/EventFormContainer';
 import Video from './video/Video/Video';
-import NavbarContainer from './navbar/NavbarContainer'
-import EventShowContainer from './events/EventShow/EventShowContainer'
+import NavbarContainer from './navbar/NavbarContainer';
+import EventShowContainer from './events/EventShow/EventShowContainer';
+import SearchResultsContainer from './searchResults/searchResultsContainer';
+import Footer from './footer/Footer';
+import About from './about/About';
 
 const App = () => (
   <>
@@ -15,12 +17,12 @@ const App = () => (
     <Switch>
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
-      <ProtectedRoute exact path="/event/create" component={EventFormContainer}/>
-      <ProtectedRoute exact path="/event/:eventId" component={EventShowContainer}/>
+      <ProtectedRoute exact path="/events/:eventId" component={EventShowContainer}/>
+      <Route exact path="/search" component={SearchResultsContainer}/>
+      <Route exact path="/about" component={About} />
       <HomeRoute path="/" /> 
-
-      {/* <AuthRoute exact path="/" component={temp} /> */}
     </Switch>
+    <Footer />
   </>
 );
 

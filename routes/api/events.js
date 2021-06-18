@@ -16,7 +16,9 @@ router.put('/:time', (req, res) => {
      Event.find({startTime: {$gte: new Date()}})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
-  } 
+  } else {
+    res.json({});
+  }
   // else if (req.params.time === 'notOver') {
   //   Event.find({isOver: false})
   //     .then((events) => res.json(events))
@@ -37,6 +39,67 @@ router.get('/:eventId', (req, res) => {
     .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that ID' }));
 });
 
+//Search for events
+router.put('/', (req, res) => {
+  
+  if (req.body.topic) {
+    const match = new RegExp(req.body.topic, 'i');
+    Event.find({topic: match})
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found with that topic' });
+        } else {
+          return res.json(events);
+        }
+      })
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } else if (req.body.title) {
+    const match = new RegExp(req.body.title, 'i');
+    Event.find({title: match})
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found' });
+        } else {
+          return res.json(events);
+        }
+      })
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } else if (req.body.description) {
+    const match = new RegExp(req.body.description, 'i');
+    Event.find({description: match})
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found' });
+        } else {
+          return res.json(events);
+        }
+      })
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } else if (req.body.host) {
+    const match = new RegExp(req.body.host, 'i');
+    Event.find({hostUsername: match})
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found' });
+        } else {
+          return res.json(events);
+        }
+      })
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  } else if (req.body.all) {
+    const match = new RegExp(req.body.all, 'i');
+    Event.find({$or: [{hostUsername: match}, {topic: match}, {title: match}, {description: match}]})
+      .then((events) => {
+        if (events.length === 0) {
+          return json({ noEventsFound: 'No events found' });
+        } else {
+          return res.json(events);
+        }
+      })
+      .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
+  }
+})
+
 // Create an event
 router.post('/',
   passport.authenticate('jwt', { session: false }),
@@ -49,6 +112,7 @@ router.post('/',
 
     const newEvent = new Event({
       hostId: req.user.id,
+      hostUsername: req.user.username,
       title: req.body.title,
       topic: req.body.topic,
       description: req.body.description,

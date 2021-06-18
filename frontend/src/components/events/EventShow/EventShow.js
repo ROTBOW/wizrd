@@ -4,49 +4,48 @@ import Video from '../../video/Video/Video';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import styles from './EventShowStyles.module.scss';
+import Moment from 'moment';
+import MomentTimezone from 'moment-timezone';
 
 
 class EventShow extends React.Component {
-  // Needs logic to check if the event has started yet, should show something if it hasn't started yet
-
 
   componentDidMount() {
-    this.props.fetchEvent(this.props.match.params.eventId);
+    this.props.fetchEvent(this.props.match.params.eventId)
+      .then((res) => document.title = `Wizrd - ${res.event.data.title}`);
   }
 
-  // handleStateEvent(e){
-  //     e.preventDefault();
-  // }
+  componentWillUnmount() {
+    document.title = 'Wizrd';
+  }
 
+  getPST(now) {
+    now = new Date(now)
+    now.setHours(now.getHours() + 7);
+    return Moment(now).tz('America/Los_Angeles');
+  }
 
   render() {
-    console.log('event', this.props.event)
     if (this.props.event !== undefined) {
-
       let event = this.props.event
       let startTime = event.startTime;
 
-      if (new Date(startTime) > new Date()) {
-
+      if (Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) {
         return (
-          <div className={styles.wrapper}>
+          <div>
             <h1 className={styles.earlyMessageTitle}>{event.title}</h1>
-            <div className={styles.earlyMessageBox}>
-              <p className={styles.earlyMessage}>
-                Oops... this event hasn't started yet!
-                            </p>
-              <p className={styles.earlyMessage}>
-                It will be on&nbsp;<i className={styles.specialText}>{event.topic}</i>
-              </p>
-              <p className={styles.earlyMessage}>
-                come back on&nbsp;<i className={styles.specialText}>{startTime}</i>&nbsp;so you don't miss it!
-              </p>
-            </div>
+            <p className={styles.earlyMessage}>
+              Oops... this event hasn't started yet!
+                        </p>
+            <p className={styles.earlyMessage}>
+              It will be on&nbsp;<i className={styles.specialText}>{event.topic}</i>
+            </p>
+            <p className={styles.earlyMessage}>
+              come back on&nbsp;<i className={styles.specialText}>{Moment(startTime).format("ddd, MMM D, LT")}</i>&nbsp;so you don't miss it!
+            </p>
           </div>
         )
-
       } else {
-
         return (
           <div className={styles.eventShowContainer}>
             <div className={styles.eventShowContent}>
@@ -102,40 +101,8 @@ class EventShow extends React.Component {
                 <Chat user={this.props.user} chatId={this.props.eventId} />
               </div>
             </div>
-          </div>  
+          </div>
         )
-          
-          // <div className={styles.eventShowContainer}>
-          //   <div className={styles.contentContainer}>
-          //     <div className={styles.videoContainer}>
-          //       <Video eventId={this.props.eventId} isHost={this.props.user.id === this.props.event.hostId} />
-          //       <div className={styles.infoContainer}>
-          //         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum odio commodi placeat a dicta dolore quia exercitationem totam numquam, amet reiciendis blanditiis aspernatur recusandae adipisci, itaque facilis temporibus, magni corporis?Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis voluptatum debitis iure eos repellat non, enim est quam et nesciunt rem impedit nostrum laboriosam culpa ipsum dolor dolorum vero doloribus.lorem
-          //       </div>
-          //     </div>
-          //     <div className={styles.chatContainer}>
-          //       <Chat user={this.props.user} chatId={this.props.eventId} />
-          //     </div>
-          //   </div>
-          // </div>
-          // <div className={styles.wrapper} >
-          //   <div className={styles.leftWing}>
-          //     <h1 className={styles.eventTitle}>{event.title}</h1>
-          //     <div className={styles.videoFeed}>
-          //       <Video eventId={this.props.eventId} isHost={this.props.user.id === this.props.event.hostId} />
-          //     </div>
-          //     <p className={styles.normalText}>
-          //       {this.props.user.username} is streaming about <i className={styles.specialText}>{this.props.event.topic}</i></p>
-          //     <p className={styles.eventDesc}>{this.props.event.description}</p>
-
-          //   </div>
-
-          //   <div className={styles.rightWing}>
-          //     <article className={styles.chatFeed}>
-          //       <Chat user={this.props.user} chatId={this.props.eventId} />
-          //     </article>
-          //   </div>
-          // </div>
       }
     } else {
       return <div>I can't find any event info! make sure your on the right page.</div>
