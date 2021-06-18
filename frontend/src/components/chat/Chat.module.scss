@@ -130,14 +130,31 @@
   font-weight: bold;
 }
 
+.userDisplay {
+  display: flex;
+  align-items: center;
+}
+
 .message {
   font-size: 1.3rem;
   width: 100%;
+  display: flex;
+  align-items: flex-start;
   overflow-wrap: break-word;
   margin: 0.2rem 0;
   color: #424242;
   &:last-of-type {
     padding-top: 1rem;
+  }
+
+  span:nth-of-type(2) {
+    padding-top: 4px;
+  }
+  
+  span:last-of-type {
+    padding-top: 4px;
+    padding-left: 4px;
+
   }
 }
 
@@ -147,6 +164,13 @@
   pointer-events: none;
   display: block; /* For Firefox */
   color: #b1b1b1;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin-right: 4px;
 }
 
 .red {

@@ -92,7 +92,7 @@ const Chat = (props) => {
             usernameStyle.push(COLORS[stringHash(message[0]) % COLORS.length]);
             return (
               <li key={i} className={styles.message}>
-                <span><img src={avatars[Number(message[2])]}/></span><span className={usernameStyle.join(' ')}>{message[0]}</span>: <span>{message[1]}</span>
+                <span className={`${usernameStyle.join(' ')} ${styles.userDisplay}`}><img src={avatars[Number(message[2])]} className={styles.avatar}/>{message[0]}</span><span>:</span><span>{message[1]}</span>
               </li>
             )
           })
