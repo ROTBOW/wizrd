@@ -81,12 +81,23 @@
   padding-bottom: 1.7rem;
 }
 
-.hostAvatar {
-  background-color: $emerald-500;
+.hostAvatarWrapper {
+  // box-shadow: 0 0 0 1px $emerald-500;
+  background-color: $emerald-100;
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.hostAvatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%; 
+}
+
 
 .broadcastHeading {
   display: flex;

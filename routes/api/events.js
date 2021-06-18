@@ -113,6 +113,7 @@ router.post('/',
     const newEvent = new Event({
       hostId: req.user.id,
       hostUsername: req.user.username,
+      hostAvatar: req.user.avatar,
       title: req.body.title,
       topic: req.body.topic,
       description: req.body.description,
