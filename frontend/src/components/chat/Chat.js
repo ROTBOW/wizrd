@@ -4,7 +4,9 @@ import io from 'socket.io-client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagic } from '@fortawesome/free-solid-svg-icons';
 import stringHash from 'string-hash';
+import avatars from '../../assets/avatars/avatars';
 
+// avatars[Number(props.user.avatar)
 
 import styles from './Chat.module.scss';
 
@@ -57,8 +59,8 @@ const Chat = (props) => {
       newSocket = socket;
     }
 
-    newSocket.on('new message', ({ username, msg }) => {
-      let message = [username, msg];
+    newSocket.on('new message', ({ username, msg, avatar }) => {
+      let message = [username, msg, avatar];
       setMessages([...messages, message]);
     });
 
@@ -71,7 +73,7 @@ const Chat = (props) => {
     const input = document.getElementById("chatInput");
     console.log(input.innerText)
     if (input.innerText) {
-      socketRef.current.emit('chat message', { chatId: props.chatId, msg: input.innerText, username: props.user.username })
+      socketRef.current.emit('chat message', { chatId: props.chatId, msg: input.innerText, username: props.user.username, avatar: props.user.avatar })
       input.innerText = '';
     };
   };
@@ -90,7 +92,7 @@ const Chat = (props) => {
             usernameStyle.push(COLORS[stringHash(message[0]) % COLORS.length]);
             return (
               <li key={i} className={styles.message}>
-                <span className={usernameStyle.join(' ')}>{message[0]}</span>: <span>{message[1]}</span>
+                <span><img src={avatars[Number(message[2])]}/></span><span className={usernameStyle.join(' ')}>{message[0]}</span>: <span>{message[1]}</span>
               </li>
             )
           })
