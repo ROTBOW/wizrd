@@ -1,7 +1,5 @@
 @import '../../../styles/variables.scss';
 
-
-
 .eventShowContainer {
   position: absolute;
   top: 6.4rem;
@@ -15,7 +13,7 @@
 .eventShowContent {
   position: relative;
   min-width: 79.7rem;
-  max-width: calc( ( ( ( 100vh - 120px ) * 16 ) / 9 ) + 297px );
+  max-width: calc((((100vh - 120px) * 16) / 9) + 297px);
   overflow: hidden;
   height: 100%;
   margin: 0 auto;
@@ -53,7 +51,6 @@
 .broadcastVideo {
   position: relative;
 }
-
 
 .textInfo {
   position: relative;
@@ -137,9 +134,6 @@
   font-weight: bold;
 }
 
-
-
-
 .normalText {
   color: $text-primary;
 }
@@ -152,7 +146,7 @@
 
 .wrapper {
   display: flex;
-  max-width: 1080px;
+  max-width: 1112px;
   margin: 0 auto;
   padding-top: 25px;
 }
@@ -220,13 +214,13 @@
   height: 4rem;
   border: none;
   box-shadow: none;
-  transition: all .1s linear;
+  transition: all 0.1s linear;
   &:hover {
     filter: brightness(95%);
   }
   &:active {
     filter: brightness(90%);
-    transform: scale(.95);
+    transform: scale(0.95);
     box-shadow: none;
     outline: none;
   }
@@ -234,5 +228,4 @@
     box-shadow: none;
     border: none;
   }
-
 }

@@ -3,7 +3,7 @@
 // Styles for LoginForm and SignupForm
 
 .pageWrapper {
-  max-width: 1080px;
+  max-width: 1112px;
   margin: 48px auto 96px auto;
   padding: 0 32px;
   display: flex;
@@ -48,7 +48,7 @@
   font-size: 15px;
 
   > a {
-    font-size: inherit
+    font-size: inherit;
   }
 }
 
@@ -103,7 +103,8 @@
   font-weight: 500;
   transition: all 0.15s;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $emerald-700;
     box-shadow: 0px 0px 8px 6px rgba($emerald-700, 0.15);
   }
@@ -145,7 +146,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 2.0rem;
+  margin-bottom: 2rem;
   cursor: pointer;
 }
 

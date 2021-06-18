@@ -59,25 +59,31 @@ const HomeFeed = (props) => {
 
         <section className={styles.sectionWrapper}> 
           <h2 className={styles.categoryTitle}>Currently Streaming Events</h2>
-          <ul className={styles.eventsGridHorizontal}>
-            {liveEvents ? liveEvents.map((e, i) => (
-              <Link to={`/events/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}  key={i}>
-                <li>
-                  <h3 className={styles.eventTitle}>{e.title}</h3>
-                  <p className={styles.eventTopic}>{e.topic}</p>
-                  <div className={styles.cardRowWrapper}>
-                    <BiUser className={styles.cardIcon}/>
-                    <p className={styles.eventHost}>{e.hostUsername}</p>
-                  </div>
-                  <div className={styles.cardRowWrapper}>
-                    <BiVideo className={styles.cardIcon}/>
-                    <p className={styles.eventStartTime}>Live now</p>
-                  </div>
-                  {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
-                </li>
-              </Link>
-            )) : ''}
-          </ul>
+          
+          <div className={styles.gridWrapper}>
+            {/* <div className={styles.gridBlurLeft}></div> */}
+            <ul className={styles.eventsGridHorizontal}>
+              {liveEvents ? liveEvents.map((e, i) => (
+                <Link to={`/events/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}  key={i}>
+                  <li>
+                    <h3 className={styles.eventTitle}>{e.title}</h3>
+                    <p className={styles.eventTopic}>{e.topic}</p>
+                    <div className={styles.cardRowWrapper}>
+                      <BiUser className={styles.cardIcon}/>
+                      <p className={styles.eventHost}>{e.hostUsername}</p>
+                    </div>
+                    <div className={styles.cardRowWrapper}>
+                      <BiVideo className={styles.cardIcon}/>
+                      <p className={styles.eventStartTime}>Live now</p>
+                    </div>
+                    {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
+                  </li>
+                </Link>
+              )) : ''}
+            </ul>
+            {/* <div className={styles.gridBlurRight}></div> */}
+          </div>
+
         </section>
 
         <section className={styles.sectionWrapper}> 
