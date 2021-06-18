@@ -67,9 +67,9 @@ io.on('connection', (socket) => {
     console.log(username + " left chatroom: " + chatId);
   })
 
-  socket.on("chat message", ({chatId, msg, username}) => {
+  socket.on("chat message", ({chatId, msg, username, avatar}) => {
     console.log('chat message: ' + msg);
-    io.to(chatId).emit("new message", {username, msg});
+    io.to(chatId).emit("new message", {username, msg, avatar});
   })
 
   // Stream sockets
