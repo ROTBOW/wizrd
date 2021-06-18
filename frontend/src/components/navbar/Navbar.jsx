@@ -70,7 +70,7 @@ const Navbar = (props) => {
                 <select id="searchParam" className={styles.searchSelect} defaultValue="all">
                   <option value="all">All Fields</option>
                   <option value="title">Title</option>
-                  <option value="topic" selected>Topic</option>
+                  <option value="topic">Topic</option>
                   <option value="description">Description</option>
                   <option value="host">Host Name</option>
                 </select>

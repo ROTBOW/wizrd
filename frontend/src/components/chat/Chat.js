@@ -1,12 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import rightArrow from '../../assets/rightArrow.png';
 import io from 'socket.io-client';
+import stringHash from 'string-hash';
+import styles from './Chat.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagic } from '@fortawesome/free-solid-svg-icons';
-import stringHash from 'string-hash';
-
-
-import styles from './Chat.module.scss';
 
 const COLORS = [
   styles.red,
@@ -17,7 +14,6 @@ const COLORS = [
   styles.pink,
   styles.indigo
 ]
-
 
 const Chat = (props) => {
   const [messages, setMessages] = useState([]);
