@@ -68,11 +68,17 @@
   font-weight: 600;
 }
 
-.eventsGrid {
+.eventsGridVertical {
   margin-top: 24px;
   display: grid;
-  // grid-template-columns: 1fr 1fr 1fr;
-  grid-template-columns: repeat(auto-fill,minmax(256px,1fr));
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.eventsGridHorizontal {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(256px, 1fr));
   // grid-template-rows: max-content;
   grid-auto-flow: column;
   grid-auto-columns: minmax(256px, 1fr);
@@ -95,10 +101,10 @@
   border-radius: 12px;
   padding: 24px 20px;
   // padding: 28px 24px;
-  box-shadow: 0px 0px 24px 8px rgba($emerald-100, 0.3);
+  box-shadow: 0px 0px 24px 8px rgba($emerald-100, 0.1);
 
   &:hover, &:focus {
-    box-shadow: 0px 2px 24px 12px rgba($emerald-400, 0.3);
+    box-shadow: 0px 2px 24px 12px rgba($emerald-400, 0.1);
   }
 }
 

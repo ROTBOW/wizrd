@@ -8,7 +8,7 @@ import { createEvent } from '../../actions/eventsActions';
 import { BiUser, BiVideo } from 'react-icons/bi';
 import { GiWizardStaff } from 'react-icons/gi'
 import { FaHatWizard } from 'react-icons/fa'
-import styles from './HomeFeed.module.scss';
+import styles from './Feed.module.scss';
 import moment from 'moment';
 import avatars from '../../assets/avatars/avatars';
 
@@ -49,7 +49,7 @@ const HomeFeed = (props) => {
         <div className={styles.header}>
           <h1 className={styles.headerTitle}>Welcome to Wizrd, <img src={avatars[Number(props.user.avatar)]} alt="avatar-Icon" width="45" height="45" className={styles.userAvatar}/>{props.user.username}</h1>
           <p className={styles.headerSubtitle}>
-            Wizrd is a streaming platform for the teacher inside all of us. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione beatae tenetur veritatis. Join an event, or create your own.
+            Wizrd is a streaming platform for the teacher inside all of us. Experience the magic of learning by joining an event or creating your own.
           </p>
           <button className={styles.createEventButton} onClick={() => props.updateModal('createEvent')}>Create an event</button>
         </div>
@@ -59,7 +59,7 @@ const HomeFeed = (props) => {
 
         <section className={styles.sectionWrapper}> 
           <h2 className={styles.categoryTitle}>Currently Streaming Events</h2>
-          <ul className={styles.eventsGrid}>
+          <ul className={styles.eventsGridHorizontal}>
             {liveEvents ? liveEvents.map((e, i) => (
               <Link to={`/events/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`}  key={i}>
                 <li>
@@ -82,7 +82,7 @@ const HomeFeed = (props) => {
 
         <section className={styles.sectionWrapper}> 
           <h2 className={styles.categoryTitle}>Upcoming Events</h2>
-          <ul className={`${styles.eventsGrid} ${styles.lastGrid}`}>
+          <ul className={`${styles.eventsGridHorizontal} ${styles.lastGrid}`}>
             {futureEvents ? futureEvents.map((e, i) => (
               <Link to={`/events/${e._id}`} className={`${styles.eventCard} ${styles.noUnderline}`} key={i}>
                 <li>

@@ -231,6 +231,7 @@ select {
   flex-flow: row nowrap;
   align-items: center;
   text-decoration: none;
+  color: $gray-600;
   
   &:hover {
     cursor: pointer;
