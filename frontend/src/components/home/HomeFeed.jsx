@@ -25,7 +25,11 @@ const HomeFeed = (props) => {
       });
     props.fetchFutureEvents()
       .then(events => {
-        setFutureEvents(events.data)
+        setFutureEvents(events.data.sort(function(a, b) {
+          const first = a['startTime'];
+          const second = b['startTime'];
+          return (first > second) ? 1 : (first < second) ? -1 : 0;
+        }))
       })
     }
     return () => isOnHomeFeed = false;
