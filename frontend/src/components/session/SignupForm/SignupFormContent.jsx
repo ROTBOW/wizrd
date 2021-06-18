@@ -46,7 +46,8 @@ const SignupFormContent = (props) => {
       email,
       username,
       password,
-      password2
+      password2,
+      avatar
     };
     props.signup(user, props.history)
       .then((user) => {
