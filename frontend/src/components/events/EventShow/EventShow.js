@@ -7,6 +7,8 @@ import styles from './EventShowStyles.module.scss';
 import Moment from 'moment';
 import MomentTimezone from 'moment-timezone';
 import { updateEvent } from "../../../actions/eventsActions";
+import avatars from '../../../assets/avatars/avatars';
+import forest from '../../../assets/sebastian-unrau-sp-p7uuT0tw-unsplash (1).jpg';
 
 
 class EventShow extends React.Component {
@@ -45,20 +47,58 @@ class EventShow extends React.Component {
       let startTime = event.startTime;
       const isHost = this.props.user.id === this.props.event.hostId;
 
-      if (Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) {
+      if ((Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) || (this.props.event.isOver)) {
         return (
-          <div>
-            <h1 className={styles.earlyMessageTitle}>{event.title}</h1>
-            <p className={styles.earlyMessage}>
-              Oops... this event hasn't started yet!
-                        </p>
-            <p className={styles.earlyMessage}>
-              It will be on&nbsp;<i className={styles.specialText}>{event.topic}</i>
-            </p>
-            <p className={styles.earlyMessage}>
-              come back on&nbsp;<i className={styles.specialText}>{Moment(startTime).format("ddd, MMM D, LT")}</i>&nbsp;so you don't miss it!
-            </p>
-          </div>
+          <div className={styles.beforePage}>
+            <div className={styles.imageBox}>
+              <img src={forest} className={styles.beforeImage}/>
+              {(Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) ? 
+              <p>The Magic Awaits...</p> :
+              <p>This stream has ended. Head back to the home page to discover more Wizrdry...</p>}
+            </div>
+            <div className={`${styles.broadcastInfo} ${styles.broadcastInfoBefore}`}>
+                  <div className={styles.infoHeader}>
+                    <div className={styles.hostAvatarWrapper}>
+                      {event.hostAvatar ? 
+                      <img src={avatars[Number(event.hostAvatar)]} className={styles.hostAvatar}/> :
+                      ''}
+                    </div>
+                    <div className={styles.broadcastHeading}>
+                      <div className={styles.hostNameContainer}>
+                        <span className={styles.hostName}>
+                          {event.hostUsername}
+                        </span>
+                      </div>
+                      <div className={styles.eventHeading}>
+                        {event.title}
+                      </div>
+                    </div>
+                    </div>
+                  <div className={styles.textInfo}>
+                    <div className={styles.eventDescription}>
+                      {event.description}
+                    </div>
+                    <ul className={styles.detailsList}>
+                      <li className={styles.detailItem}>
+                        <label className={styles.detailLabel}>
+                          Start Time
+                        </label>
+                        <span className={styles.detailInfo}>
+                          {new Date(event.startTime).toLocaleString()}
+                        </span>
+                      </li>
+                      <li className={styles.detailItem}>
+                        <label className={styles.detailLabel}>
+                          Topic
+                        </label>
+                        <span className={styles.detailInfo}>
+                          {event.topic}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
         )
       } else if (this.props.event.isOver) {
         return (
@@ -79,8 +119,10 @@ class EventShow extends React.Component {
                 </div>
                 <div className={styles.broadcastInfo}>
                   <div className={styles.infoHeader}>
-                    <div className={styles.hostAvatar}>
-
+                    <div className={styles.hostAvatarWrapper}>
+                      {event.hostAvatar ? 
+                      <img src={avatars[Number(event.hostAvatar)]} className={styles.hostAvatar}/> :
+                      ''}
                     </div>
                     <div className={styles.broadcastHeading}>
                       <div className={styles.hostNameContainer}>
