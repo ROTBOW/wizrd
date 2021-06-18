@@ -6,6 +6,12 @@ import { BiX, BiSearch } from 'react-icons/bi'
 
 const Navbar = (props) => {
 
+  useEffect(() => {
+    document.getElementById('searchInput').onkeydown = (e) => {
+      if(e.key == 13) search();
+    };
+  })
+
   const history = useHistory();
 
   const search = (e) => {
@@ -57,7 +63,6 @@ const Navbar = (props) => {
     <header className={styles.header}>
       <div className={styles.outer}>
         <div className={styles.inner}>
-
           <div className={styles.logoWrapper}>
             <Link to="/">
               <img className={styles.logo} src={logo} alt="logo" />
@@ -75,11 +80,10 @@ const Navbar = (props) => {
                   <option value="host">Host Name</option>
                 </select>
               </div>
-
               <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search" />
-              <div className={styles.searchInputXWrapper}>
+              {/* <div className={styles.searchInputXWrapper}>
                 <button className={styles.searchInputX} onClick={clearSearch}><BiX /></button>
-              </div>
+              </div> */}
               <button className={styles.searchButton} onClick={search}><BiSearch /></button>
             </form>
           </div>
