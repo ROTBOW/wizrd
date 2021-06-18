@@ -39,6 +39,18 @@ const SearchResults = (props) => {
     modal = <Modal name="sessionModal" updateModal={props.updateModal}/>
   : modal = '';
 
+  const eventTime = startTime => {
+    if (moment(startTime).isAfter(moment())) {
+      return (
+        <p className={styles.eventStartTime}>{moment(startTime).format("ddd, MMM D, LT")}</p>
+      )
+    } else {
+      return (
+        <p className={styles.eventStartTime}>Live Now</p>
+      )
+    }
+  }
+
   return (
     <div>
       {modal}
@@ -60,8 +72,9 @@ const SearchResults = (props) => {
                   <div className={styles.cardRowWrapper}>
                     <BiVideo className={styles.cardIcon}/>
                     <p className={styles.eventStartTime}>
-                      {moment(e.startTime).format("ddd, MMM D, LT")}
+                      {eventTime(e.startTime)}
                     </p>
+                    {/* <p className={styles.eventStartTime}>{moment(e.startTime).format("ddd, MMM D, LT")}</p> */}
                   </div>
                   
                   {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
