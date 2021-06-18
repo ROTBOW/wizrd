@@ -31,7 +31,6 @@ class EventFormClass extends React.Component {
     this.props.createEvent(submitForm)
       .then((event) => {
         this.props.updateModal();
-        console.log(event);
         this.props.history.replace(`/events/${event.event.data._id}`)
       })
   }

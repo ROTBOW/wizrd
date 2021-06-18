@@ -5,7 +5,9 @@ import { fetchLiveEvents, fetchFutureEvents } from '../../util/eventUtil';
 import Modal from '../modal/modal';
 import { updateModal } from '../../actions/uiActions';
 import { createEvent } from '../../actions/eventsActions';
-import { BiUser, BiVideo } from "react-icons/bi";
+import { BiUser, BiVideo } from 'react-icons/bi';
+import { GiWizardStaff } from 'react-icons/gi'
+import { FaHatWizard } from 'react-icons/fa'
 import styles from './HomeFeed.module.scss';
 import moment from 'moment';
 import avatars from '../../assets/avatars/avatars';
@@ -23,7 +25,11 @@ const HomeFeed = (props) => {
       });
     props.fetchFutureEvents()
       .then(events => {
-        setFutureEvents(events.data)
+        setFutureEvents(events.data.sort(function(a, b) {
+          const first = a['startTime'];
+          const second = b['startTime'];
+          return (first > second) ? 1 : (first < second) ? -1 : 0;
+        }))
       })
     }
     return () => isOnHomeFeed = false;
@@ -65,7 +71,7 @@ const HomeFeed = (props) => {
                   </div>
                   <div className={styles.cardRowWrapper}>
                     <BiVideo className={styles.cardIcon}/>
-                    <p className={styles.eventStartTime}>{moment(e.startTime).format("ddd, MMM D, LT")}</p>
+                    <p className={styles.eventStartTime}>Live now</p>
                   </div>
                   {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
                 </li>

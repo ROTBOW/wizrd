@@ -1,6 +1,6 @@
-import red from './avatarRed.png';
-import green from './avatarGreen.png';
-import yellow from './avatarYellow.png';
+// import red from './avatarRed.png';
+// import green from './avatarGreen.png';
+// import yellow from './avatarYellow.png';
 import deer from './deer.png';
 import fox from './fox.png';
 import hedgehog from './hedgehog.png';
@@ -17,7 +17,4 @@ export default [
     hedgehog,
     owl,
     racoon
-    // green,
-    // yellow,
-    // red
 ];

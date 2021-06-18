@@ -24,7 +24,6 @@ const Chat = (props) => {
   const [socket, setSocket] = useState(null);
   const socketRef = useRef();
 
-  console.log(props.user)
 
   useEffect(() => {
 
