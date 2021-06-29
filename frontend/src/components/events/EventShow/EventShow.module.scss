@@ -64,28 +64,12 @@
 }
 
 .broadcastInfo {
-  position: relative;
-  margin-top: 1.4rem;
-  margin-left: 1.2rem;
-  margin-right: 1.2rem;
-  padding-bottom: 2rem;
-}
-
-.broadcastInfoBefore {
-  display: flex;
-  position: relative;
-  // top: -50px;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 0;
-  // align-items: flex-start;
-  // justify-content: flex-start;
-  // flex-direction: column;
-  // align-items: center;
-  // align-self: flex-start;
+  margin: 32px 64px;
 }
 
 .infoHeader {
   display: flex;
+  flex-direction: row;
   align-items: center;
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 1.7rem;
@@ -117,6 +101,7 @@
 
 .hostNameContainer {
   display: flex;
+  align-items: center;
   font-size: 1.5rem;
 }
 
@@ -141,7 +126,13 @@
   color: #767676;
 }
 
+.viewerCount {
+  margin-left: 0.4rem;
+}
+
 .userCountIcon {
+  height: 1.8rem;
+  width: 1.8rem;
   color: #b6b6b6;
 }
 
@@ -255,16 +246,35 @@
 
 }
 
+.editEventButton {
+  padding: 0 1.4rem;
+  background-color: $emerald-600;
+  color: white;
+  border-radius: 0.8rem;
+  font-size: 1.5rem;
+  height: 4rem;
+  border: none;
+  box-shadow: none;
+  transition: all 0.1s linear;
+  &:hover {
+    filter: brightness(95%);
+  }
+  &:active {
+    filter: brightness(90%);
+    transform: scale(0.95);
+    box-shadow: none;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+
+}
+
 .beforePage {
-  margin: 0;
-  position: absolute;
-  top: 6.4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .beforeWrapper {
@@ -279,35 +289,40 @@
   align-self: center;
 }
 
-.imageBox {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+.imageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;;
   align-items: center;
   text-align: center;
   width: 100%;
   height: 60rem;
-  position: relative;
-  // top: -60px;
-  z-index: -50;
+
+  overflow: hidden;
 
   p {
-    grid-row: 1;
-    grid-column: 1;
     color: white;
     font-size: 4rem;
     width: 100%;
+    z-index: 1;
   }
 
   .beforeImage {
-    
-    grid-row: 1;
-    grid-column: 1;
-    // position: relative;
+    position: absolute;
     height: 60rem;
-    // height: 100%;
     object-fit: cover;
-    // border-radius: 0 0 12px 12px;
   }
 }
 
+.errorWrapper {
+  width: 100%;
+  height: 60rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  max-width: 60ch;
+  font-size: 24px;
+}

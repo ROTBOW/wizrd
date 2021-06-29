@@ -1,14 +1,12 @@
 import React from "react";
 import Chat from '../../chat/Chat';
 import Video from '../../video/Video/Video';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import styles from './EventShowStyles.module.scss';
+import { BsPeopleFill } from 'react-icons/bs'
+import styles from './EventShow.module.scss';
 import Moment from 'moment';
 import MomentTimezone from 'moment-timezone';
-import { updateEvent } from "../../../actions/eventsActions";
 import avatars from '../../../assets/avatars/avatars';
-import forest from '../../../assets/sebastian-unrau-sp-p7uuT0tw-unsplash (1).jpg';
+import forest from '../../../assets/images/forest.jpg';
 import Modal from '../../modal/modal';
 
 
@@ -50,7 +48,7 @@ class EventShow extends React.Component {
 
       if ((Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) || (this.props.event.isOver)) {
         return (
-          <div>
+          <>
             {this.props.modal === 'editEvent' ?
             <Modal 
               name='editEvent'
@@ -58,20 +56,24 @@ class EventShow extends React.Component {
               updateEvent={this.props.updateEvent}
               event={event}
             /> : null}
+
             <div className={styles.beforePage}>
-              <div className={styles.imageBox}>
+
+              <div className={styles.imageWrapper}>
                 <img src={forest} className={styles.beforeImage}/>
                 {(Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) ? 
                 <p>The Magic Awaits...</p> :
                 <p>This stream has ended. Head back to the home page to discover more Wizrdry...</p>}
               </div>
-              <div className={`${styles.broadcastInfo} ${styles.broadcastInfoBefore}`}>
+
+              <div className={styles.broadcastInfo}>
                   <div className={styles.infoHeader}>
                     <div className={styles.hostAvatarWrapper}>
                       {event.hostAvatar ? 
                       <img src={avatars[Number(event.hostAvatar)]} className={styles.hostAvatar}/> :
                       ''}
                     </div>
+                    
                     <div className={styles.broadcastHeading}>
                       <div className={styles.hostNameContainer}>
                         <span className={styles.hostName}>
@@ -81,16 +83,18 @@ class EventShow extends React.Component {
                       <div className={styles.eventHeading}>
                         {event.title}
                       </div>
-                      {isHost ? 
-                        <div className={styles.buttonContainer}>
-                          <button onClick={() => this.props.updateModal('editEvent')}>
-                            Edit Event
-                          </button>
-                        </div> :
-                        null
-                      }
                     </div>
-                    </div>
+
+                    {isHost ? 
+                      <div className={styles.buttonContainer}>
+                        <button onClick={() => this.props.updateModal('editEvent')} className={styles.editEventButton}>
+                          Edit Event
+                        </button>
+                      </div> :
+                      null
+                    }
+                  </div>
+
                   <div className={styles.textInfo}>
                     <div className={styles.eventDescription}>
                       {event.description}
@@ -115,9 +119,10 @@ class EventShow extends React.Component {
                     </ul>
                   </div>
                 </div>
+                
             </div>
-          </div>
-        )
+          </>
+        );
       } else {
         return (
           <div className={styles.eventShowContainer}>
@@ -142,8 +147,9 @@ class EventShow extends React.Component {
                           {event.hostUsername}
                         </span>
                         <span className={styles.userCount}>
-                          <FontAwesomeIcon className={styles.userCountIcon} icon={faUserFriends} /> <span id="viewerCount">0</span>
+                          <BsPeopleFill className={styles.userCountIcon}/>
                         </span>
+                        <div class={styles.viewerCount} id="viewerCount">0</div>
                       </div>
                       <div className={styles.eventHeading}>
                         {event.title}
@@ -189,10 +195,16 @@ class EventShow extends React.Component {
               </div>
             </div>
           </div>
-        )
+        );
       }
     } else {
-      return <div>I can't find any event info! make sure your on the right page.</div>
+      return (
+        <div className={styles.errorWrapper}>
+          <p className={styles.error}>
+            I can't find any event info! make sure your on the right page.
+          </p>
+        </div>
+      );
     }
   }
 }
