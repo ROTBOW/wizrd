@@ -6,7 +6,7 @@ const EventForm = (props) => {
   const [title, setTitle] = useState(props.event.title || '');
   const [topic, setTopic] = useState(props.event.topic || '');
   const [description, setDescription] = useState(props.event.description || '');
-  const [startTime, setStartTime] = useState(moment().tz('America/Los_Angeles').format('YYYY-MM-DDTkk:mm'));
+  const [startTime, setStartTime] = useState(moment(props.event.startTime).format('YYYY-MM-DDTkk:mm') || moment().tz('America/Los_Angeles').format('YYYY-MM-DDTkk:mm'));
   const [liveToggle, setLiveToggle] = useState(false);
   const [errors, setErrors] = useState(props.errors);
 
