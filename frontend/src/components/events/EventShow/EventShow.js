@@ -28,9 +28,7 @@ class EventShow extends React.Component {
   }
 
   onEndEvent = (e) => {
-
     if (window.confirm('Are you sure you want to end the event?')) {
-      console.log('ending event')
       const event = {
         ...this.props.event,
         isOver: true

@@ -22,7 +22,6 @@ const PEER_CONFIG = process.env.NODE_ENV === "production" ?
   };
 
 const Video = ({ eventId, isHost }) => {
-  console.log({ eventId, isHost })
 
   const [stream, setStream] = useState(null);
   const socketRef = useRef();
@@ -33,6 +32,15 @@ const Video = ({ eventId, isHost }) => {
   useEffect(() => {
     if (!isHost) {
       receiveBroadcast();
+    } else {
+      socketRef.current = io.connect('/');
+      socketRef.current.emit('joining event', { eventId, isHost });
+      socketRef.current.on('viewer count', (viewCount) => {
+          
+          const viewerCountEl = document.getElementById('viewerCount');
+          viewerCountEl.innerHTML = viewCount;
+          socketRef.current.emit('update viewer count', viewCount)
+      })
     }
     return () => destroyRefs();
   }, [])
@@ -48,35 +56,29 @@ const Video = ({ eventId, isHost }) => {
   }, [])
 
   function startBroadcast() {
-    socketRef.current = io.connect('/');
+
+    console.log('emitting')
+
+
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       setStream(stream)
 
       const peer = new Peer(PEER_CONFIG)
       peerRef.current = peer;
 
-      socketRef.current.emit('joining event', eventId);
       socketRef.current.on('user request stream', (userId) => {
         peer.connect(userId)
       })
-      socketRef.current.on('user disconnected', () => {
-        const viewerCountEl = document.getElementById('viewerCount');
-        viewerCountEl.innerHTML = parseInt(viewerCountEl.innerHTML) - 1;
-        socketRef.current.emit('update viewer count', parseInt(viewerCountEl.innerHTML));
-      })
-      
-      
       
       peer.on('open', () => socketRef.current.emit('host joined', peer.id))
       peer.on('connection', connection => {
         peer.call(connection.peer, stream);
         peersRef.current.add(peer)
 
-    
-
-        const viewerCountEl = document.getElementById('viewerCount');
-        viewerCountEl.innerHTML = parseInt(viewerCountEl.innerHTML) + 1;
-        socketRef.current.emit('update viewer count', parseInt(viewerCountEl.innerHTML))
+  
+        // const viewerCountEl = document.getElementById('viewerCount');
+        // viewerCountEl.innerHTML = parseInt(viewerCountEl.innerHTML) + 1;
+        // socketRef.current.emit('update viewer count', parseInt(viewerCountEl.innerHTML))
       })
       peer.on('disconnected', () => {
         socketRef.current.emit('host disconnected')
@@ -94,11 +96,10 @@ const Video = ({ eventId, isHost }) => {
     const peer = new Peer(PEER_CONFIG)
     peerRef.current = peer;
 
-    socketRef.current.emit('joining event', eventId);
+    socketRef.current.emit('joining event', { eventId });
     socketRef.current.on('host disconnected', () => setStream(null))
     socketRef.current.on('host request connection', hostId => peer.connect(hostId))
     socketRef.current.on('viewer count', (viewerCount) => {
-      console.log({ viewerCount})
       const viewerCountEl = document.getElementById('viewerCount');
       viewerCountEl.innerHTML = viewerCount;
     })
@@ -109,9 +110,7 @@ const Video = ({ eventId, isHost }) => {
       call.answer();
       call.on('stream', stream => setStream(stream))
     })
-    peer.on('disconnected', () => {
-      socketRef.current.emit('user disconnected')
-    })
+
   }
 
   function destroyRefs() {
@@ -149,7 +148,7 @@ const Video = ({ eventId, isHost }) => {
   const StreamVideo = () => (
     stream ?
       <video
-        muted
+        muted={isHost}
         autoPlay
         playsInline
         className={styles.video}
