@@ -25,8 +25,6 @@ const SearchResults = (props) => {
   }, [props.events, props.errors])
 
   const auth = (eventId) => {
-    // console.log('auth');
-    // e.preventDefault();
     if (!props.isLoggedIn) {
       props.updateModal('sessionModal');
     } else {
