@@ -5,7 +5,13 @@ Wizrd is an event-driven streaming and messaging application for educational res
 ## Group Members
 
 <!-- Add github, linkedin, angellist links here -->
-**Brandon Fang, Melissa Flynn, Inho Lee, Josiah Leon**
+- FirstName LastName: [LinkedIn](), [GitHub](), [AngelList](), [Email]()
+
+Brandon Fang (@brandonfang): [LinkedIn](), [GitHub](), [AngelList](), [Email]()
+
+
+
+
 
 ## Overview
 
@@ -23,6 +29,7 @@ We will need to:
 - [x] Events (create, update, delete)
 - [x] Chat and messaging
 - [x] Video streaming
+- [x] Video error handling
 - [x] Deployment with Heroku
 - [x] Production README
 
@@ -31,24 +38,30 @@ We will need to:
 - [ ] Notifications
 - [ ] Share screen on stream
 
-## Backend: MongoDB/Express/Socket.io/WebRTC
+## Backend Technologies: MongoDB/Express/Socket.io/WebRTC
 
-We will be using MongoDB for the database and Mongoose as our ODM. Express will be used for our backend framework.
+We will be using MongoDB as our database and Mongoose as our ODM. 
 
-Socket.io will be used for messaging and streaming. PeerJS/WebRTC will be used to stream videos to users.
+Express will be used for our backend Node.js framework.
 
-Technical Challenges:
+Socket.io will be used for messaging and streaming. 
+
+PeerJS/WebRTC will be used to stream videos to users.
+
+**Technical Challenges:**
 - Secure user authentication
 - Setting up Socket.io to work with chatting
 - Setting up Socket.io and PeerJS to be able to create rooms and have multiple viewers connected to same stream
 - Implementing event creation, update, and deletion
 
-## Frontend: React/Redux/Sass
+## Frontend Technologies: React/Redux/Sass
 
-We will be using React/Redux and Sass modules to create the user authentication flow and streaming events flow.
+We will be using React to create and manage our UI components, Redux to keep track of state, and Sass modules to style our React components.
 
-Technical Challenges:
-- Reading data from MongoDB and keeping redux state normalized
+Frontend features include the user authentication flow and event-streaming flow.
+
+**Technical Challenges:**
+- Reading data from MongoDB and keeping Redux state normalized
 - Creating user authentication forms
 - Creating streaming event forms
 - Subscribing to backend for real-time updates
