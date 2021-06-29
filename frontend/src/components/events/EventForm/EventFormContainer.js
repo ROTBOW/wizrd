@@ -5,7 +5,7 @@ import EventForm from './EventForm';
 const mapStateToProps = (state) => ({
   currentUser: state.session.user,
   errors: state.errors.session,
-  event: state.entities.events
+  // event: state.entities.events
 });
 
 const mapDispatchToProps = (dispatch) => ({

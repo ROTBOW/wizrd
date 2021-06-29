@@ -46,6 +46,7 @@ class EventShow extends React.Component {
       let event = this.props.event
       let startTime = event.startTime;
       const isHost = this.props.user.id === this.props.event.hostId;
+      console.log(event);
 
       if ((Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) || (this.props.event.isOver)) {
         return (
@@ -55,6 +56,7 @@ class EventShow extends React.Component {
               name='editEvent'
               updateModal={this.props.updateModal}
               updateEvent={this.props.updateEvent}
+              event={event}
             /> : null}
             <div className={styles.beforePage}>
               <div className={styles.imageBox}>
@@ -116,12 +118,6 @@ class EventShow extends React.Component {
             </div>
           </div>
         )
-      // } else if (this.props.event.isOver) {
-      //   return (
-      //     <div>
-      //       The event is over.
-      //     </div>
-      //   )
       } else {
         return (
           <div className={styles.eventShowContainer}>

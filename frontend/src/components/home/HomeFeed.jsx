@@ -43,6 +43,7 @@ const HomeFeed = (props) => {
           updateModal={props.updateModal} 
           createEvent={props.createEvent}
           history={props.history}
+          event={{}}
         /> : ''}
 
       <div className={styles.headerWrapper}>

@@ -3,9 +3,9 @@ import styles from './EventForm.module.scss';
 import moment from 'moment';
 
 const EventForm = (props) => {
-  const [title, setTitle] = useState('');
-  const [topic, setTopic] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState(props.event.title || '');
+  const [topic, setTopic] = useState(props.event.topic || '');
+  const [description, setDescription] = useState(props.event.description || '');
   const [startTime, setStartTime] = useState(moment().tz('America/Los_Angeles').format('YYYY-MM-DDTkk:mm'));
   const [liveToggle, setLiveToggle] = useState(false);
   const [errors, setErrors] = useState(props.errors);
@@ -20,32 +20,46 @@ const EventForm = (props) => {
     setLiveToggle(!liveToggle);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, type) => {
     e.preventDefault();
     let event;
-    if (!liveToggle) {
+    if (type === 'create') {
+      if (!liveToggle) {
 
-      event = {
-        title,
-        topic,
-        description,
-        startTime: moment(startTime).tz('America/Los_Angeles').format()
-      };
-    } else {
-      event = {
+        event = {
+          title,
+          topic,
+          description,
+          startTime: moment(startTime).tz('America/Los_Angeles').format()
+        };
+      } else {
+        event = {
+          title,
+          topic,
+          description,
+          startTime: moment().tz('America/Los_Angeles').format()
+        };
+      }
+
+      props.createEvent(event)
+        .then((event) => {
+          props.updateModal();
+          props.history.replace(`/events/${event.event.data._id}`)
+        })
+    } else if (type === 'update') {
+
+      let event = {
+        _id: props.event._id,
         title,
         topic,
         description,
         startTime: moment().tz('America/Los_Angeles').format()
-      };
+      }
+      props.updateEvent(event)
+        .then(() => {
+          props.updateModal();
+        })
     }
-
-
-    props.createEvent(event)
-      .then((event) => {
-        props.updateModal();
-        props.history.replace(`/events/${event.event.data._id}`)
-      })
   }
 
   const renderErrors = () => {
@@ -62,8 +76,8 @@ const EventForm = (props) => {
 
   return (
     <div className={styles.formWrapper}>
-      <form className={styles.form} onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
-        <h2>Create an Event</h2>
+      <form className={styles.form} onClick={(e) => e.stopPropagation()}>
+        <h2>{props.name === 'createEvent' ? 'Create an Event' : 'Edit Your Event'}</h2>
 
         {renderErrors()}
 
@@ -71,6 +85,7 @@ const EventForm = (props) => {
           <input
             type='text'
             placeholder='Give your event an eye-catching title!'
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
           />
@@ -80,6 +95,7 @@ const EventForm = (props) => {
           <input
             type='text'
             placeholder="What's the topic?"
+            value={topic}
             required
             onChange={(e) => setTopic(e.target.value)}
           />
@@ -89,6 +105,7 @@ const EventForm = (props) => {
           <textarea
             rows='3'
             placeholder='Give your event a longer description (optional)'
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
@@ -101,7 +118,7 @@ const EventForm = (props) => {
               <button className={styles.toggleButton} onClick={(e) => handleToggle(e)}>Switch to future event</button>
               <p className={styles.liveInfo}>Your event will start as soon as you press <em>Create a live event now</em></p>
             </div>
-            <button className={styles.submitButton} type='submit'>Create a live event now</button>
+            <button className={styles.submitButton} onClick={(e) => handleSubmit(e, 'create')}>Create a live event now</button>
           </>
         ) : (
           <>
@@ -118,7 +135,10 @@ const EventForm = (props) => {
                 />
               </label>
             </div>
-            <button className={styles.submitButton} type='submit'>Create an event for later</button>
+            {props.name === 'createEvent' ? 
+              <button className={styles.submitButton} onClick={(e) => handleSubmit(e, 'create')}>Create an event for later</button>
+              : <button className={styles.submitButton} onClick={(e) => handleSubmit(e, 'update')}>Update Event</button>
+            }
           </>
         )}
       </form>

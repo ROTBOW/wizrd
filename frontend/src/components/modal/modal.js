@@ -10,13 +10,13 @@ const Modal = (props) => {
 
   switch (name) {
     case 'createEvent':
-      modal = <EventFormContainer {...otherProps} />;
+      modal = <EventFormContainer {...otherProps} name={name}/>;
       break;
     case 'sessionModal':
       modal = <SessionModalContainer {...otherProps} />;
       break;
     case 'editEvent':
-      modal = '';
+      modal = <EventFormContainer {...otherProps} name={name}/>;
       break;
     default: 
       return;
