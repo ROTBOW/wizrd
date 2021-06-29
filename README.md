@@ -1,17 +1,18 @@
 # Wizrd
 
-Wizrd is an event-driven streaming and messaging application for educational resources.
+Wizrd is an event-driven streaming and messaging application for educational resources. By going live or scheduling future events, instructors and creators can connect with their audiences through real-time video streaming and chat.
 
 ## Group Members
 
 <!-- Add github, linkedin, angellist links here -->
-- FirstName LastName: [LinkedIn](), [GitHub](), [AngelList](), [Email]()
-
-Brandon Fang (@brandonfang): [LinkedIn](), [GitHub](), [AngelList](), [Email]()
-
-
-
-
+- **FirstName LastName** 
+  - [GitHub](), [LinkedIn](),  [AngelList](), [Email]()
+- **FirstName LastName** 
+  - [GitHub](), [LinkedIn](),  [AngelList](), [Email]()
+- **FirstName LastName** 
+  - [GitHub](), [LinkedIn](),  [AngelList](), [Email]()
+- **FirstName LastName** 
+  - [GitHub](), [LinkedIn](),  [AngelList](), [Email]()
 
 ## Overview
 
@@ -48,7 +49,8 @@ Socket.io will be used for messaging and streaming.
 
 PeerJS/WebRTC will be used to stream videos to users.
 
-**Technical Challenges:**
+### Technical Challenges
+
 - Secure user authentication
 - Setting up Socket.io to work with chatting
 - Setting up Socket.io and PeerJS to be able to create rooms and have multiple viewers connected to same stream
@@ -60,7 +62,8 @@ We will be using React to create and manage our UI components, Redux to keep tra
 
 Frontend features include the user authentication flow and event-streaming flow.
 
-**Technical Challenges:**
+### Technical Challenges
+
 - Reading data from MongoDB and keeping Redux state normalized
 - Creating user authentication forms
 - Creating streaming event forms
