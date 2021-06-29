@@ -48,6 +48,8 @@ app.use('/api/events', events);
 
 
 const hosts = {};
+const streams = {};
+
 
 io.on('connection', (socket) => {
 
@@ -73,29 +75,47 @@ io.on('connection', (socket) => {
   })
 
   // Stream sockets
-  socket.on('joining event', (eventId) => {
+  socket.on('joining event', ({ eventId, isHost}) => {
     socket.join(eventId);
+
+    if (isHost) {
+      if (streams[eventId]) {
+        streams[eventId.host] = socket.id
+      } else {
+        streams[eventId] = {
+          host: null,
+          users: []
+        }
+        streams[eventId].host = socket.id
+      }
+    } else {
+      if (streams[eventId]) {
+        streams[eventId].users.push(socket.id)
+      } else {
+        streams[eventId] = {
+          host: null,
+          users: []
+        }
+        streams[eventId].users.push(socket.id)
+      }
+    }
+    io.to(eventId).emit('viewer count', streams[eventId].users.length)
+
     socket.on('stream', (data) => io.to(eventId).emit('stream', data))
-    socket.on('host joined', (hostId) => {
-      hosts[eventId] = socket.id;
-      io.to(eventId).emit('host request connection', hostId)
-    })
+    socket.on('host joined', (hostId) => io.to(eventId).emit('host request connection', hostId))
     socket.on('user joined', (userId) => io.to(eventId).emit('user request stream', userId))
     socket.on('host disconnected', () => io.to(eventId).emit('host disconnected'))
     socket.on('disconnect', () => {
-      if (socket.id === hosts[eventId]) {
-        console.log('here')
-        delete hosts[eventId]
+      if (socket.id === streams[eventId].host) {
+        streams[eventId].host = null
         io.to(eventId).emit('host disconnected')
       } else {
-        io.to(eventId).emit('user disconnected')
+        streams[eventId].users = streams[eventId].users.filter(user => user !== socket.id);
+        io.to(eventId).emit('viewer count', streams[eventId].users.length)
+        
       }
     })
-    socket.on('user disconnected', () => console.log('disconnecasdjflkasdklfjlsdkf'))
-    socket.on('update viewer count', (viewerCount) => {
-      console.log(viewerCount)
-      io.to(eventId).emit('viewer count', viewerCount)
-    })
+
   })
 
 })
