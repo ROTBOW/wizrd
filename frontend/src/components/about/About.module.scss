@@ -39,6 +39,8 @@
 .memberPhoto {
   border-radius: 8px;
   margin-bottom: 16px;
+  height: 100px;
+  width: 100px;
 }
 
 .memberName {
@@ -48,4 +50,6 @@
 }
 
 .memberParagraph {
+  display: flex;
+  flex-direction: column;
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import styles from './About.module.scss';
+import melissa from '../../assets/images/Melissa-pic.jpeg';
 
 const About = () => {
   
@@ -15,7 +16,7 @@ const About = () => {
       <div className={styles.about}>
         <h1>About</h1>
         <p>
-           Welcome to Wizrd! Wizrd is a streaming platform for the teacher inside all of us. 
+           Welcome to Wizrd! Wizrd is a streaming platform for the teacher inside all of us. It offers users the ability to create and host live streaming events to teach other users about their passions! Do you have a really great recipe to share? Are you an impressive dog trainer? Dying to share the secrets you used to learn to play guitar? You name it! Viewers can watch the livestream from the host and join in the chat room to ask questions or make general commentary. The magic of every day learning is here, what are you waiting for?
         </p>
 
         <h2 className={styles.subtitle}>Meet the Team</h2>
@@ -25,7 +26,8 @@ const About = () => {
             <img className={styles.memberPhoto} src="https://images.unsplash.com/photo-1581464647110-26e129ce2d02?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" />
             <h3 className={styles.memberName}>Brandon Fang</h3>
             <p className={styles.memberParagraph}>
-              Y'all need to put your own crap here, fugiat iure ea sunt dolor ducimus voluptas id temporibus reprehenderit neque saepe ab atque quae quisquam iusto. Ex earum recusandae minus deserunt quibusdam sunt in, deleniti accusantium reiciendis quos omnis ea odit labore non placeat eius unde eveniet quisquam error rerum dolore, minima totam!
+              <a href="">LinkedIn</a>
+              <a href="">Github</a>
             </p>
           </div>
           
@@ -33,15 +35,17 @@ const About = () => {
             <img className={styles.memberPhoto} src="https://images.unsplash.com/photo-1581464647110-26e129ce2d02?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" />
             <h3 className={styles.memberName}>Josiah Leon</h3>
             <p className={styles.memberParagraph}>
-            Y'all need to put your own crap here, fugiat iure ea sunt dolor ducimus voluptas id temporibus reprehenderit neque saepe ab atque quae quisquam iusto. Ex earum recusandae minus deserunt quibusdam sunt in, deleniti accusantium reiciendis quos omnis ea odit labore non placeat eius unde eveniet quisquam error rerum dolore, minima totam!
+              <a href="">LinkedIn</a>
+              <a href="">Github</a>
             </p>
           </div>
 
           <div className={styles.memberWrapper}>
-            <img className={styles.memberPhoto} src="https://images.unsplash.com/photo-1581464647110-26e129ce2d02?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" />
+            <img className={styles.memberPhoto} src={melissa} alt="" />
             <h3 className={styles.memberName}>Melissa Flynn</h3>
             <p className={styles.memberParagraph}>
-            Y'all need to put your own crap here, fugiat iure ea sunt dolor ducimus voluptas id temporibus reprehenderit neque saepe ab atque quae quisquam iusto. Ex earum recusandae minus deserunt quibusdam sunt in, deleniti accusantium reiciendis quos omnis ea odit labore non placeat eius unde eveniet quisquam error rerum dolore, minima totam!
+              <a href="https://www.linkedin.com/in/melissa-flynn-372b84b7/">LinkedIn</a>
+              <a href="https://github.com/melflynn">Github</a>
             </p>
           </div>
 
@@ -49,7 +53,8 @@ const About = () => {
             <img className={styles.memberPhoto} src="https://images.unsplash.com/photo-1581464647110-26e129ce2d02?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" />
             <h3 className={styles.memberName}>Inho Lee</h3>
             <p className={styles.memberParagraph}>
-            Y'all need to put your own crap here, fugiat iure ea sunt dolor ducimus voluptas id temporibus reprehenderit neque saepe ab atque quae quisquam iusto. Ex earum recusandae minus deserunt quibusdam sunt in, deleniti accusantium reiciendis quos omnis ea odit labore non placeat eius unde eveniet quisquam error rerum dolore, minima totam!
+              <a href="">LinkedIn</a>
+              <a href="">Github</a>
             </p>
           </div>
         </div>
