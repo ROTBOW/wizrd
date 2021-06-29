@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 // Get all events
 router.put('/:time', (req, res) => {
   if (req.params.time === 'live') {
-    Event.find({startTime: {$lte: new Date()}}, {isOver: false})
+    Event.find({$and: [{startTime: {$lte: new Date()}}, {isOver: false}]})
       .then((events) => res.json(events))
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
   } else if (req.params.time === 'future') {
