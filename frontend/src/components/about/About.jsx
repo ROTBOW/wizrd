@@ -13,9 +13,9 @@ const About = () => {
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.about}>
-        <h1>About Us</h1>
+        <h1>About</h1>
         <p>
-          Consequuntur beatae saepe incidunt quidem voluptatum, ab odit earum optio molestiae, autem exercitationem enim est quam eligendi ea, sequi corporis mollitia. Fugiat cupiditate quae blanditiis accusamus laborum, quidem dolorem reiciendis sequi, ipsa eum recusandae officia voluptas. Possimus molestias ducimus nam, ut eum, eaque distinctio eveniet ab eius, tempore cupiditate mollitia veniam cum facere autem fugit assumenda voluptate commodi neque? Vero adipisci porro similique qui dicta. Facilis, aliquid dolorum? 
+           Welcome to Wizrd! Wizrd is a streaming platform for the teacher inside all of us. 
         </p>
 
         <h2 className={styles.subtitle}>Meet the Team</h2>
