@@ -74,7 +74,6 @@ const Chat = (props) => {
     };
   };
 
-  console.log(messages)
   return (
     <div className={styles.chatbox}>
       <div className={styles.chatHeader}>
@@ -84,7 +83,6 @@ const Chat = (props) => {
         {
           messages.slice().reverse().map((message, i) => {
             const usernameStyle = [ styles.username ]
-            console.log(message)
             usernameStyle.push(COLORS[stringHash(message[0]) % COLORS.length]);
             return (
               <li key={i} className={styles.message}>

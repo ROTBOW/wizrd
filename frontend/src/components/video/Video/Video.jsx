@@ -22,7 +22,7 @@ const PEER_CONFIG = process.env.NODE_ENV === "production" ?
   };
 
 const Video = ({ eventId, isHost }) => {
-  console.log({ eventId, isHost })
+  // console.log({ eventId, isHost })
 
   const [stream, setStream] = useState(null);
   const socketRef = useRef();
@@ -98,7 +98,7 @@ const Video = ({ eventId, isHost }) => {
     socketRef.current.on('host disconnected', () => setStream(null))
     socketRef.current.on('host request connection', hostId => peer.connect(hostId))
     socketRef.current.on('viewer count', (viewerCount) => {
-      console.log({ viewerCount})
+      // console.log({ viewerCount})
       const viewerCountEl = document.getElementById('viewerCount');
       viewerCountEl.innerHTML = viewerCount;
     })

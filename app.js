@@ -40,35 +40,30 @@ if (process.env.NODE_ENV === 'production') {
   app.use('/peerjs', peerServer)
 }
 
-// Add api routes
 app.use('/api/users', users);
 app.use('/api/events', events);
-
-
-
 
 const hosts = {};
 
 io.on('connection', (socket) => {
-
   // Chat sockets
-  console.log('a user connected')
+  // console.log('a user connected')
   socket.on('disconnect', () => {
-    console.log('user disconnected')
+    // console.log('user disconnected')
   });
 
   socket.on("join chat", ({chatId, username}) => {
     socket.join(chatId);
-    console.log(username + " joined chatroom: " + chatId);
+    // console.log(username + " joined chatroom: " + chatId);
   })
 
   socket.on("leave chat", ({chatId, username}) => {
     socket.leave(chatId);
-    console.log(username + " left chatroom: " + chatId);
+    // console.log(username + " left chatroom: " + chatId);
   })
 
   socket.on("chat message", ({chatId, msg, username, avatar}) => {
-    console.log('chat message: ' + msg);
+    // console.log('chat message: ' + msg);
     io.to(chatId).emit("new message", {username, msg, avatar});
   })
 
@@ -84,7 +79,7 @@ io.on('connection', (socket) => {
     socket.on('host disconnected', () => io.to(eventId).emit('host disconnected'))
     socket.on('disconnect', () => {
       if (socket.id === hosts[eventId]) {
-        console.log('here')
+        // console.log('here')
         delete hosts[eventId]
         io.to(eventId).emit('host disconnected')
       } else {
@@ -93,7 +88,7 @@ io.on('connection', (socket) => {
     })
     socket.on('user disconnected', () => console.log('disconnecasdjflkasdklfjlsdkf'))
     socket.on('update viewer count', (viewerCount) => {
-      console.log(viewerCount)
+      // console.log(viewerCount)
       io.to(eventId).emit('viewer count', viewerCount)
     })
   })
