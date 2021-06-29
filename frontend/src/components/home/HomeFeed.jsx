@@ -6,8 +6,6 @@ import Modal from '../modal/modal';
 import { updateModal } from '../../actions/uiActions';
 import { createEvent } from '../../actions/eventsActions';
 import { BiUser, BiVideo } from 'react-icons/bi';
-import { GiWizardStaff } from 'react-icons/gi'
-import { FaHatWizard } from 'react-icons/fa'
 import styles from './Feed.module.scss';
 import moment from 'moment';
 import avatars from '../../assets/avatars/avatars';
