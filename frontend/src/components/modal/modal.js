@@ -15,6 +15,9 @@ const Modal = (props) => {
     case 'sessionModal':
       modal = <SessionModalContainer {...otherProps} />;
       break;
+    case 'editEvent':
+      modal = '';
+      break;
     default: 
       return;
   }

@@ -9,6 +9,7 @@ import MomentTimezone from 'moment-timezone';
 import { updateEvent } from "../../../actions/eventsActions";
 import avatars from '../../../assets/avatars/avatars';
 import forest from '../../../assets/sebastian-unrau-sp-p7uuT0tw-unsplash (1).jpg';
+import Modal from '../../modal/modal';
 
 
 class EventShow extends React.Component {
@@ -42,21 +43,27 @@ class EventShow extends React.Component {
 
   render() {
     if (this.props.event !== undefined) {
-      console.log('event', this.props.event)
       let event = this.props.event
       let startTime = event.startTime;
       const isHost = this.props.user.id === this.props.event.hostId;
 
       if ((Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) || (this.props.event.isOver)) {
         return (
-          <div className={styles.beforePage}>
-            <div className={styles.imageBox}>
-              <img src={forest} className={styles.beforeImage}/>
-              {(Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) ? 
-              <p>The Magic Awaits...</p> :
-              <p>This stream has ended. Head back to the home page to discover more Wizrdry...</p>}
-            </div>
-            <div className={`${styles.broadcastInfo} ${styles.broadcastInfoBefore}`}>
+          <div>
+            {this.props.modal === 'editEvent' ?
+            <Modal 
+              name='editEvent'
+              updateModal={this.props.updateModal}
+              updateEvent={this.props.updateEvent}
+            /> : null}
+            <div className={styles.beforePage}>
+              <div className={styles.imageBox}>
+                <img src={forest} className={styles.beforeImage}/>
+                {(Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) ? 
+                <p>The Magic Awaits...</p> :
+                <p>This stream has ended. Head back to the home page to discover more Wizrdry...</p>}
+              </div>
+              <div className={`${styles.broadcastInfo} ${styles.broadcastInfoBefore}`}>
                   <div className={styles.infoHeader}>
                     <div className={styles.hostAvatarWrapper}>
                       {event.hostAvatar ? 
@@ -72,6 +79,14 @@ class EventShow extends React.Component {
                       <div className={styles.eventHeading}>
                         {event.title}
                       </div>
+                      {isHost ? 
+                        <div className={styles.buttonContainer}>
+                          <button onClick={() => this.props.updateModal('editEvent')}>
+                            Edit Event
+                          </button>
+                        </div> :
+                        null
+                      }
                     </div>
                     </div>
                   <div className={styles.textInfo}>
@@ -99,13 +114,14 @@ class EventShow extends React.Component {
                   </div>
                 </div>
             </div>
-        )
-      } else if (this.props.event.isOver) {
-        return (
-          <div>
-            The event is over.
           </div>
         )
+      // } else if (this.props.event.isOver) {
+      //   return (
+      //     <div>
+      //       The event is over.
+      //     </div>
+      //   )
       } else {
         return (
           <div className={styles.eventShowContainer}>

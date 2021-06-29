@@ -19,16 +19,6 @@ router.put('/:time', (req, res) => {
   } else {
     res.json({});
   }
-  // else if (req.params.time === 'notOver') {
-  //   Event.find({isOver: false})
-  //     .then((events) => res.json(events))
-  //     .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
-  // } else {
-  //   Event.find()
-  //     .sort({ date: -1 })
-  //     .then((events) => res.json(events))
-  //     .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
-  // }
 
 });
 
