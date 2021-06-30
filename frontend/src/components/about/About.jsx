@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
 import styles from './About.module.scss';
-import melissa from '../../assets/images/Melissa-pic.jpeg';
-import josiah from '../../assets/images/Josiah-crap-pic.png';
+import melissa from '../../assets/images/melissa.jpeg';
+import josiah from '../../assets/images/josiah.png';
 import joe from '../../assets/images/inho.jpeg';
+import brandon from '../../assets/images/brandon.jpg';
 
 const About = () => {
   
@@ -25,38 +25,46 @@ const About = () => {
 
         <div className={styles.teamGrid}>
           <div className={styles.memberWrapper}>
-            <img className={styles.memberPhoto} src="https://images.unsplash.com/photo-1581464647110-26e129ce2d02?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" />
+            <img className={styles.memberPhoto} src={brandon} alt="" />
             <h3 className={styles.memberName}>Brandon Fang</h3>
-            <p className={styles.memberParagraph}>
-              <a href="">LinkedIn</a>
-              <a href="">Github</a>
+            <p className={styles.memberInfo}>
+              <a href="https://www.linkedin.com/in/bdmfang">LinkedIn</a>
+            </p>
+            <p className={styles.memberInfo}>
+              <a href="https://github.com/brandonfang">GitHub</a>
             </p>
           </div>
           
           <div className={styles.memberWrapper}>
-            <img className={styles.memberPhotoJosiah} src={josiah} alt="" />
+            <img className={styles.memberPhoto} src={josiah} alt="" />
             <h3 className={styles.memberName}>Josiah Leon</h3>
-            <p className={styles.memberParagraph}>
+            <p className={styles.memberInfo}>
               <a href="https://www.linkedin.com/in/josiah-leon/">LinkedIn</a>
-              <a href="https://github.com/ROTBOW">Github</a>
+            </p>
+            <p className={styles.memberInfo}>
+              <a href="https://github.com/ROTBOW">GitHub</a>
             </p>
           </div>
 
           <div className={styles.memberWrapper}>
             <img className={styles.memberPhoto} src={melissa} alt="" />
             <h3 className={styles.memberName}>Melissa Flynn</h3>
-            <p className={styles.memberParagraph}>
+            <p className={styles.memberInfo}>
               <a href="https://www.linkedin.com/in/melissa-flynn-372b84b7/">LinkedIn</a>
-              <a href="https://github.com/melflynn">Github</a>
+            </p>
+            <p className={styles.memberInfo}>
+              <a href="https://github.com/melflynn">GitHub</a>
             </p>
           </div>
 
           <div className={styles.memberWrapper}>
             <img className={styles.memberPhoto} src={joe} alt="" />
             <h3 className={styles.memberName}>Inho Lee</h3>
-            <p className={styles.memberParagraph}>
+            <p className={styles.memberInfo}>
               <a href="https://www.linkedin.com/in/inhojl">LinkedIn</a>
-              <a href="https://github.com/inhojl">Github</a>
+            </p>
+            <p className={styles.memberInfo}>
+              <a href="https://github.com/inhojl">GitHub</a>
             </p>
           </div>
         </div>
