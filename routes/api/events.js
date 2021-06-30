@@ -67,7 +67,7 @@ router.put('/', (req, res) => {
       .catch((err) => res.status(404).json({ noEventsFound: 'No events found' }));
   } else if (req.body.host) {
     const match = new RegExp(req.body.host, 'i');
-    Event.find({hostUsername: match}, {isOver: false})
+    Event.find({$and: [{hostUsername: match}, {isOver: false}]})
       .then((events) => {
         if (events.length === 0) {
           return json({ noEventsFound: 'No events found' });
