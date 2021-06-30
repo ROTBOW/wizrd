@@ -91,7 +91,7 @@ const Navbar = (props) => {
 
               <div className={styles.divider}></div>
 
-              <ul className={styles.navList}>
+              <ul className={`${styles.navList} ${styles.right}`}>
                 <Link to="/about" className={styles.navLink}>
                   <li>About</li>
                 </Link>

@@ -56,12 +56,6 @@
   align-items: center;
 }
 
-@media (max-width: 840px) {
-  .searchWrapper {
-    display: none;
-  }
-}
-
 .searchBar {
   position: relative;
   width: 100%;
@@ -257,27 +251,26 @@ select {
   background: $emerald-400;
 }
 
-.navGreeting {
-  display: flex;
-  align-items: center;
-  font-weight: 400;
-  padding: 0 12px;
+@media (max-width: 840px) {
+  .logoWrapper {
+    margin-right: 8px;
+  }
+
+  .searchWrapper {
+    display: none;
+  }
+
+  .navWrapper {
+    margin-left: 0px;
+  }
 }
 
-.example-enter {
-  opacity: 0.01;
-}
+@media (max-width: 520px) {
+  .divider {
+    display: none;
+  }
 
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.example-leave {
-  opacity: 1;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+  .navList.right {
+    display: none;
+  }
 }

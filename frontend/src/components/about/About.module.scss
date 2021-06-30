@@ -32,7 +32,7 @@
   margin-bottom: 48px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 880px) {
   .teamGrid {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -44,6 +44,14 @@
   .teamGrid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 384px) {
+  .teamGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     gap: 32px;
   }
 }
