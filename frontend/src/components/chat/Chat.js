@@ -28,7 +28,7 @@ const Chat = (props) => {
     const inputElement = document.getElementById('chatInput');
     inputElement.addEventListener('keydown', (e) => {
       if(e.keyCode == 13) {
-        console.log('executing enter')
+        //console.log('executing enter')
         e.preventDefault();
         handleSubmit(e);
         inputElement.focus();
@@ -67,14 +67,12 @@ const Chat = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const input = document.getElementById("chatInput");
-    console.log(input.innerText)
     if (input.innerText) {
       socketRef.current.emit('chat message', { chatId: props.chatId, msg: input.innerText, username: props.user.username, avatar: props.user.avatar })
       input.innerText = '';
     };
   };
 
-  console.log(messages)
   return (
     <div className={styles.chatbox}>
       <div className={styles.chatHeader}>
@@ -84,7 +82,6 @@ const Chat = (props) => {
         {
           messages.slice().reverse().map((message, i) => {
             const usernameStyle = [ styles.username ]
-            console.log(message)
             usernameStyle.push(COLORS[stringHash(message[0]) % COLORS.length]);
             return (
               <li key={i} className={styles.message}>

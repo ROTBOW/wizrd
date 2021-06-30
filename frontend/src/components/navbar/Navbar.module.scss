@@ -5,6 +5,7 @@
   box-sizing: border-box;
   box-shadow: 0 0 16px 6px rgba(133, 119, 119, 0.03);
   border-bottom: 2px solid $emerald-500;
+  background: white;
 }
 
 .outer {
@@ -31,7 +32,7 @@
 
 .logo {
   display: block;
-  height: 36px;
+  height: 32px;
   width: auto;
   padding-right: 8px;
 }

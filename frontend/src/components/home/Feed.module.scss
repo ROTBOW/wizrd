@@ -70,7 +70,7 @@
 }
 
 .categoryTitle {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
   margin-bottom: 24px;
 }
@@ -78,7 +78,6 @@
 .gridWrapper {
   position: relative;
   width: 100%;
-  // overflow: visible;
 }
 
 .eventsGridVertical {
@@ -88,7 +87,6 @@
 }
 
 .eventsGridHorizontal {
-  
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
   // grid-template-rows: max-content;
@@ -98,8 +96,7 @@
   grid-template-rows: 1fr 1fr;
   gap: 24px;
   border-radius: 8px;
-  padding: 24px 8px;
-  // margin-left: -24px;
+  padding: 24px 12px;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -123,38 +120,8 @@
   }
 }
 
-// add media query
-
 .lastGrid {
   margin-bottom: 40px;
-}
-
-.gridBlurLeft {
-  position: absolute;
-  margin-left: -24px;
-  width: 24px;
-  height: 583px;
-  // background: green;
-  // backdrop-filter: blur(48px);
-  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
-    linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  mask-size: 100% 50%;
-  mask-repeat: no-repeat;
-  mask-position: left top, left bottom;
-  z-index: 1;
-}
-.gridBlurRight {
-  position: absolute;
-  margin-left: -24px;
-  width: 24px;
-  height: 583px;
-  // background: green;
-  // backdrop-filter: blur(48px);
-  // mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0)), linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
-  // mask-size: 100% 50%;
-  // mask-repeat: no-repeat;
-  // mask-position: left top, left bottom;
-  // z-index: 1;
 }
 
 .eventCard {
@@ -163,9 +130,8 @@
   background: $white;
   border-radius: 12px;
   padding: 24px 20px;
-  // padding: 28px 24px;
   box-shadow: 0px 0px 4px 4px rgba($emerald-100, 0.1);
-  transition: box-shadow .2s linear;
+  transition: box-shadow .2s;
   &:hover,
   &:focus {
     box-shadow: 0px 0px 4px 4px rgba($emerald-400, 0.2);

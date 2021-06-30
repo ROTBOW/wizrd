@@ -15,7 +15,6 @@ const LoginFormContent = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(loginButton, props.errors);
     if (loginButton === 'clicked' && Object.values(props.errors).length === 0) {
       props.updateModal();
     }
