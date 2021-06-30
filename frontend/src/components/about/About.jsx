@@ -39,7 +39,7 @@ const About = () => {
             <img className={styles.memberPhoto} src={josiah} alt="" />
             <h3 className={styles.memberName}>Josiah Leon</h3>
             <p className={styles.memberInfo}>
-              <a href="https://www.linkedin.com/in/josiah-leon/">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/josiah-leon">LinkedIn</a>
             </p>
             <p className={styles.memberInfo}>
               <a href="https://github.com/ROTBOW">GitHub</a>
@@ -50,7 +50,7 @@ const About = () => {
             <img className={styles.memberPhoto} src={melissa} alt="" />
             <h3 className={styles.memberName}>Melissa Flynn</h3>
             <p className={styles.memberInfo}>
-              <a href="https://www.linkedin.com/in/melissa-flynn-372b84b7/">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/melissa-flynn-372b84b7">LinkedIn</a>
             </p>
             <p className={styles.memberInfo}>
               <a href="https://github.com/melflynn">GitHub</a>

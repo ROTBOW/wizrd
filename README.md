@@ -5,14 +5,14 @@ Wizrd is an event-driven streaming and messaging application for educational res
 ## Group Members
 
 <!-- Add github, linkedin, angellist links here -->
-- **FirstName LastName** 
-  - [GitHub](), [LinkedIn](),  [AngelList](), [Email]()
-- **FirstName LastName** 
-  - [GitHub](), [LinkedIn](),  [AngelList](), [Email]()
-- **FirstName LastName** 
-  - [GitHub](), [LinkedIn](),  [AngelList](), [Email]()
-- **FirstName LastName** 
-  - [GitHub](), [LinkedIn](),  [AngelList](), [Email]()
+- **Inho Lee** 
+  - [GitHub](https://github.com/inhojl), [LinkedIn](https://www.linkedin.com/in/inhojl)
+- **Josiah Leon** 
+  - [GitHub](https://github.com/ROTBOW), [LinkedIn](https://www.linkedin.com/in/josiah-leon)
+- **Melissa Flynn** 
+  - [GitHub](https://github.com/melflynn), [LinkedIn](https://www.linkedin.com/in/melissa-flynn-372b84b7)
+- **Brandon Fang** 
+  - [GitHub](https://github.com/brandonfang), [LinkedIn](https://www.linkedin.com/in/bdmfang)
 
 ## Overview
 
