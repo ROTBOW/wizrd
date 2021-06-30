@@ -12,7 +12,9 @@ const EventForm = (props) => {
 
   useEffect(() => {
     // start a time ticker, but remove second argument
-    return () => setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
+    if (props.name === 'createEvent') {
+      return () => setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
+    }
   }, [title, topic, description, liveToggle]);
 
   const handleToggle = (e) => {
@@ -53,7 +55,7 @@ const EventForm = (props) => {
         title,
         topic,
         description,
-        startTime: moment().tz('America/Los_Angeles').format()
+        startTime: moment(startTime).tz('America/Los_Angeles').format()
       }
       props.updateEvent(event)
         .then(() => {
