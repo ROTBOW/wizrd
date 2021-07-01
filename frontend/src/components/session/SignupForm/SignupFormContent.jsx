@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
 import avatars from '../../../assets/avatars/avatars';
 
@@ -8,9 +7,8 @@ const SignupFormContent = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(props.errors);
   const [avatar, setAvatar] = useState('0');
-  const [loginButton, setLoginButton] = useState("");
 
   useEffect(() => {
     setErrors({});
@@ -54,7 +52,7 @@ const SignupFormContent = (props) => {
 
   const renderErrors = () => (
     <ul className={styles.errorsWrapper}>
-      {Object.values(props.errors).map((error, i) => (
+      {Object.values(errors).map((error, i) => (
         <li key={`error-${i}`}>
           {error}
         </li>
@@ -80,7 +78,7 @@ const SignupFormContent = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                <img src={avatars[0]} className={`${styles.avatarIcon} ${checkIfSelected(0)}`}/>
+                <img src={avatars[0]} alt='' className={`${styles.avatarIcon} ${checkIfSelected(0)}`}/>
               </label>
               
               <label>
@@ -91,7 +89,7 @@ const SignupFormContent = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                <img src={avatars[1]} className={`${styles.avatarIcon} ${checkIfSelected(1)}`}/>
+                <img src={avatars[1]} alt='' className={`${styles.avatarIcon} ${checkIfSelected(1)}`}/>
               </label>
 
               <label>
@@ -102,7 +100,7 @@ const SignupFormContent = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                <img src={avatars[2]} className={`${styles.avatarIcon} ${checkIfSelected(2)}`}/>
+                <img src={avatars[2]} alt='' className={`${styles.avatarIcon} ${checkIfSelected(2)}`}/>
               </label>
 
               <label>
@@ -113,7 +111,7 @@ const SignupFormContent = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                <img src={avatars[3]} className={`${styles.avatarIcon} ${checkIfSelected(3)}`}/>
+                <img src={avatars[3]} alt='' className={`${styles.avatarIcon} ${checkIfSelected(3)}`}/>
               </label>
 
               <label>
@@ -124,7 +122,7 @@ const SignupFormContent = (props) => {
                   onChange={onValueChange}
                   className={styles.hideMe}
                 />
-                <img src={avatars[4]} className={`${styles.avatarIcon} ${checkIfSelected(4)}`}/>
+                <img src={avatars[4]} alt='' className={`${styles.avatarIcon} ${checkIfSelected(4)}`}/>
               </label>
             </div>
 

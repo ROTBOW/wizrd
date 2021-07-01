@@ -4,7 +4,7 @@ import styles from '../SessionForm.module.scss';
 const LoginFormContent = (props) => {
   const [usernameOrEmail, setUserNameOrEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(props.errors);
   const [loginButton, setLoginButton] = useState("");
 
   useEffect(() => {
@@ -14,10 +14,10 @@ const LoginFormContent = (props) => {
   }, []);
 
   useEffect(() => {
-    if (loginButton === 'clicked' && Object.values(props.errors).length === 0) {
+    if (loginButton === 'clicked' && Object.values(errors).length === 0) {
       props.updateModal();
     }
-  }, [loginButton, props.errors])
+  }, [loginButton, errors])
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const LoginFormContent = (props) => {
   
   const renderErrors = () => (
     <ul className={styles.errorsWrapper}>
-      {Object.values(props.errors).map((error, i) => (
+      {Object.values(errors).map((error, i) => (
         <li key={`error-${i}`}>
           {error}
         </li>

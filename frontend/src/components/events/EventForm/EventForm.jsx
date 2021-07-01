@@ -15,7 +15,7 @@ const EventForm = (props) => {
     if (props.name === 'createEvent') {
       return () => setStartTime(moment().format('YYYY-MM-DDTkk:mm'));
     }
-  }, [title, topic, description, liveToggle]);
+  }, [title, topic, description, liveToggle, props.name]);
 
   const handleToggle = (e) => {
     e.preventDefault();

@@ -42,7 +42,6 @@ class EventShow extends React.Component {
       let event = this.props.event
       let startTime = event.startTime;
       const isHost = this.props.user.id === this.props.event.hostId;
-      console.log(event);
 
       if ((Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) || (this.props.event.isOver)) {
         return (
