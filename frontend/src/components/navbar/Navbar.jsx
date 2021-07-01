@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState  } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/logo.svg';
@@ -27,14 +27,14 @@ const Navbar = (props) => {
     input.value = '';
   };
   
-  const empty = pojo => {
-    let count = 0;
-    for (let i in pojo) count++;
-    return count === 0
-  }
+  // const empty = pojo => {
+  //   let count = 0;
+  //   for (let i in pojo) count++;
+  //   return count === 0
+  // }
 
   const sessionButtons = () => {
-    if (empty(props.user)) {
+    if (Object.keys(props.user).length === 0) {
       return (
         <>
           <Link to="/login"  className={styles.navLink}>

@@ -11,7 +11,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (user) => dispatch(login(user))
-    // add demo login dispatch
   }
 }
 

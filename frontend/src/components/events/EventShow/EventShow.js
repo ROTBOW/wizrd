@@ -58,7 +58,7 @@ class EventShow extends React.Component {
             <div className={styles.beforePage}>
 
               <div className={styles.imageWrapper}>
-                <img src={forest} className={styles.beforeImage}/>
+                <img src={forest} className={styles.beforeImage} alt='' />
                 {(Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) ? 
                 <p>The Magic Awaits...</p> :
                 <p>This stream has ended. Head back to the home page to discover more Wizrdry...</p>}
@@ -68,7 +68,7 @@ class EventShow extends React.Component {
                   <div className={styles.infoHeader}>
                     <div className={styles.hostAvatarWrapper}>
                       {event.hostAvatar ? 
-                      <img src={avatars[Number(event.hostAvatar)]} className={styles.hostAvatar}/> :
+                      <img src={avatars[Number(event.hostAvatar)]}  alt='' className={styles.hostAvatar}/> :
                       ''}
                     </div>
                     
@@ -95,7 +95,7 @@ class EventShow extends React.Component {
 
                   <div className={styles.textInfo}>
                     <div className={styles.eventDescription}>
-                      {event.description}
+                      <p>{event.description}</p>
                     </div>
                     <ul className={styles.detailsList}>
                       <li className={styles.detailItem}>
@@ -136,7 +136,7 @@ class EventShow extends React.Component {
                   <div className={styles.infoHeader}>
                     <div className={styles.hostAvatarWrapper}>
                       {event.hostAvatar ? 
-                      <img src={avatars[Number(event.hostAvatar)]} className={styles.hostAvatar}/> :
+                      <img src={avatars[Number(event.hostAvatar)]} alt='' className={styles.hostAvatar}/> :
                       ''}
                     </div>
                     <div className={styles.broadcastHeading}>
@@ -147,7 +147,7 @@ class EventShow extends React.Component {
                         <span className={styles.userCount}>
                           <BsPeopleFill className={styles.userCountIcon}/>
                         </span>
-                        <div class={styles.viewerCount} id="viewerCount">0</div>
+                        <div className={styles.viewerCount} id="viewerCount">0</div>
                       </div>
                       <div className={styles.eventHeading}>
                         {event.title}
@@ -165,7 +165,7 @@ class EventShow extends React.Component {
                   </div>
                   <div className={styles.textInfo}>
                     <div className={styles.eventDescription}>
-                      {event.description}
+                      <p>{event.description}</p>
                     </div>
                     <ul className={styles.detailsList}>
                       <li className={styles.detailItem}>

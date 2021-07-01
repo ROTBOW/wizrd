@@ -139,13 +139,14 @@
 .detailItem {
   display: flex;
   color: #787878;
+  font-size: 1.6rem;
   padding-bottom: 1.2rem;
 }
 
 .detailLabel {
   display: block;
   width: 12.5rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: bold;
 }
 
@@ -303,6 +304,7 @@
   p {
     color: white;
     font-size: 4rem;
+    max-width: 35ch;
     width: 100%;
     z-index: 1;
   }

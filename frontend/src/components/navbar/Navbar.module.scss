@@ -90,8 +90,6 @@ select {
 
 .selectWrapper {
   height: 40px;
-  // min-width: 5ch;
-  // max-width: 12ch;
   width: fit-content;
   border-radius: 4px 0 0 4px;
   padding: 0 8px 0 0;
@@ -116,8 +114,6 @@ select {
 .searchSelect {
   grid-area: select;
   width: fit-content;
-  // min-width: 5ch;
-  // max-width: 12ch;
   height: 40px;
   margin: 0;
   border-radius: 4px 0 0 4px;
