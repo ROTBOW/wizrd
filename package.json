@@ -1,5 +1,5 @@
 {
-  "name": "mern-stack-project",
+  "name": "wizrd",
   "version": "1.0.0",
   "description": "Streaming and messaging app",
   "main": "app.js",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ROTBOW/MERN-stack-project.git"
+    "url": "git+https://github.com/ROTBOW/wizrd.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ROTBOW/MERN-stack-project/issues"
+    "url": "https://github.com/ROTBOW/wizrd/issues"
   },
-  "homepage": "https://github.com/ROTBOW/MERN-stack-project#readme",
+  "homepage": "https://github.com/ROTBOW/wizrd#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",

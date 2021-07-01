@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Event = require('../../models/Event');
 const validateEventInput = require('../../validation/events');
-const { v4: uuidv4 } = require('uuid');
 
 // Get all events
 router.put('/:time', (req, res) => {
