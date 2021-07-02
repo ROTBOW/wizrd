@@ -4,8 +4,6 @@ import stringHash from 'string-hash';
 import avatars from '../../assets/avatars/avatars';
 
 import styles from './Chat.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagic } from '@fortawesome/free-solid-svg-icons';
 
 const COLORS = [
   styles.red,
