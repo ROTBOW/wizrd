@@ -2,6 +2,10 @@
 
 Wizrd is an event-driven streaming and messaging application for educational resources. By going live or scheduling future events, instructors and creators can connect with their audiences through real-time video streaming and chat.
 
+![wizrd-splash](https://user-images.githubusercontent.com/74887895/124530504-7cf83500-ddc1-11eb-8844-827b3ebe01cc.png)
+
+
+
 ## Group Members
 
 <!-- Add github, linkedin, angellist links here -->
@@ -27,9 +31,25 @@ We will need to:
 ## Features
 
 - [x] User authentication (signup, login, logout)
+
+  ![wizrd-auth](https://user-images.githubusercontent.com/74887895/124530704-e4ae8000-ddc1-11eb-90f8-c8c392ab11b8.gif)
+
+
 - [x] Events (create, update, delete)
+
+  ![wizrd-event](https://user-images.githubusercontent.com/74887895/124530996-69010300-ddc2-11eb-953d-8a21c2363040.gif)
+
+
 - [x] Chat and messaging
+
+  ![wizrd-chat](https://user-images.githubusercontent.com/74887895/124531261-00665600-ddc3-11eb-946d-a348843a034c.gif)
+
+
 - [x] Video streaming
+
+  ![stream](https://user-images.githubusercontent.com/74887895/124531576-a4e89800-ddc3-11eb-99e6-45017265563b.gif)
+
+
 - [x] Video error handling
 - [x] Deployment with Heroku
 - [x] Production README
