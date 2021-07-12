@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styles from '../home/Feed.module.scss';
-import { BiUser, BiBulb, BiVideo } from "react-icons/bi";
+import { BiUser, BiVideo } from "react-icons/bi";
 import moment from 'moment';
 import Modal from '../modal/modal';
 
@@ -59,25 +59,25 @@ const SearchResults = (props) => {
           <ul className={styles.eventsGridVertical}>
             {errors ? <li className={styles.errorItem}>{errors}</li> :
             results ? results.map((e, i) => {
-              return <a className={`${styles.noUnderline} ${styles.eventCard}`} key={i} onClick={() => auth(e._id)}>
-                <li>
-                  <h3 className={styles.eventTitle}>{e.title}</h3>
-                  <p className={styles.eventTopic}>{e.topic}</p>
-                  <div className={styles.cardRowWrapper}>
-                    <BiUser className={styles.cardIcon}/>
-                    <p className={styles.eventHost}>{e.hostUsername}</p>
-                  </div>
-                  <div className={styles.cardRowWrapper}>
-                    <BiVideo className={styles.cardIcon}/>
-                    <p className={styles.eventStartTime}>
-                      {eventTime(e.startTime)}
-                    </p>
-                    {/* <p className={styles.eventStartTime}>{moment(e.startTime).format("ddd, MMM D, LT")}</p> */}
-                  </div>
-                  
-                  {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
-                </li>
-              </a>
+              return (
+                <div className={`${styles.noUnderline} ${styles.eventCard}`} key={i} onClick={() => auth(e._id)}>
+                  <li>
+                    <h3 className={styles.eventTitle}>{e.title}</h3>
+                    <p className={styles.eventTopic}>{e.topic}</p>
+                    <div className={styles.cardRowWrapper}>
+                      <BiUser className={styles.cardIcon}/>
+                      <p className={styles.eventHost}>{e.hostUsername}</p>
+                    </div>
+                    <div className={styles.cardRowWrapper}>
+                      <BiVideo className={styles.cardIcon}/>
+                      <p className={styles.eventStartTime}>
+                        {eventTime(e.startTime)}
+                      </p>
+                    </div>
+                    {e.description ? <p className={styles.eventDescription}>{e.description}</p> : ''}
+                  </li>
+                </div>
+              );
             }) : ''
           }
           </ul>

@@ -16,6 +16,10 @@
   text-align: center;
 }
 
-a:hover {
-  cursor: pointer;
+.link {
+  text-decoration: underline;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styles from '../SessionForm.module.scss';
 import LoginFormContent from './LoginFormContent';
@@ -9,35 +9,30 @@ const LoginForm = (props) => {
     e.preventDefault();
 
     const demo = { usernameOrEmail: 'demo@mail.com', password: '123456' };
-  
     const demoEmail = demo.usernameOrEmail.split('');
     const demoPassword = demo.password.split('');
     const time = 65;
 
-    
-      demoEmail.forEach((char, i) => {
+    demoEmail.forEach((char, i) => {
+      setTimeout(() => {
+        let email = document.getElementById('email-input').value;
+        email += char;
+        document.getElementById('email-input').value = email;
+      }, time * (i));
+    })
+  
+    demoPassword.forEach((char, i) => {
         setTimeout(() => {
-          let email = document.getElementById('email-input').value;
-          email += char;
-          document.getElementById('email-input').value = email;
-        }, time * (i));
-      })
-    
-    
-      demoPassword.forEach((char, i) => {
-          setTimeout(() => {
-            let password = document.getElementById('password-input').value;
-            password += char;
-            document.getElementById('password-input').value = password;
-          }, time * (i + demoEmail.length));
-        }
-      )
+          let password = document.getElementById('password-input').value;
+          password += char;
+          document.getElementById('password-input').value = password;
+        }, time * (i + demoEmail.length));
+      }
+    )
     
     setTimeout(()=> {
       props.login(demo)
     }, 1700);
-    
-    
   };
  
   return (

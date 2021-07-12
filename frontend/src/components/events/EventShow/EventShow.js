@@ -58,7 +58,7 @@ class EventShow extends React.Component {
             <div className={styles.beforePage}>
 
               <div className={styles.imageWrapper}>
-                <img src={forest} className={styles.beforeImage}/>
+                <img src={forest} alt="" className={styles.beforeImage}/>
                 {(Moment(startTime).isAfter(Moment().tz('America/Los_Angeles'))) ? 
                 <p>The Magic Awaits...</p> :
                 <p>This stream has ended. Head back to the home page to discover more Wizrdry...</p>}
@@ -68,7 +68,7 @@ class EventShow extends React.Component {
                   <div className={styles.infoHeader}>
                     <div className={styles.hostAvatarWrapper}>
                       {event.hostAvatar ? 
-                      <img src={avatars[Number(event.hostAvatar)]} className={styles.hostAvatar}/> :
+                      <img src={avatars[Number(event.hostAvatar)]} alt="" className={styles.hostAvatar}/> :
                       ''}
                     </div>
                     
@@ -136,7 +136,7 @@ class EventShow extends React.Component {
                   <div className={styles.infoHeader}>
                     <div className={styles.hostAvatarWrapper}>
                       {event.hostAvatar ? 
-                      <img src={avatars[Number(event.hostAvatar)]} className={styles.hostAvatar}/> :
+                      <img src={avatars[Number(event.hostAvatar)]} alt="" className={styles.hostAvatar}/> :
                       ''}
                     </div>
                     <div className={styles.broadcastHeading}>

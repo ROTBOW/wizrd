@@ -3,12 +3,9 @@ import { AuthRoute, ProtectedRoute, HomeRoute } from '../util/routeUtil';
 import { Route, Switch } from 'react-router-dom';
 import LoginFormContainer from './session/LoginForm/LoginFormContainer';
 import SignupFormContainer from './session/SignupForm/SignupFormContainer';
-import { Link } from 'react-router-dom';
-import Video from './video/Video/Video';
 import NavbarContainer from './navbar/NavbarContainer';
 import EventShowContainer from './events/EventShow/EventShowContainer';
 import SearchResultsContainer from './searchResults/searchResultsContainer';
-import Footer from './footer/Footer';
 import About from './about/About';
 
 const App = () => (

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 import stringHash from 'string-hash';
 import avatars from '../../assets/avatars/avatars';
-
 import styles from './Chat.module.scss';
 
 const COLORS = [
@@ -22,11 +21,9 @@ const Chat = (props) => {
 
 
   useEffect(() => {
-
     const inputElement = document.getElementById('chatInput');
     inputElement.addEventListener('keydown', (e) => {
-      if(e.keyCode == 13) {
-        //console.log('executing enter')
+      if(e.keyCode === 13) {
         e.preventDefault();
         handleSubmit(e);
         inputElement.focus();
@@ -35,7 +32,7 @@ const Chat = (props) => {
     return () => {
       inputElement.removeEventListener('keydown', null);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     let newSocket;
@@ -83,7 +80,7 @@ const Chat = (props) => {
             usernameStyle.push(COLORS[stringHash(message[0]) % COLORS.length]);
             return (
               <li key={i} className={styles.message}>
-                <span className={`${usernameStyle.join(' ')} ${styles.userDisplay}`}><img src={avatars[Number(message[2])]} className={styles.avatar}/>{message[0]}</span><span>:</span><span>{message[1]}</span>
+                <span className={`${usernameStyle.join(' ')} ${styles.userDisplay}`}><img src={avatars[Number(message[2])]} alt="" className={styles.avatar}/>{message[0]}</span><span>:</span><span>{message[1]}</span>
               </li>
             )
           })
@@ -101,23 +98,7 @@ const Chat = (props) => {
         </div>
       </div>
     </div>
-
-
-
   )
-  // <div className={styles.wrapper}>
-  //   <ul className={styles.messageList}>
-  //     {messages.reverse().map((message, i) => {
-  //       return <li key={i} className={styles.message}><i className={styles.specialText}>{message[0]}</i>: {message[1]}</li>;
-  //     })}
-  //   </ul>
-  //   <form className={styles.messageInput}>
-  //     <input autoComplete="off" type="text" id="chat-input"></input>
-  //     <button onClick={handleSubmit} className={styles.button} >
-  //       <FontAwesomeIcon icon={faMagic} />
-  //     </button>
-  //   </form>
-  // </div>
 }
 
 export default Chat;
