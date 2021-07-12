@@ -69,7 +69,7 @@ const Navbar = (props) => {
                   <option value="host">Host Name</option>
                 </select>
               </div>
-              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+              <input className={styles.searchInput} id="searchInput" type="text" placeholder="Search for lesson, music, etc." value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
               <div className={styles.searchInputXWrapper}>
                 <button type="button" className={styles.searchInputX} onClick={clearSearch}><BiX /></button>
               </div>
