@@ -4,11 +4,8 @@ Wizrd is an event-driven streaming and messaging application for educational res
 
 ![wizrd-splash](https://user-images.githubusercontent.com/74887895/124530504-7cf83500-ddc1-11eb-8844-827b3ebe01cc.png)
 
-
-
 ## Group Members
 
-<!-- Add github, linkedin, angellist links here -->
 - **Inho Lee** 
   - [GitHub](https://github.com/inhojl), [LinkedIn](https://www.linkedin.com/in/inhojl)
 - **Josiah Leon** 
@@ -30,31 +27,281 @@ We will need to:
 
 ## Features
 
-- [x] User authentication (signup, login, logout)
+### User authentication (signup, login, logout)
 
-  ![wizrd-auth](https://user-images.githubusercontent.com/74887895/124530704-e4ae8000-ddc1-11eb-90f8-c8c392ab11b8.gif)
+![wizrd-auth](https://user-images.githubusercontent.com/74887895/124530704-e4ae8000-ddc1-11eb-90f8-c8c392ab11b8.gif)
 
+```js
+// routes/api/users.js
+router.post('/login', (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const usernameOrEmail = req.body.usernameOrEmail;
+  const password = req.body.password;
+  let queryField;
+  if (usernameOrEmail.includes('@')) {
+    queryField = 'email';
+  } else {
+    queryField = 'username'
+  }
 
-- [x] Events (create, update, delete)
+  User.findOne({ [queryField]: usernameOrEmail }).then((user) => {
+    if (!user) {
+      errors.email = 'User not found';
+      return res.status(404).json(errors);
+    }
 
-  ![wizrd-event](https://user-images.githubusercontent.com/74887895/124530996-69010300-ddc2-11eb-953d-8a21c2363040.gif)
+    bcrypt.compare(password, user.password).then((isMatch) => {
+      if (isMatch) {
+        const payload = { id: user.id, username: user.username, email: user.email, avatar: user.avatar };
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          { expiresIn: 14400 },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: 'Bearer ' + token,
+            });
+          }
+        );
+      } else {
+        return res.status(400).json({ password: 'Incorrect password' });
+      }
+    });
+  });
+});
+```
 
+### Events (create, update, delete, search)
 
-- [x] Chat and messaging
+![wizrd-event](https://user-images.githubusercontent.com/74887895/124530996-69010300-ddc2-11eb-953d-8a21c2363040.gif)
 
-  ![wizrd-chat](https://user-images.githubusercontent.com/74887895/124531261-00665600-ddc3-11eb-946d-a348843a034c.gif)
+```js
+router.post('/',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateEventInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    const newEvent = new Event({
+      hostId: req.user.id,
+      hostUsername: req.user.username,
+      hostAvatar: req.user.avatar,
+      title: req.body.title,
+      topic: req.body.topic,
+      description: req.body.description,
+      startTime: req.body.startTime,
+      isOver: false
+    });
+    newEvent.save().then((event) => res.json(event));
+  }
+);
 
+router.patch('/:eventId', (req, res) => {
+  const { errors, isValid } = validateEventInput(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  Event.findById(req.params.eventId)
+    .then((event) => {
+      const { body: { title, topic, description } } = req;
+      if (title) event.title = title;
+      if (topic) event.topic = topic;
+      if (description) event.description = description;
+      if (req.body.startTime) event.startTime = req.body.startTime;
+      if (req.body.isOver) event.isOver = req.body.isOver;
+      event.save().then((event) => res.json(event));
+    })
+    .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that ID' }));
+});
+```
 
-- [x] Video streaming
+### Chat and messaging
 
-  ![stream](https://user-images.githubusercontent.com/74887895/124531576-a4e89800-ddc3-11eb-99e6-45017265563b.gif)
+![wizrd-chat](https://user-images.githubusercontent.com/74887895/124531261-00665600-ddc3-11eb-946d-a348843a034c.gif)
 
+```js
+// frontend/src/components/chat/Chat.js
+const Chat = (props) => {
+  const [messages, setMessages] = useState([]);
+  const [socket, setSocket] = useState(null);
+  const socketRef = useRef();
+  useEffect(() => {
+    const inputElement = document.getElementById('chatInput');
+    inputElement.addEventListener('keydown', (e) => {
+      if(e.keyCode === 13) {
+        e.preventDefault();
+        handleSubmit(e);
+        inputElement.focus();
+      }
+    }) 
+    return () => {
+      inputElement.removeEventListener('keydown', null);
+    }
+  }, []);
+  useEffect(() => {
+    let newSocket;
+    if (!socket) {
+      newSocket = io.connect('/');
+      setSocket(newSocket);
+      socketRef.current = newSocket;
 
-- [x] Video error handling
-- [x] Deployment with Heroku
-- [x] Production README
+      newSocket.emit('join chat', {
+        chatId: props.chatId,
+        username: props.user.username
+      });
+    } else {
+      newSocket = socket;
+    }
+    newSocket.on('new message', ({ username, msg, avatar }) => {
+      let message = [username, msg, avatar];
+      setMessages([...messages, message]);
+    });
+    return () => newSocket.off('new message');
+  }, [messages])
 
-### Bonus Features
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const input = document.getElementById("chatInput");
+    if (input.innerText) {
+      socketRef.current.emit('chat message', { chatId: props.chatId, msg: input.innerText, username: props.user.username, avatar: props.user.avatar })
+      input.innerText = '';
+    };
+  };
+
+  return (...);
+}
+```
+
+### Video streaming
+
+![stream](https://user-images.githubusercontent.com/74887895/124531576-a4e89800-ddc3-11eb-99e6-45017265563b.gif)
+
+```jsx
+// frontend/src/components/chat/Video.jsx
+
+const Video = ({ eventId, isHost }) => {
+  const [stream, setStream] = useState(null);
+  const socketRef = useRef();
+  const peerRef = useRef();
+  const peersRef = useRef(new Set());
+  const videoRef = useRef();
+
+  useEffect(() => {
+    if (!isHost) {
+      receiveBroadcast();
+    } else {
+      socketRef.current = io.connect('/');
+      socketRef.current.emit('joining event', { eventId, isHost });
+      socketRef.current.on('viewer count', (viewCount) => {
+        const viewerCountEl = document.getElementById('viewerCount');
+        viewerCountEl.innerHTML = viewCount;
+        socketRef.current.emit('update viewer count', viewCount)
+      })
+    }
+    return () => destroyRefs();
+  }, []);
+
+  useEffect(() => {
+    if (stream) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', destroyRefs);
+  }, []);
+
+  function startBroadcast() {
+    console.log('emitting')
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      setStream(stream)
+      const peer = new Peer(PEER_CONFIG)
+      peerRef.current = peer;
+      socketRef.current.on('user request stream', (userId) => {
+        peer.connect(userId)
+      })
+      peer.on('open', () => socketRef.current.emit('host joined', peer.id))
+      peer.on('connection', connection => {
+        peer.call(connection.peer, stream);
+        peersRef.current.add(peer)
+      })
+      peer.on('disconnected', () => {
+        socketRef.current.emit('host disconnected')
+        stream.getTracks().forEach((track) => {
+          track.stop();
+        })
+        setStream(null)
+      })
+    })
+  }
+
+  function receiveBroadcast() {
+    socketRef.current = io.connect('/');
+    const peer = new Peer(PEER_CONFIG)
+    peerRef.current = peer;
+    socketRef.current.emit('joining event', { eventId });
+    socketRef.current.on('host disconnected', () => setStream(null))
+    socketRef.current.on('host request connection', hostId => peer.connect(hostId))
+    socketRef.current.on('viewer count', (viewerCount) => {
+      const viewerCountEl = document.getElementById('viewerCount');
+      viewerCountEl.innerHTML = viewerCount;
+    })
+    peer.on('open', () => socketRef.current.emit('user joined', peer.id))
+    peer.on('connection', connection => peer.connect(connection.peer))
+    peer.on('call', call => {
+      call.answer();
+      call.on('stream', stream => setStream(stream))
+    })
+
+  }
+
+  function destroyRefs() {
+    if (peerRef.current) {
+      peerRef.current.disconnect();
+      peerRef.current.destroy();
+      if (peersRef.current.length) {
+        peersRef.current.forEach((peer) => {
+          peer.disconnect();
+          peer.destroy();
+        })
+      }
+    }
+    if (socketRef.current) {
+      socketRef.current.close();
+    }
+    window.removeEventListener('beforeunload', destroyRefs);
+  }
+
+  function onHostDisconnect() {
+    if (window.confirm('Are you sure you want to turn off your video?')) {
+      peerRef.current.disconnect()
+      peerRef.current.destroy()
+    }
+  }
+
+  function onHostConnect() {
+    startBroadcast();
+  }
+
+  ...
+
+  return (...);
+}
+```
+
+### Video error handling
+
+### Deployment with Heroku
+
+### Production README
+
+## Bonus Features
+
 - [ ] Subscription to events
 - [ ] Notifications
 - [ ] Share screen on stream

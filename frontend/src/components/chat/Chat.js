@@ -19,7 +19,6 @@ const Chat = (props) => {
   const [socket, setSocket] = useState(null);
   const socketRef = useRef();
 
-
   useEffect(() => {
     const inputElement = document.getElementById('chatInput');
     inputElement.addEventListener('keydown', (e) => {

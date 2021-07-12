@@ -1,6 +1,6 @@
 import React from "react";
 import Chat from '../../chat/Chat';
-import Video from '../../video/Video/Video';
+import Video from '../../video/Video';
 import { BsPeopleFill } from 'react-icons/bs'
 import styles from './EventShow.module.scss';
 import Moment from 'moment';
@@ -147,7 +147,7 @@ class EventShow extends React.Component {
                         <span className={styles.userCount}>
                           <BsPeopleFill className={styles.userCountIcon}/>
                         </span>
-                        <div class={styles.viewerCount} id="viewerCount">0</div>
+                        <div className={styles.viewerCount} id="viewerCount">0</div>
                       </div>
                       <div className={styles.eventHeading}>
                         {event.title}
