@@ -31,52 +31,56 @@ We will need to:
 
 ![wizrd-auth](https://user-images.githubusercontent.com/74887895/124530704-e4ae8000-ddc1-11eb-90f8-c8c392ab11b8.gif)
 
-```js
-// routes/api/users.js
-router.post('/login', (req, res) => {
-  const { errors, isValid } = validateLoginInput(req.body);
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-  const usernameOrEmail = req.body.usernameOrEmail;
-  const password = req.body.password;
-  let queryField;
-  if (usernameOrEmail.includes('@')) {
-    queryField = 'email';
-  } else {
-    queryField = 'username'
-  }
-  User.findOne({ [queryField]: usernameOrEmail }).then((user) => {
-    if (!user) {
-      errors.email = 'User not found';
-      return res.status(404).json(errors);
+<details>
+<summary><code>/routes/api/users.js</code></summary>
+<pre>
+  <code style="white-space:nowrap;">
+  router.post('/login', (req, res) => {
+    const { errors, isValid } = validateLoginInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
     }
-    bcrypt.compare(password, user.password).then((isMatch) => {
-      if (isMatch) {
-        const payload = { 
-          id: user.id, 
-          username: user.username, 
-          email: user.email, avatar: 
-          user.avatar 
-        };
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 14400 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: 'Bearer ' + token,
-            });
-          }
-        );
-      } else {
-        return res.status(400).json({ password: 'Incorrect password' });
+    const usernameOrEmail = req.body.usernameOrEmail;
+    const password = req.body.password;
+    let queryField;
+    if (usernameOrEmail.includes('@')) {
+      queryField = 'email';
+    } else {
+      queryField = 'username'
+    }
+    User.findOne({ [queryField]: usernameOrEmail }).then((user) => {
+      if (!user) {
+        errors.email = 'User not found';
+        return res.status(404).json(errors);
       }
+      bcrypt.compare(password, user.password).then((isMatch) => {
+        if (isMatch) {
+          const payload = { 
+            id: user.id, 
+            username: user.username, 
+            email: user.email, avatar: 
+            user.avatar 
+          };
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 14400 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: 'Bearer ' + token,
+              });
+            }
+          );
+        } else {
+          return res.status(400).json({ password: 'Incorrect password' });
+        }
+      });
     });
   });
-});
-```
+  </code>
+</pre>
+</details>
 
 ### Events (create, update, delete, search)
 
