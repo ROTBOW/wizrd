@@ -31,56 +31,45 @@ We will need to:
 
 ![wizrd-auth](https://user-images.githubusercontent.com/74887895/124530704-e4ae8000-ddc1-11eb-90f8-c8c392ab11b8.gif)
 
-<details>
-<summary><code>/routes/api/users.js</code></summary>
-<pre>
-  <code style="white-space:nowrap;">
-  router.post('/login', (req, res) => {
-    const { errors, isValid } = validateLoginInput(req.body);
-    if (!isValid) {
-      return res.status(400).json(errors);
+```js
+// routes/api/users.js
+router.post('/login', (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const usernameOrEmail = req.body.usernameOrEmail;
+  const password = req.body.password;
+  let queryField;
+  if (usernameOrEmail.includes('@')) {
+    queryField = 'email';
+  } else {
+    queryField = 'username'
+  }
+  User.findOne({ [queryField]: usernameOrEmail }).then((user) => {
+    if (!user) {
+      errors.email = 'User not found';
+      return res.status(404).json(errors);
     }
-    const usernameOrEmail = req.body.usernameOrEmail;
-    const password = req.body.password;
-    let queryField;
-    if (usernameOrEmail.includes('@')) {
-      queryField = 'email';
-    } else {
-      queryField = 'username'
-    }
-    User.findOne({ [queryField]: usernameOrEmail }).then((user) => {
-      if (!user) {
-        errors.email = 'User not found';
-        return res.status(404).json(errors);
+    bcrypt.compare(password, user.password).then((isMatch) => {
+      if (isMatch) {
+        const payload = { id: user.id, username: user.username, email: user.email, avatar: user.avatar 
+        };
+        jwt.sign(payload, keys.secretOrKey,{ expiresIn: 14400 },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: 'Bearer ' + token,
+            });
+          }
+        );
+      } else {
+        return res.status(400).json({ password: 'Incorrect password' });
       }
-      bcrypt.compare(password, user.password).then((isMatch) => {
-        if (isMatch) {
-          const payload = { 
-            id: user.id, 
-            username: user.username, 
-            email: user.email, avatar: 
-            user.avatar 
-          };
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            { expiresIn: 14400 },
-            (err, token) => {
-              res.json({
-                success: true,
-                token: 'Bearer ' + token,
-              });
-            }
-          );
-        } else {
-          return res.status(400).json({ password: 'Incorrect password' });
-        }
-      });
     });
   });
-  </code>
-</pre>
-</details>
+});
+```
 
 ### Events (create, update, delete, search)
 
@@ -113,19 +102,7 @@ const Chat = (props) => {
   const [socket, setSocket] = useState(null);
   const socketRef = useRef();
 
-  useEffect(() => {
-    const inputElement = document.getElementById('chatInput');
-    inputElement.addEventListener('keydown', (e) => {
-      if(e.keyCode === 13) {
-        e.preventDefault();
-        handleSubmit(e);
-        inputElement.focus();
-      }
-    }) 
-    return () => {
-      inputElement.removeEventListener('keydown', null);
-    }
-  }, []);
+  ...
 
   useEffect(() => {
     let newSocket;
@@ -172,28 +149,11 @@ io.on('connection', (socket) => {
     socket.join(eventId);
 
     if (isHost) {
-      if (streams[eventId]) {
-        streams[eventId.host] = socket.id
-      } else {
-        streams[eventId] = {
-          host: null,
-          users: []
-        }
-        streams[eventId].host = socket.id
-      }
+      ...
     } else {
-      if (streams[eventId]) {
-        streams[eventId].users.push(socket.id)
-      } else {
-        streams[eventId] = {
-          host: null,
-          users: []
-        }
-        streams[eventId].users.push(socket.id)
-      }
+      ...
     }
     io.to(eventId).emit('viewer count', streams[eventId].users.length)
-
     socket.on('stream', (data) => io.to(eventId).emit('stream', data))
     socket.on('host joined', (hostId) => io.to(eventId).emit('host request connection', hostId))
     socket.on('user joined', (userId) => io.to(eventId).emit('user request stream', userId))
@@ -219,30 +179,7 @@ const Video = ({ eventId, isHost }) => {
   const peersRef = useRef(new Set());
   const videoRef = useRef();
 
-  useEffect(() => {
-    if (!isHost) {
-      receiveBroadcast();
-    } else {
-      socketRef.current = io.connect('/');
-      socketRef.current.emit('joining event', { eventId, isHost });
-      socketRef.current.on('viewer count', (viewCount) => {
-        const viewerCountEl = document.getElementById('viewerCount');
-        viewerCountEl.innerHTML = viewCount;
-        socketRef.current.emit('update viewer count', viewCount)
-      })
-    }
-    return () => destroyRefs();
-  }, []);
-
-  useEffect(() => {
-    if (stream) {
-      videoRef.current.srcObject = stream;
-    }
-  }, [stream]);
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', destroyRefs);
-  }, []);
+  ...
 
   function startBroadcast() {
     console.log('emitting')
