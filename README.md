@@ -46,16 +46,19 @@ router.post('/login', (req, res) => {
   } else {
     queryField = 'username'
   }
-
   User.findOne({ [queryField]: usernameOrEmail }).then((user) => {
     if (!user) {
       errors.email = 'User not found';
       return res.status(404).json(errors);
     }
-
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
-        const payload = { id: user.id, username: user.username, email: user.email, avatar: user.avatar };
+        const payload = { 
+          id: user.id, 
+          username: user.username, 
+          email: user.email, avatar: 
+          user.avatar 
+        };
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -79,57 +82,33 @@ router.post('/login', (req, res) => {
 
 ![wizrd-event](https://user-images.githubusercontent.com/74887895/124530996-69010300-ddc2-11eb-953d-8a21c2363040.gif)
 
-```js
-router.post('/',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateEventInput(req.body);
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-    const newEvent = new Event({
-      hostId: req.user.id,
-      hostUsername: req.user.username,
-      hostAvatar: req.user.avatar,
-      title: req.body.title,
-      topic: req.body.topic,
-      description: req.body.description,
-      startTime: req.body.startTime,
-      isOver: false
-    });
-    newEvent.save().then((event) => res.json(event));
-  }
-);
-
-router.patch('/:eventId', (req, res) => {
-  const { errors, isValid } = validateEventInput(req.body);
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-  Event.findById(req.params.eventId)
-    .then((event) => {
-      const { body: { title, topic, description } } = req;
-      if (title) event.title = title;
-      if (topic) event.topic = topic;
-      if (description) event.description = description;
-      if (req.body.startTime) event.startTime = req.body.startTime;
-      if (req.body.isOver) event.isOver = req.body.isOver;
-      event.save().then((event) => res.json(event));
-    })
-    .catch((err) => res.status(404).json({ noEventsFound: 'No events found with that ID' }));
-});
-```
 
 ### Chat and messaging
 
 ![wizrd-chat](https://user-images.githubusercontent.com/74887895/124531261-00665600-ddc3-11eb-946d-a348843a034c.gif)
 
 ```js
+// app.js
+io.on('connection', (socket) => {
+  socket.on("join chat", ({chatId, username}) => {
+    socket.join(chatId);
+  })
+
+  socket.on("leave chat", ({chatId, username}) => {
+    socket.leave(chatId);
+  })
+
+  socket.on("chat message", ({chatId, msg, username, avatar}) => {
+    io.to(chatId).emit("new message", {username, msg, avatar});
+  })
+}
+
 // frontend/src/components/chat/Chat.js
 const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(null);
   const socketRef = useRef();
+
   useEffect(() => {
     const inputElement = document.getElementById('chatInput');
     inputElement.addEventListener('keydown', (e) => {
@@ -143,6 +122,7 @@ const Chat = (props) => {
       inputElement.removeEventListener('keydown', null);
     }
   }, []);
+
   useEffect(() => {
     let newSocket;
     if (!socket) {
@@ -162,7 +142,7 @@ const Chat = (props) => {
       setMessages([...messages, message]);
     });
     return () => newSocket.off('new message');
-  }, [messages])
+  }, [messages]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -170,10 +150,10 @@ const Chat = (props) => {
     if (input.innerText) {
       socketRef.current.emit('chat message', { chatId: props.chatId, msg: input.innerText, username: props.user.username, avatar: props.user.avatar })
       input.innerText = '';
-    };
+    }
   };
 
-  return (...);
+  ...
 }
 ```
 
@@ -182,8 +162,52 @@ const Chat = (props) => {
 ![stream](https://user-images.githubusercontent.com/74887895/124531576-a4e89800-ddc3-11eb-99e6-45017265563b.gif)
 
 ```jsx
-// frontend/src/components/chat/Video.jsx
+// app.js
+io.on('connection', (socket) => {
+  socket.on('joining event', ({ eventId, isHost}) => {
+    socket.join(eventId);
 
+    if (isHost) {
+      if (streams[eventId]) {
+        streams[eventId.host] = socket.id
+      } else {
+        streams[eventId] = {
+          host: null,
+          users: []
+        }
+        streams[eventId].host = socket.id
+      }
+    } else {
+      if (streams[eventId]) {
+        streams[eventId].users.push(socket.id)
+      } else {
+        streams[eventId] = {
+          host: null,
+          users: []
+        }
+        streams[eventId].users.push(socket.id)
+      }
+    }
+    io.to(eventId).emit('viewer count', streams[eventId].users.length)
+
+    socket.on('stream', (data) => io.to(eventId).emit('stream', data))
+    socket.on('host joined', (hostId) => io.to(eventId).emit('host request connection', hostId))
+    socket.on('user joined', (userId) => io.to(eventId).emit('user request stream', userId))
+    socket.on('host disconnected', () => io.to(eventId).emit('host disconnected'))
+    socket.on('disconnect', () => {
+      if (socket.id === streams[eventId].host) {
+        streams[eventId].host = null
+        io.to(eventId).emit('host disconnected')
+      } else {
+        streams[eventId].users = streams[eventId].users.filter(user => user !== socket.id);
+        io.to(eventId).emit('viewer count', streams[eventId].users.length)
+        
+      }
+    })
+  })
+}
+
+// frontend/src/components/chat/Video.jsx
 const Video = ({ eventId, isHost }) => {
   const [stream, setStream] = useState(null);
   const socketRef = useRef();
@@ -261,20 +285,7 @@ const Video = ({ eventId, isHost }) => {
   }
 
   function destroyRefs() {
-    if (peerRef.current) {
-      peerRef.current.disconnect();
-      peerRef.current.destroy();
-      if (peersRef.current.length) {
-        peersRef.current.forEach((peer) => {
-          peer.disconnect();
-          peer.destroy();
-        })
-      }
-    }
-    if (socketRef.current) {
-      socketRef.current.close();
-    }
-    window.removeEventListener('beforeunload', destroyRefs);
+    ...
   }
 
   function onHostDisconnect() {
@@ -289,8 +300,6 @@ const Video = ({ eventId, isHost }) => {
   }
 
   ...
-
-  return (...);
 }
 ```
 
